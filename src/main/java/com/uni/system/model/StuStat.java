@@ -1,5 +1,7 @@
 package com.uni.system.model;
 
+import java.sql.Date;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,14 +13,13 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @ToString
-public class User {
-
+public class StuStat {
+	
+	private int id;
 	private int studentId;
-	private int tuiYear;
-	private int semester;
-	private int tuiAmount;
-	private int schType;
-	private int schAmount;
-	private int status;
+	private String status;
+	private Date fromDate;
+	private Date toDate;
+	private int breakAppId;
 
 }
