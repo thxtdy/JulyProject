@@ -11,14 +11,12 @@ import lombok.ToString;
 @AllArgsConstructor
 @Builder
 @ToString
-public class User {
-
+public class StuSub {
+	
+	private int id;
 	private int studentId;
-	private int tuiYear;
-	private int semester;
-	private int tuiAmount;
-	private int schType;
-	private int schAmount;
-	private int status;
+	private int subjectId;
+	private String grade;
+	private int completeGrade;
 
 }
