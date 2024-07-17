@@ -9,4 +9,14 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>servletTemp</display-name>
+    <servlet-name>servletTemp</servlet-name>
+    <servlet-class>com.uni.system.controller.servletTemp</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>servletTemp</servlet-name>
+    <url-pattern>/servletTemp</url-pattern>
+  </servlet-mapping>
 </web-app>
