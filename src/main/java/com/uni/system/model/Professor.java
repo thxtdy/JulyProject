@@ -22,6 +22,6 @@ public class Professor {
 	String address;
 	String tel;
 	String email;
-	int dept_id;
+	int deptId;
 	Date hireDate;
 }
