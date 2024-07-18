@@ -18,15 +18,15 @@ public class UserController extends HttpServlet {
 		String action = request.getContextPath();
 		
 		switch (action) {
-		case "student":
+		case "/student":
 			request.getRequestDispatcher("WEB-INF/views/user/studentInfo.jsp").forward(request, response);
 			break;
 
-		case "professor":
+		case "/professor":
 			request.getRequestDispatcher("WEB-INF/views/user/professorInfo.jsp").forward(request, response);
 			break;
 		
-		case "employee":
+		case "/employee":
 			request.getRequestDispatcher("WEB-INF/views/user/employeeInfo.jsp").forward(request, response);
 			break;
 
