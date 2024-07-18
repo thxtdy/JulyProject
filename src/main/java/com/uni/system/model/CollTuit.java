@@ -5,20 +5,14 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
 @ToString
-public class User {
-
-	private int studentId;
-	private int tuiYear;
-	private int semester;
-	private int tuiAmount;
-	private int schType;
-	private int schAmount;
-	private int status;
-
+public class CollTuit {
+	
+	private int collegeId;
+	private int amount;
+	
 }

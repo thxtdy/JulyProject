@@ -9,16 +9,12 @@ import lombok.ToString;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 @ToString
-public class User {
+@Builder
 
-	private int studentId;
-	private int tuiYear;
-	private int semester;
-	private int tuiAmount;
-	private int schType;
-	private int schAmount;
-	private int status;
-
+public class Grade {
+	
+	private String grade;
+	private float grade_value;
+	
 }
