@@ -12,7 +12,7 @@ import lombok.ToString;
 @Builder
 @ToString
 public class User {
-
+//
 	private int studentId;
 	private int tuiYear;
 	private int semester;
