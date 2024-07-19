@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<<<<<<< HEAD
 <%@ include file="WEB-INF/views/layout/header.jsp" %>
+=======
+<%@ include file= "/WEB-INF/views/layout/header.jsp" %>
+</head>
+>>>>>>> 619b75d0d1ad2f0c07f85035fcc5b895c1def2d2
 <body>
 	<!-- 세부 메뉴 + 메인 -->
 	<div>
