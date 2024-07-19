@@ -78,7 +78,8 @@
 						<option value="신소재공학개론"></option>
 						<option value="신소재기초실습"></option>
 						<option value="칸트철학"></option>
-						<option value="불교철학사"></option>
+						<o
+						ption value="불교철학사"></option>
 						<option value="대륙합리론"></option>
 						<option value="심리학론"></option>
 						<option value="역사학개론"></option>

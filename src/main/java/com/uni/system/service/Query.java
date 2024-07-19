@@ -1,11 +1,14 @@
 package com.uni.system.service;
 
+<<<<<<< HEAD
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 
+=======
+>>>>>>> 58c4baee944a8ccbe952f644c66e9ab08bd80544
 public class Query {
 	
 	// 학생 정보 보기 
@@ -30,4 +33,6 @@ public class Query {
 	
 	// 로그인 유저 아이디 비밀번호 확인
 	final String SELECT_USER_BY_PASSWORD = " SELECT * FROM user_tb WHERE id = ? AND password = ? " ;
+	
+	final String GET_USER_ROLE = " SELECT user_role from user_tb where id = ? ";
 }
