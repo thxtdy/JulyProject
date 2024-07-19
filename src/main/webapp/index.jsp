@@ -17,6 +17,7 @@
 		<input type="text" id="username" name="username" value="2023000001">
 		<label for="password">비밀번호:</label>
 		<input type="password" id="password" name="password" value="0000">
+		
 		<button type="submit">로그인</button>
 	</div>
 	</form>
