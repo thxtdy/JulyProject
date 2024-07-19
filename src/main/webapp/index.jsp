@@ -8,14 +8,24 @@
 </head>
 <body>
 	
-	<div class="login-container">
-		<form action="/six/">
-			<input type = "text" id = "userid" name = "userid" placeholder="아이디를 입력하세요">
-			<input type = "text" id = "password " name = "password" placeholder="비밀번호를 입력하세요">
-			<input type = "hidden" id = "user_role" name = "user_role">
-			<button type = "submit">로그인</button>
-		</form>
+<div class="container">
+	<h2> 로그인</h2>
+
+	<form action="${pageContext.request.contextPath}/user/signIn" method="post">
+		<div>
+		<label for="username">사용자 이름:</label>
+		<input type="text" id="username" name="username" value="2023000001">
+		<label for="password">비밀번호:</label>
+		<input type="password" id="password" name="password" value="0000">
+		<button type="submit">로그인</button>
 	</div>
+	</form>
+
+
+
+</div>
+
+
 	
 </body>
 </html>
