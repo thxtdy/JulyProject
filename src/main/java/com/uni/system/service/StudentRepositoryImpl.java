@@ -10,6 +10,7 @@ import com.uni.system.repository.interfaces.StudentRepository;
 import com.uni.system.repository.model.BreakApp;
 import com.uni.system.repository.model.Grade;
 import com.uni.system.repository.model.Notice;
+import com.uni.system.repository.model.Student;
 import com.uni.system.repository.model.Subject;
 import com.uni.system.utils.DBUtil;
 
@@ -18,8 +19,39 @@ public class StudentRepositoryImpl implements StudentRepository{
 	Query query;
 	
 	@Override
-	public void viewMyInfo() {
-		
+	public Student viewMyInfo(int userid) {
+		Student student = null;;
+		try (Connection conn = DBUtil.getConnection()){
+			conn.setAutoCommit(false);
+			try (PreparedStatement pstmt = conn.prepareStatement(query.VIEW_STUDENT_INFO)){
+				pstmt.setInt(1, userid);
+				ResultSet rs =  pstmt.executeQuery();
+				if(rs.next()) {
+					student = Student.builder()
+							.id(rs.getInt("id"))
+							.name(rs.getString("name"))
+							.birthDate(rs.getDate("birthDate"))
+							.gender(rs.getString("gender"))
+							.address(rs.getString("address"))
+							.tel(rs.getString("tel"))
+							.email(rs.getString("email"))
+							.deptId(rs.getInt("deptId"))
+							.grade(rs.getInt("grade"))
+							.semester(rs.getInt("semester"))
+							.entranceDate(rs.getDate("entranceDate"))
+							.graduationDate(rs.getDate("graduation"))
+							.build();
+					return student;
+				}
+				
+			} catch (Exception e) {
+				conn.rollback();
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return student;
 	}
 
 	@Override

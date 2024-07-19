@@ -2,17 +2,15 @@ package com.uni.system.controller;
 
 import java.io.IOException;
 
-import com.uni.system.repository.UserRepositoryImpl;
 import com.uni.system.repository.interfaces.UserRepository;
-import com.uni.system.repository.model.User;
 import com.uni.system.repository.model.UserDTO;
+import com.uni.system.service.UserRepositoryImpl;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/user/*")
 public class UserController extends HttpServlet {
@@ -32,9 +30,6 @@ public class UserController extends HttpServlet {
 		switch (action) {
 		case "/signup":
 			request.getRequestDispatcher("/WEB-INF/six/user/signup.jsp").forward(request, response);
-			break;
-		case "/signIn":
-			request.getRequestDispatcher("/WEB-INF/six/user/signIn.jsp").forward(request, response);
 			break;
 		default:
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
@@ -60,6 +55,7 @@ public class UserController extends HttpServlet {
 	}
 
 	private void handleSignIn(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+<<<<<<< HEAD
 
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
@@ -79,11 +75,17 @@ public class UserController extends HttpServlet {
 			request.getRequestDispatcher("/subject.jsp").forward(request, response);
 			
 		}
+=======
 		
-		System.out.println("username : " + username + "password : " + password);
-		UserDTO dto = userRepository.getUserbyUsername(Integer.parseInt(username), password);		
-		System.out.println(dto.getUserRole());
+		int userId = Integer.parseInt(request.getParameter("username")); // 23000001
+		System.out.println(userId);
+		String password = request.getParameter("password"); // 123123
+		UserDTO principal = userRepository.getUserbyRole(userId);
+>>>>>>> ebdbf330f5c3c8e759771b450707cde9ae3e9a06
 		
+		if(userId == principal.getId() && password.equals(principal.getPassword())) {
+		
+<<<<<<< HEAD
 		if (username == null || password.trim().isEmpty()) {
 			response.sendRedirect("signIn?message=invalid");
 			return;
@@ -92,6 +94,10 @@ public class UserController extends HttpServlet {
 		} else {
 			System.out.println("잘못된 요청입니다1111111");
 			
+=======
+			request.setAttribute("principal", principal);
+			response.sendRedirect(password);
+>>>>>>> ebdbf330f5c3c8e759771b450707cde9ae3e9a06
 		}
 
 	}

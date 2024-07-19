@@ -5,7 +5,7 @@
 		auth="Container"
 		type="javax.sql.DataSource"
 		factory="com.zaxxer.hikari.HikariJNDIFactory"
-		uniqueResourceName="MyTboard"
+		uniqueResourceName="MySix"
 		minimumIdle="5"
 		maximumPoolSize="10"
 		connectionTimeout="30000"
