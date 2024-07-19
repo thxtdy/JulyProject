@@ -2,17 +2,15 @@ package com.uni.system.controller;
 
 import java.io.IOException;
 
-import com.uni.system.repository.UserRepositoryImpl;
 import com.uni.system.repository.interfaces.UserRepository;
-import com.uni.system.repository.model.User;
 import com.uni.system.repository.model.UserDTO;
+import com.uni.system.service.UserRepositoryImpl;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/user/*")
 public class UserController extends HttpServlet {
@@ -32,9 +30,6 @@ public class UserController extends HttpServlet {
 		switch (action) {
 		case "/signup":
 			request.getRequestDispatcher("/WEB-INF/six/user/signup.jsp").forward(request, response);
-			break;
-		case "/signIn":
-			request.getRequestDispatcher("/WEB-INF/six/user/signIn.jsp").forward(request, response);
 			break;
 		default:
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
@@ -60,37 +55,16 @@ public class UserController extends HttpServlet {
 	}
 
 	private void handleSignIn(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
-		UserDTO principal = userRepository.getUserbyRole(password);
 		
-		if(principal != null && principal.getPassword().equals(password)) {
-			HttpSession session = request.getSession();
-			session.setAttribute("principal", principal);
-			
-			System.out.println("로그인 완료 ");
-			System.out.println(request.getContextPath());
-			response.sendRedirect(request.getContextPath() + "/six/subject.jsp");
-			
-		} else {
-			request.setAttribute("errorMessage", "잘못된 요청입니다");
-			request.getRequestDispatcher("/subject.jsp").forward(request, response);
-			
-		}
+		int userId = Integer.parseInt(request.getParameter("username")); // 23000001
+		System.out.println(userId);
+		String password = request.getParameter("password"); // 123123
+		UserDTO principal = userRepository.getUserbyRole(userId);
 		
-		System.out.println("username : " + username + "password : " + password);
-		UserDTO dto = userRepository.getUserbyUsername(Integer.parseInt(username), password);		
-		System.out.println(dto.getUserRole());
+		if(userId == principal.getId() && password.equals(principal.getPassword())) {
 		
-		if (username == null || password.trim().isEmpty()) {
-			response.sendRedirect("signIn?message=invalid");
-			return;
-
-			
-		} else if (dto.getUserRole().equals("student")) {
-			response.sendRedirect("signIn?message=success");
-			
+			request.setAttribute("principal", principal);
+			response.sendRedirect(password);
 		}
 
 	}

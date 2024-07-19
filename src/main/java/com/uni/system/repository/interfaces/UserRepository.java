@@ -6,7 +6,7 @@ import com.uni.system.repository.model.UserDTO;
 public interface UserRepository {
 	
 	UserDTO getUserbyUsername(int username, String password);
-	UserDTO getUserbyRole(String userRole); 
+	UserDTO getUserbyRole(int userId); 
 
 }
 	
