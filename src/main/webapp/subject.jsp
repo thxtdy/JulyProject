@@ -1,11 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<<<<<<< HEAD
-<%@ include file="WEB-INF/views/layout/header.jsp" %>
-=======
 <%@ include file= "/WEB-INF/views/layout/header.jsp" %>
 </head>
->>>>>>> 619b75d0d1ad2f0c07f85035fcc5b895c1def2d2
 <body>
 	<!-- 세부 메뉴 + 메인 -->
 	<div>
@@ -17,7 +13,7 @@
 				<table class="sub_menu_table" border="1">
 					<tbody>
 						<tr>
-							<td><a href="subject/list/1" class="selected_menu">전체 강의 조회</a></td>
+							<td><a href="subject.jsp	" class="selected_menu">전체 강의 조회</a></td>
 						</tr>
 					</tbody>
 				</table>
@@ -142,16 +138,40 @@
 						<option value="국제무역론 입문"></option>
 						<option value="한국무역법"></option>
 						</datalist>
+						<button type="submit">조회</button>
 				</form>
 				<h2>목록 </h2>
 				<!-- TODO [총 00건] -->
 				<!-- 나중에 for문 돌려서 강의 목록 페이지 작성! 페이징 처리도 해야함.  -->
 				<h3> [총 00건]</h3>
 				<table border="1">
+					<thead>
+						<tr>
+							<th>연도/학기</th>
+							<th>단과대학</th>
+							<th>개설학과</th>
+							<th>학수번호</th>
+							<th>강의명</th>
+							<th>담당교수</th>
+							<th>학점</th>
+							<th>수강인원</th>
+							<th>정원</th>
+							<th>강의계획서</th>
+						</tr>						
+					</thead>
 					<tbody>
 						<tr>
-							<th></th>
-						</tr>						
+							<td>2023-1학기</td>
+							<td>인문대학</td>
+							<td>철학과</td>
+							<td>10020</td>
+							<td>전공</td>
+							<td>칸트철학</td>
+							<td>구평회</td>
+							<td>3</td>
+							<td>0</td>
+							<td>25</td>
+						</tr>
 					</tbody>
 				</table>
 			</div>

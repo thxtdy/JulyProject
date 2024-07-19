@@ -15,19 +15,19 @@ public class UserController extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String action = request.getContextPath();
+		String action = request.getPathInfo();
 		
 		switch (action) {
 		case "/student":
-			request.getRequestDispatcher("WEB-INF/views/user/studentInfo.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/views/user/studentInfo.jsp").forward(request, response);
 			break;
 
 		case "/professor":
-			request.getRequestDispatcher("WEB-INF/views/user/professorInfo.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/views/user/professorInfo.jsp").forward(request, response);
 			break;
 		
 		case "/employee":
-			request.getRequestDispatcher("WEB-INF/views/user/employeeInfo.jsp").forward(request, response);
+			request.getRequestDispatcher("/WEB-INF/views/user/employeeInfo.jsp").forward(request, response);
 			break;
 
 		default:
