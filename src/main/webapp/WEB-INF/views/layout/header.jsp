@@ -10,7 +10,6 @@
 </head>
 <body>
 	<header>
-<<<<<<< HEAD
 	<div class="header_top">
 		<ul>
 			<li>(이름)님 id: 123123 들어갈 자리</li>
@@ -46,7 +45,6 @@
 			<li><a href="${pageContext.request.contextPath}/notice">학사정보</a>
 		</ul>
 	</nav>
-=======
 		<div class="header_top_box">
 			<ul class="header_top_info_ul">
 				<li class="header_top_info_li">(변영준)님 id: 17510048</li>
@@ -82,7 +80,6 @@
 				<li><a href="${pageContext.request.contextPath}/notice">학사정보</a>
 			</ul> --%>
 		</nav>
->>>>>>> 619b75d0d1ad2f0c07f85035fcc5b895c1def2d2
 	</header>
 </body>
 </html>

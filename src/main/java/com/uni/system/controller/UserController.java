@@ -63,7 +63,8 @@ public class UserController extends HttpServlet {
 
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		UserDTO principal = userRepository.getUserbyRole(password);
+		UserDTO principal = userRepository.getUserbyUsername(Integer.parseInt(username), password);
+		
 		
 		if(principal != null && principal.getPassword().equals(password)) {
 			HttpSession session = request.getSession();
@@ -71,8 +72,8 @@ public class UserController extends HttpServlet {
 			
 			System.out.println("로그인 완료 ");
 			System.out.println(request.getContextPath());
-			response.sendRedirect(request.getContextPath() + "/six/subject.jsp");
-			
+			response.sendRedirect(request.getContextPath() + "/subject.jsp");
+		
 		} else {
 			request.setAttribute("errorMessage", "잘못된 요청입니다");
 			request.getRequestDispatcher("/subject.jsp").forward(request, response);
@@ -88,8 +89,8 @@ public class UserController extends HttpServlet {
 			return;
 
 			
-		} else if (dto.getUserRole().equals("student")) {
-			response.sendRedirect("signIn?message=success");
+		} else {
+			System.out.println("잘못된 요청입니다1111111");
 			
 		}
 
