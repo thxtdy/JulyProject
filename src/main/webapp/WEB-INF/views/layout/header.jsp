@@ -21,7 +21,7 @@
 		<h1> -- 학생 접속 시 -- </h1>
 		<ul>
 			<li><a href="${pageContext.request.contextPath}/header.jsp">홈</a>
-			<li><a href="${pageContext.request.contextPath}/info">MY</a>
+			<li><a href="${pageContext.request.contextPath}/info/student">MY</a>
 			<li><a href="${pageContext.request.contextPath}/subject">수업</a>
 			<li><a href="${pageContext.request.contextPath}/sugang">수강신청</a>
 			<li><a href="${pageContext.request.contextPath}/thisSemester">성적</a>
@@ -30,7 +30,7 @@
 		<h1> -- 교직원 접속 시 -- </h1>
 		<ul>
 			<li><a href="${pageContext.request.contextPath}/header.jsp">홈</a>
-			<li><a href="${pageContext.request.contextPath}/info">MY</a>
+			<li><a href="${pageContext.request.contextPath}/info/employee">MY</a>
 			<li><a href="${pageContext.request.contextPath}/user">학사관리</a>
 			<li><a href="${pageContext.request.contextPath}//admin">등록</a>
 			<li><a href="${pageContext.request.contextPath}/notice">학사정보</a>
@@ -38,7 +38,7 @@
 		<h1> -- 교사 접속 시 -- </h1>
 		<ul>
 			<li><a href="${pageContext.request.contextPath}/header.jsp">홈</a>
-			<li><a href="${pageContext.request.contextPath}/info">MY</a>
+			<li><a href="${pageContext.request.contextPath}/info/professor">MY</a>
 			<li><a href="${pageContext.request.contextPath}/subject">수업</a>
 			<li><a href="${pageContext.request.contextPath}/notice">학사정보</a>
 		</ul>
