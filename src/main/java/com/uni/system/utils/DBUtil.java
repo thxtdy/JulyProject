@@ -7,6 +7,10 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 public class DBUtil {
+<<<<<<< HEAD
+=======
+
+>>>>>>> ffd718c7aab878faa863fca8e696321ad0c1861a
 
 	private static DataSource dataSource;
 
