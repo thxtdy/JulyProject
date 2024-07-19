@@ -7,7 +7,6 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 public class DBUtil {
-<<<<<<< Updated upstream
 
 	private static DataSource dataSource;
 
@@ -25,9 +24,5 @@ public class DBUtil {
 		
 		return dataSource.getConnection();
 	}
-=======
-	
-	
-	
->>>>>>> Stashed changes
+
 }
