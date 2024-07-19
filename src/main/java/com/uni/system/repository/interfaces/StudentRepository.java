@@ -14,7 +14,7 @@ public interface StudentRepository {
 	void tuitionbill(); // 등록금 납부 고지서
 	
 	// 수업
-	void viewAllClass(); // 전체 강의 조회
+	List<Subject> viewAllClass(); // 전체 강의 조회
 	
 	// 수강 신청
 	void viewAllClassSchedule(); // 강의 시간표 조회

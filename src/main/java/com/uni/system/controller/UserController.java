@@ -7,38 +7,24 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+<<<<<<< HEAD
 @WebServlet("/info/*")
+=======
+import java.io.IOException;
+
+
+>>>>>>> 35fbf81f86f135f88469202886ee73b347fa6a25
 public class UserController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	public UserController() {
-		
-	}
+       
+    public UserController() {
+    }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String action = request.getContextPath();
-		
-		switch (action) {
-		case "/student":
-			request.getRequestDispatcher("WEB-INF/views/user/studentInfo.jsp").forward(request, response);
-			break;
-
-		case "/professor":
-			request.getRequestDispatcher("WEB-INF/views/user/professorInfo.jsp").forward(request, response);
-			break;
-		
-		case "/employee":
-			request.getRequestDispatcher("WEB-INF/views/user/employeeInfo.jsp").forward(request, response);
-			break;
-
-		default:
-			break;
-		}
-		
-		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+<<<<<<< HEAD
 
 		
 		String action = request.getPathInfo();
@@ -53,6 +39,8 @@ public class UserController extends HttpServlet {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			break;
 		}
+=======
+>>>>>>> 35fbf81f86f135f88469202886ee73b347fa6a25
 	}
 
 	private void signIn(HttpServletRequest request, HttpServletResponse response) throws IOException {

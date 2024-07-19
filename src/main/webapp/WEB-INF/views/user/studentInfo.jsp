@@ -7,7 +7,7 @@
 				<tbody>
 					<tr>
 						<td>
-							<a href="/info/student" class="seleted-menu">내 정보 조회</a>
+							<a href="/info/studentInfo" class="seleted-menu">내 정보 조회</a>
 						</td>
 					</tr>
 					<tr>
