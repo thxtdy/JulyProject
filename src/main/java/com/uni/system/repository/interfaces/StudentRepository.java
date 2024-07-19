@@ -1,15 +1,6 @@
 package com.uni.system.repository.interfaces;
 
-<<<<<<< HEAD
-import com.uni.system.model.Student;
-
-public interface StudentRepository {
-	
-	Student getStudentByStudentname(String username);
-
-=======
 import java.util.List;
-
 import com.uni.system.repository.model.*;
 
 public interface StudentRepository {
@@ -39,5 +30,4 @@ public interface StudentRepository {
 	// 학사정보
 	List<Notice> viewNotice(); // 공지사항 
 	void viewAcademicSchedule(); // 학사일정
->>>>>>> cc1dbca2aab4cce24b8d40480466c86a77fa5923
 }

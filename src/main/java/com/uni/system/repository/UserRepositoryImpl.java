@@ -1,7 +1,7 @@
 package com.uni.system.repository;
 
-import com.uni.system.model.User;
 import com.uni.system.repository.interfaces.UserRepository;
+import com.uni.system.repository.model.User;
 
 public class UserRepositoryImpl implements UserRepository {
 	

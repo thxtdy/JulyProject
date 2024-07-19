@@ -1,16 +1,12 @@
 package com.uni.system.controller;
 
-<<<<<<< HEAD
 import java.io.IOException;
 
-=======
->>>>>>> cc1dbca2aab4cce24b8d40480466c86a77fa5923
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-<<<<<<< HEAD
 
 @WebServlet("/user/*")
 public class UserController extends HttpServlet {
