@@ -8,9 +8,12 @@ import javax.sql.DataSource;
 
 public class DBUtil {
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 
 >>>>>>> ffd718c7aab878faa863fca8e696321ad0c1861a
+=======
+>>>>>>> 1c98975819d24d9465e16590ce57fea170488345
 
 	private static DataSource dataSource;
 
@@ -28,5 +31,11 @@ public class DBUtil {
 		
 		return dataSource.getConnection();
 	}
+<<<<<<< HEAD
 
+=======
+	
+	
+	
+>>>>>>> 1c98975819d24d9465e16590ce57fea170488345
 }

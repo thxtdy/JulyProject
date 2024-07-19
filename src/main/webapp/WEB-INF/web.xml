@@ -3,7 +3,7 @@
   <display-name>universityManagementSystem</display-name>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>signin.jsp</welcome-file>
     <welcome-file>index.htm</welcome-file>
     <welcome-file>default.html</welcome-file>
     <welcome-file>default.jsp</welcome-file>
@@ -21,6 +21,7 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+<<<<<<< HEAD
     <display-name>BreakController</display-name>
     <servlet-name>BreakController</servlet-name>
     <servlet-class>com.uni.system.controller.BreakController</servlet-class>
@@ -38,5 +39,14 @@
   <servlet-mapping>
     <servlet-name>TutionController</servlet-name>
     <url-pattern>/TutionController</url-pattern>
+=======
+    <display-name>UserController</display-name>
+    <servlet-name>UserController</servlet-name>
+    <servlet-class>com.uni.system.controller.UserController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserController</servlet-name>
+    <url-pattern>/UserController</url-pattern>
+>>>>>>> 1c98975819d24d9465e16590ce57fea170488345
   </servlet-mapping>
 </web-app>

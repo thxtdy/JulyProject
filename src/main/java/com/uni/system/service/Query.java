@@ -1,5 +1,13 @@
 package com.uni.system.service;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+
 public class Query {
 	
 	// 학생 정보 보기 
@@ -22,5 +30,6 @@ public class Query {
 	// 전체 강의 조회
 	final String VIEW_ALL_CLASS = " SELECT * FROM subject_tb ";
 	
-	
+	// 로그인 유저 아이디 비밀번호 확인
+	final String SELECT_USER_BY_PASSWORD = " SELECT * FROM user_tb WHERE id = ? AND password = ? " ;
 }
