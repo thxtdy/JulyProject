@@ -7,7 +7,7 @@ import com.uni.system.repository.model.*;
 public interface StudentRepository {
 	
 	// MY 페이지
-	void viewMyInfo();      // 내 정보 보기
+	Student viewMyInfo(int userid);      // 내 정보 보기
 	void changePassword();  // 비밀번호 변경
 	void addBreak();       // 휴학신청 
 	List<BreakApp> viewAllBreak(); // 휴학신청내역

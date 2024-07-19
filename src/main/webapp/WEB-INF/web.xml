@@ -19,4 +19,24 @@
     <servlet-name>servletTemp</servlet-name>
     <url-pattern>/servletTemp</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>BreakController</display-name>
+    <servlet-name>BreakController</servlet-name>
+    <servlet-class>com.uni.system.controller.BreakController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BreakController</servlet-name>
+    <url-pattern>/BreakController</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>TutionController</display-name>
+    <servlet-name>TutionController</servlet-name>
+    <servlet-class>com.uni.system.controller.TutionController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>TutionController</servlet-name>
+    <url-pattern>/TutionController</url-pattern>
+  </servlet-mapping>
 </web-app>
