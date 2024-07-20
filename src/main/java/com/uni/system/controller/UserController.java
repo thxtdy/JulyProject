@@ -11,6 +11,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/user/*")
 public class UserController extends HttpServlet {
@@ -26,7 +27,6 @@ public class UserController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String action = request.getPathInfo();
-		System.out.println("DOGET PathInfo : " + action);
 		switch (action) {
 		case "/signup":
 			request.getRequestDispatcher("/WEB-INF/six/user/signup.jsp").forward(request, response);
@@ -60,11 +60,12 @@ public class UserController extends HttpServlet {
 		System.out.println(userId);
 		String password = request.getParameter("password"); // 123123
 		UserDTO principal = userRepository.getUserbyRole(userId);
+		HttpSession session = request.getSession();
 		
 		if(userId == principal.getId() && password.equals(principal.getPassword())) {
-		
-			request.setAttribute("principal", principal);
-			response.sendRedirect(password);
+			System.out.println("Login Success : " + principal);
+			session.setAttribute("principal", principal);
+			request.getRequestDispatcher("WEB-INF/subject.jsp").forward(request, response);
 		}
 
 	}

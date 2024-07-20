@@ -17,31 +17,34 @@ import com.uni.system.utils.DBUtil;
 public class StudentRepositoryImpl implements StudentRepository{
 	
 	Query query;
+	private String STUDENT_INFO = "SELECT s.*, c.name as college, d.name as department FROM college_tb as c LEFT JOIN department_tb AS d ON c.id = d.college_id LEFT JOIN student_tb as s on s.dept_id = d.id where s.id = ? ";
+	private String CHANGE_PASSWORD = " UPDATE user_tb SET password = ? WHERE id = ? ";
 	
 	@Override
 	public Student viewMyInfo(int userid) {
-		Student student = null;;
+		Student student = null;
 		try (Connection conn = DBUtil.getConnection()){
 			conn.setAutoCommit(false);
-			try (PreparedStatement pstmt = conn.prepareStatement(query.VIEW_STUDENT_INFO)){
+			try (PreparedStatement pstmt = conn.prepareStatement(STUDENT_INFO)){
 				pstmt.setInt(1, userid);
 				ResultSet rs =  pstmt.executeQuery();
 				if(rs.next()) {
 					student = Student.builder()
 							.id(rs.getInt("id"))
 							.name(rs.getString("name"))
-							.birthDate(rs.getDate("birthDate"))
+							.birthDate(rs.getDate("birth_Date"))
 							.gender(rs.getString("gender"))
 							.address(rs.getString("address"))
 							.tel(rs.getString("tel"))
 							.email(rs.getString("email"))
-							.deptId(rs.getInt("deptId"))
+							.deptId(rs.getInt("dept_id"))
 							.grade(rs.getInt("grade"))
 							.semester(rs.getInt("semester"))
-							.entranceDate(rs.getDate("entranceDate"))
-							.graduationDate(rs.getDate("graduation"))
+							.entranceDate(rs.getDate("entrance_date"))
+							.graduationDate(rs.getDate("graduation_date"))
+							.college(rs.getString("college"))
+							.department(rs.getString("department"))
 							.build();
-					return student;
 				}
 				
 			} catch (Exception e) {
@@ -53,11 +56,29 @@ public class StudentRepositoryImpl implements StudentRepository{
 		}
 		return student;
 	}
-
 	@Override
-	public void changePassword() {
+	public void changePassword(String password, int userId) {
+		try (Connection conn = DBUtil.getConnection()){
+			conn.setAutoCommit(false);
+			try (PreparedStatement pstmt = conn.prepareStatement(CHANGE_PASSWORD)) {
+				pstmt.setString(1, password);
+				pstmt.setInt(2, userId);
+				int rowCount =  pstmt.executeUpdate();
+				
+				if(rowCount > 0) {
+					conn.commit();
+				}
+				
+			} catch (Exception e) {
+				conn.rollback();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
+	
+
 
 	@Override
 	public void addBreak() {
@@ -157,5 +178,8 @@ public class StudentRepositoryImpl implements StudentRepository{
 	public void viewAcademicSchedule() {
 		
 	}
+	
+
+	
 
 }

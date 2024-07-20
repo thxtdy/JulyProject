@@ -27,5 +27,8 @@ public class Student {
 	private int semester;
 	private Date entranceDate;
 	private Date graduationDate;
+	private String college;
+	private String department;
+	
 
 }
