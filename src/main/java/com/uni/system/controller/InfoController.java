@@ -74,17 +74,22 @@ public class InfoController extends HttpServlet {
 		}
 	}
 
-	private void changePassword(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
+	private void changePassword(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		HttpSession session = request.getSession();
 		UserDTO dto = (UserDTO) session.getAttribute("principal");
-		System.out.println("Password : " + dto.getPassword());
-		if (dto.getId() == 0) {
+		String changePassword = request.getParameter("change_password");
+		System.out.println("Current Password : " + dto.getPassword());
+		System.out.println("Changed Password : " + changePassword);
+		
+		if (dto.getId() != 0) {
+			studentRepository.changePassword(changePassword, dto.getId());
+			request.getRequestDispatcher("/WEB-INF/views/user/studentInfo.jsp").forward(request, response);
+		
+		} else {
 			response.sendRedirect(request.getContextPath() + "/info?message=invalid");
 		}
 
-		studentRepository.changePassword(dto.getPassword(), dto.getId());
-		request.getRequestDispatcher("/WEB-INF/views/user/studentInfo.jsp").forward(request, response);
 	}
 
 }

@@ -63,11 +63,8 @@ public class StudentRepositoryImpl implements StudentRepository{
 			try (PreparedStatement pstmt = conn.prepareStatement(CHANGE_PASSWORD)) {
 				pstmt.setString(1, password);
 				pstmt.setInt(2, userId);
-				int rowCount =  pstmt.executeUpdate();
-				
-				if(rowCount > 0) {
-					conn.commit();
-				}
+				pstmt.executeUpdate();
+				conn.commit();
 				
 			} catch (Exception e) {
 				conn.rollback();

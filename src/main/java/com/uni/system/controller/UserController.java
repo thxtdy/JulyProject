@@ -63,7 +63,7 @@ public class UserController extends HttpServlet {
 			session.setAttribute("principal", principal); // header.jsp, 각종 info 에 끌고 오기 위해 속성 설정해주기.
 			response.sendRedirect("/six/user/home.jsp");
 		} else {
-			// TODO - Error Message ( Not JavaScript )
+			response.sendRedirect(request.getContextPath() + "/user?message=invalid");
 		}
 
 	}
