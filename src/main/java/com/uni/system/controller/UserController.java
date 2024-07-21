@@ -26,15 +26,7 @@ public class UserController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String action = request.getPathInfo();
-		switch (action) {
-		case "/signup":
-			request.getRequestDispatcher("/WEB-INF/six/user/signup.jsp").forward(request, response);
-			break;
-		default:
-			response.sendError(HttpServletResponse.SC_NOT_FOUND);
-			break;
-		}
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -56,16 +48,22 @@ public class UserController extends HttpServlet {
 
 	private void handleSignIn(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		
+		// index.jsp 에서 입력한 아이디, 비밀번호 값을 userId, password 라는 곳에 담기.
 		int userId = Integer.parseInt(request.getParameter("username")); // 23000001
 		System.out.println(userId);
 		String password = request.getParameter("password"); // 123123
-		UserDTO principal = userRepository.getUserbyRole(userId);
+		
+		// userRepository의 getUserInfoById(유저 정보 끌고 오기)를 사용하여 principal 이라는 곳에 담기.
+		UserDTO principal = userRepository.getUserInfoById(userId);
 		HttpSession session = request.getSession();
 		
+		// 입력한 값(userId, password)이 dto 값과 일치하는지 확인)
 		if(userId == principal.getId() && password.equals(principal.getPassword())) {
 			System.out.println("Login Success : " + principal);
-			session.setAttribute("principal", principal);
-			request.getRequestDispatcher("WEB-INF/subject.jsp").forward(request, response);
+			session.setAttribute("principal", principal); // header.jsp, 각종 info 에 끌고 오기 위해 속성 설정해주기.
+			response.sendRedirect("/six/user/home.jsp");
+		} else {
+			// TODO - Error Message ( Not JavaScript )
 		}
 
 	}

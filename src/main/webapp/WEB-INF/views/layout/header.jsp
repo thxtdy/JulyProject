@@ -8,11 +8,14 @@
 	href="${pageContext.request.contextPath}/resources/css/header.css">
 </head>
 <body>
+<%
+request.getAttribute("principal");
+%>
 	<header>
 
 		<div class="header_top_box">
 			<ul class="header_top_info_ul">
-				<li class="header_top_info_li">(변영준)님 id: 17510048</li>
+				<li class="header_top_info_li">${principal.name}님 id: ${principal.id}</li>
 				<li class="header_top_info_li" style="margin: 0 15px;"></li>
 				<li class="header_top_info_li"><a href="/logout">로그아웃</a></li>
 			</ul>
