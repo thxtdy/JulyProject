@@ -29,4 +29,14 @@
     <servlet-name>UserController</servlet-name>
     <url-pattern>/UserController</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SubjectController</display-name>
+    <servlet-name>SubjectController</servlet-name>
+    <servlet-class>com.uni.system.controller.SubjectController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SubjectController</servlet-name>
+    <url-pattern>/SubjectController</url-pattern>
+  </servlet-mapping>
 </web-app>

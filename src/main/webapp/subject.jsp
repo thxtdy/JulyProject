@@ -23,13 +23,16 @@
 		<main>
 			<h1>전체 강의 조회</h1>
 			<div class="filter">
-				<form action="#">
+				<form action="${pageContext.request.contextPath}/subject/subject.jsp" method="POST">
 					<label>연도</label>
 					<!-- 개설연도 숫자 -->
-					<input type="number" value="2024" name="year" id="year" min="2017" max="2033"> <label>학기</label> <select name="semester" id="semester">
+					<input type="number" value="2024" name="year" id="year" min="2017" max="2033">
+					 <label>학기</label> 
+					 <select name="semester" id="semester">
 						<option value="1">1학기</option>
 						<option value="2">2학기</option>
-					</select> <label>개설학과</label> <select name="deptId">
+					</select> 
+					<label>개설학과</label> <select name="dept_id">
 						<option value="-1">전체</option>
 						<option value="101">컴퓨터공학과</option>
 						<option value="102">전자공학과</option>
@@ -55,7 +58,7 @@
 						
 						<!-- 강의 검색 -->
 						<label>강의명</label> 
-						<input type="text" name="name" list="lecture_name">
+						<input type="text" name="lecture_name" list="lecture_name">
 						<datalist id="lecture_name">
 						<option value="데이터통신"></option>
 						<option value="딥러닝의 기초"></option>
