@@ -22,9 +22,9 @@ public class DBUtil {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public static Connection getConnection() throws SQLException {
-		
+
 		return dataSource.getConnection();
 	}
 	

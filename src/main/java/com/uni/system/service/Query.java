@@ -1,10 +1,5 @@
 package com.uni.system.service;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
-@Data
 
 public class Query {
 	
@@ -30,4 +25,6 @@ public class Query {
 	
 	// 로그인 유저 아이디 비밀번호 확인
 	final String SELECT_USER_BY_PASSWORD = " SELECT * FROM user_tb WHERE id = ? AND password = ? " ;
+	
+	final String GET_USER_ROLE = " SELECT user_role from user_tb where id = ? ";
 }

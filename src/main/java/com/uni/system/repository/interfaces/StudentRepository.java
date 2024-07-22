@@ -6,8 +6,8 @@ import com.uni.system.repository.model.*;
 public interface StudentRepository {
 	
 	// MY 페이지
-	void viewMyInfo();      // 내 정보 보기
-	void changePassword();  // 비밀번호 변경
+	Student viewMyInfo(int userid);      // 내 정보 보기
+	void changePassword(String password, int userId); // 비밀번호 변경
 	void addBreak();       // 휴학신청 
 	List<BreakApp> viewAllBreak(); // 휴학신청내역
 	void viewTuition(); // 등록금 내역 조회
@@ -30,4 +30,5 @@ public interface StudentRepository {
 	// 학사정보
 	List<Notice> viewNotice(); // 공지사항 
 	void viewAcademicSchedule(); // 학사일정
+
 }

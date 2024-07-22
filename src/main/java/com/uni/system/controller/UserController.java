@@ -2,10 +2,9 @@ package com.uni.system.controller;
 
 import java.io.IOException;
 
-import com.uni.system.repository.UserRepositoryImpl;
 import com.uni.system.repository.interfaces.UserRepository;
-import com.uni.system.repository.model.User;
 import com.uni.system.repository.model.UserDTO;
+import com.uni.system.service.UserRepositoryImpl;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -37,6 +36,9 @@ public class UserController extends HttpServlet {
 
 		case "/employee":
 			request.getRequestDispatcher("/WEB-INF/views/user/employeeInfo.jsp").forward(request, response);
+		default:
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			break;
 		}
 	}
 
@@ -58,40 +60,26 @@ public class UserController extends HttpServlet {
 		}
 	}
 
-	private void handleSignIn(HttpServletRequest request, HttpServletResponse response)
-			throws IOException, ServletException {
 
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
-		UserDTO principal = userRepository.getUserbyRole(password);
-
-		if (principal != null && principal.getPassword().equals(password)) {
-			HttpSession session = request.getSession();
-			session.setAttribute("principal", principal);
-
-			System.out.println("로그인 완료 ");
-			System.out.println(request.getContextPath());
-			response.sendRedirect(request.getContextPath() + "/six/subject.jsp");
-
+	private void handleSignIn(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		
+		// index.jsp 에서 입력한 아이디, 비밀번호 값을 userId, password 라는 곳에 담기.
+		int userId = Integer.parseInt(request.getParameter("username")); // 23000001
+		System.out.println(userId);
+		String password = request.getParameter("password"); // 123123
+		
+		// userRepository의 getUserInfoById(유저 정보 끌고 오기)를 사용하여 principal 이라는 곳에 담기.
+		UserDTO principal = userRepository.getUserInfoById(userId);
+		HttpSession session = request.getSession();
+		
+		// 입력한 값(userId, password)이 dto 값과 일치하는지 확인)
+		if(userId == principal.getId() && password.equals(principal.getPassword())) {
+			System.out.println("Login Success : " + principal);
+			session.setAttribute("principal", principal); // header.jsp, 각종 info 에 끌고 오기 위해 속성 설정해주기.
+			response.sendRedirect("/six/user/home.jsp");
 		} else {
-			request.setAttribute("errorMessage", "잘못된 요청입니다");
-			request.getRequestDispatcher("/subject.jsp").forward(request, response);
-
-		}
-
-		System.out.println("username : " + username + "password : " + password);
-		UserDTO dto = userRepository.getUserbyUsername(Integer.parseInt(username), password);
-		System.out.println(dto.getUserRole());
-
-		if (username == null || password.trim().isEmpty()) {
-			response.sendRedirect("signIn?message=invalid");
-			return;
-
-		} else if (dto.getUserRole().equals("student")) {
-			response.sendRedirect("signIn?message=success");
-
+			response.sendRedirect(request.getContextPath() + "/user?message=invalid");
 		}
 
 	}
-
 }
