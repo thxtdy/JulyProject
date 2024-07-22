@@ -6,7 +6,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%
 request.getAttribute("principal");
-request.getAttribute("studentInfo");
+session.getAttribute("studentInfo");
 %>
 	<h1>내 정보 조회</h1>
 	<div class="line">
@@ -60,7 +60,7 @@ request.getAttribute("studentInfo");
 				<th>성별</th>
 				<td>${studentInfo.gender}</td>
 				<th>주소</th>
-				<td>${studentinfo.address}</td>
+				<td>${studentInfo.address}</td>
 			</tr>
 			<tr>
 				<th>연락처</th>

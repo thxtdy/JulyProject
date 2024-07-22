@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<%@ include file= "/WEB-INF/views/layout/header.jsp" %>
+<%@ include file="/WEB-INF/views/layout/header.jsp"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 </head>
 <body>
+
 	<!-- 세부 메뉴 + 메인 -->
 	<div>
 		<div class="sub_menu">
@@ -13,7 +15,7 @@
 				<table class="sub_menu_table" border="1">
 					<tbody>
 						<tr>
-							<td><a href="subject/list/1" class="selected_menu">전체 강의 조회</a></td>
+							<td><a href="subject.jsp" class="selected_menu">전체 강의 조회</a></td>
 						</tr>
 					</tbody>
 				</table>
@@ -23,13 +25,13 @@
 		<main>
 			<h1>전체 강의 조회</h1>
 			<div class="filter">
-				<form action="#">
+				<form action="${pageContext.request.contextPath}/subject/list" method="GET">
 					<label>연도</label>
 					<!-- 개설연도 숫자 -->
-					<input type="number" value="2024" name="year" id="year" min="2017" max="2033"> <label>학기</label> <select name="semester" id="semester">
+					<input type="number" value="2023" name="year" id="year" min="2017" max="2033"> <label>학기</label> <select name="semester" id="semester">
 						<option value="1">1학기</option>
 						<option value="2">2학기</option>
-					</select> <label>개설학과</label> <select name="deptId">
+					</select> <label>개설학과</label> <select name="dept_id">
 						<option value="-1">전체</option>
 						<option value="101">컴퓨터공학과</option>
 						<option value="102">전자공학과</option>
@@ -51,12 +53,12 @@
 						<option value="118">회계학과</option>
 						<option value="119">농업경영학과</option>
 						<option value="120">무역학과</option>
-						</select> 
-						
-						<!-- 강의 검색 -->
-						<label>강의명</label> 
-						<input type="text" name="name" list="lecture_name">
-						<datalist id="lecture_name">
+					</select>
+
+					<!-- 강의 검색 -->
+					<label>강의명</label>
+					 <input type="text" name="lecture_name" list="lecture_name">
+					<datalist id="lecture_name">
 						<option value="데이터통신"></option>
 						<option value="딥러닝의 기초"></option>
 						<option value="컴퓨터의 개념 및 실습"></option>
@@ -137,17 +139,45 @@
 						<option value="국제경영학"></option>
 						<option value="국제무역론 입문"></option>
 						<option value="한국무역법"></option>
-						</datalist>
+					</datalist>
+					<button type="submit">조회</button>
 				</form>
-				<h2>목록 </h2>
+				<h2>목록</h2>
 				<!-- TODO [총 00건] -->
 				<!-- 나중에 for문 돌려서 강의 목록 페이지 작성! 페이징 처리도 해야함.  -->
-				<h3> [총 00건]</h3>
+				<h3>[총 00건]</h3>
 				<table border="1">
-					<tbody>
+					<thead>
 						<tr>
-							<th></th>
-						</tr>						
+							<th>연도/학기</th>
+							<th>단과대학</th>
+							<th>개설학과</th>
+							<th>학수번호</th>
+							<th>강의구분</th>
+							<th>강의명</th>
+							<th>담당교수</th>
+							<th>학점</th>
+							<th>수강인원</th>
+							<th>정원</th>
+							<th>강의계획서</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="subject" items="${subjectList}">
+                <tr>
+                    <td>${subject.subYear}-${subject.semester}학기</td>
+                    <td>${subject.collegeName}</td>
+                    <td>${subject.departmentName}</td>
+                    <td>${subject.haksuNum}</td>
+                    <td>${subject.type}</td>
+                    <td>${subject.lectureName}</td>
+                    <td>${subject.professorName}</td>
+                    <td>${subject.grades}</td>
+                    <td>${subject.numOfStudent}</td>
+                    <td>${subject.capacity}</td>
+                    <td>조회</td>
+                </tr>
+            </c:forEach>
 					</tbody>
 				</table>
 			</div>

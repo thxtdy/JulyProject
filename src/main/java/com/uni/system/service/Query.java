@@ -1,5 +1,6 @@
 package com.uni.system.service;
 
+
 public class Query {
 	
 	// 학생 정보 보기 

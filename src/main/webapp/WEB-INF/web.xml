@@ -21,6 +21,7 @@
   </servlet-mapping>
   <servlet>
     <description></description>
+<<<<<<< HEAD
     <display-name>BreakRepositoryImpl</display-name>
     <servlet-name>BreakRepositoryImpl</servlet-name>
     <servlet-class>com.uni.system.service.BreakRepositoryImpl</servlet-class>
@@ -28,5 +29,24 @@
   <servlet-mapping>
     <servlet-name>BreakRepositoryImpl</servlet-name>
     <url-pattern>/BreakRepositoryImpl</url-pattern>
+=======
+    <display-name>UserController</display-name>
+    <servlet-name>UserController</servlet-name>
+    <servlet-class>com.uni.system.controller.UserController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserController</servlet-name>
+    <url-pattern>/UserController</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SubjectController</display-name>
+    <servlet-name>SubjectController</servlet-name>
+    <servlet-class>com.uni.system.controller.SubjectController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SubjectController</servlet-name>
+    <url-pattern>/SubjectController</url-pattern>
+>>>>>>> e952fa8cd564d62caba7f7318f0c28ddba2c371f
   </servlet-mapping>
 </web-app>
