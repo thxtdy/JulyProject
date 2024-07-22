@@ -74,9 +74,8 @@ public class UserController extends HttpServlet {
 		}
 	}
 
-	private void handleSignIn(HttpServletRequest request, HttpServletResponse response)
-			throws IOException, ServletException {
-
+	private void handleSignIn(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		System.out.println("handleSignIn 호출 확인");
 		// index.jsp 에서 입력한 아이디, 비밀번호 값을 userId, password 라는 곳에 담기.
 		int userId = Integer.parseInt(request.getParameter("username")); // 23000001
 		System.out.println(userId);
