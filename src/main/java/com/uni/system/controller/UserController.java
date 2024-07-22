@@ -96,4 +96,8 @@ public class UserController extends HttpServlet {
 
 	}
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> cf4c85da919a84be1be2c50420ee6eb8de508476
