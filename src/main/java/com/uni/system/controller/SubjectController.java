@@ -25,27 +25,27 @@ public class SubjectController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		handleList(request, response);
-//		String action = request.getPathInfo();
-//		System.out.println("GET action: " + action);
-//		switch (action) {
-//		case "/subject":
-//			handleSubject(request, response);
-//			break;
-//		case "/list":
-//			break;
-//
-//		default:
-//			response.sendError(HttpServletResponse.SC_NOT_FOUND);
-//			break;
-//		}
+		String action = request.getPathInfo();
+		System.out.println("GET action: " + action);
+		switch (action) {
+		case "/subject":
+			handleSubject(request, response);
+			break;
+		case "/list":
+			handleList(request, response);
+			break;
+
+		default:
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+			break;
+		}
 	}
 
-	private void handleSubject(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	private void handleSubject(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<SubjectLectureList> subjectList = subjectRepository.selectAllTable();
 		System.out.println("subjectList : " + subjectList.toString());
 		request.setAttribute("subjectList", subjectList);
-		response.sendRedirect(request.getContextPath() + "/subject.jsp");
+		request.getRequestDispatcher("/WEB-INF/views/user/subject.jsp").forward(request, response);
 	}
 
 	private void handleList(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -78,7 +78,7 @@ public class SubjectController extends HttpServlet {
 			System.out.println("개설학과만 선택 안했을 경우 : " + subjectList);
 		}
 		request.setAttribute("subjectList", subjectList);
-		request.getRequestDispatcher(request.getContextPath() + "/subject.jsp").forward(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/user/subject.jsp").forward(request, response);
 
 	}
 

@@ -34,15 +34,12 @@ public class UserController extends HttpServlet {
 		case "/professor":
 			request.getRequestDispatcher("/WEB-INF/views/user/professorInfo.jsp").forward(request, response);
 			break;
-<<<<<<< HEAD
-=======
 		case "/logout":
 			handleLogout(request, response);
 			break;
 		case "/home":
 			request.getRequestDispatcher("/WEB-INF/views/user/home.jsp").forward(request, response);
 			break;
->>>>>>> 62f88b3e307687ba6b7aac02246f1295ac079fd5
 		case "/employee":
 			request.getRequestDispatcher("/WEB-INF/views/user/employeeInfo.jsp").forward(request, response);
 		default:
@@ -76,14 +73,8 @@ public class UserController extends HttpServlet {
 		}
 	}
 
-	private void handleSignIn(HttpServletRequest request, HttpServletResponse response)
-			throws IOException, ServletException {
-
-<<<<<<< HEAD
 	private void handleSignIn(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		System.out.println("handleSignIn 호출 확인");
-=======
->>>>>>> 62f88b3e307687ba6b7aac02246f1295ac079fd5
 		// index.jsp 에서 입력한 아이디, 비밀번호 값을 userId, password 라는 곳에 담기.
 		int userId = Integer.parseInt(request.getParameter("username")); // 23000001
 		System.out.println(userId);
@@ -97,12 +88,8 @@ public class UserController extends HttpServlet {
 		if (userId == principal.getId() && password.equals(principal.getPassword())) {
 			System.out.println("Login Success : " + principal);
 			session.setAttribute("principal", principal); // header.jsp, 각종 info 에 끌고 오기 위해 속성 설정해주기.
-<<<<<<< HEAD
-			response.sendRedirect(request.getContextPath() + "/home.jsp"); // ("/WEB-INF/home.jsp").forward(request, response);
-=======
 			response.sendRedirect(request.getContextPath() + "/user/home");
 			System.out.println("홈제에스피 되나");
->>>>>>> 62f88b3e307687ba6b7aac02246f1295ac079fd5
 		} else {
 			response.sendRedirect(request.getContextPath() + "/user?message=invalid");
 		}

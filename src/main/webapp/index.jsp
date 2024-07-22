@@ -11,7 +11,7 @@
 <div class="container">
 	<h2> 로그인</h2>
 
-	<form action="${pageContext.request.contextPath}/signIn" method="post">
+	<form action="${pageContext.request.contextPath}/user/signIn" method="post">
 		<div>
 		<label for="username">사용자 이름:</label>
 		<input type="text" id="username" name="username" value="2023000001">
