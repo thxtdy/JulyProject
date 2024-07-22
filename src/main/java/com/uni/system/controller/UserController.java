@@ -52,7 +52,7 @@ public class UserController extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.invalidate();
 
-		response.sendRedirect(request.getContextPath() + "/user/index");
+		response.sendRedirect(request.getContextPath() + "/index.jsp");
 
 	}
 
