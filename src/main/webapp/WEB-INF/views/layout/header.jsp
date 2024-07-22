@@ -1,4 +1,21 @@
+<<<<<<< HEAD
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+=======
+<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/header.css">
+</head>
+<body>
+<%
+request.getAttribute("principal");
+%>
+	<header>
+>>>>>>> f9fb528665f7e2d3c431fa86cdc49752de8eea15
 
 	<div class="header_top">
 		<ul>
@@ -41,7 +58,7 @@
 >>>>>>> 58c4baee944a8ccbe952f644c66e9ab08bd80544
 		<div class="header_top_box">
 			<ul class="header_top_info_ul">
-				<li class="header_top_info_li">(변영준)님 id: 17510048</li>
+				<li class="header_top_info_li">${principal.name}님 id: ${principal.id}</li>
 				<li class="header_top_info_li" style="margin: 0 15px;"></li>
 				<li class="header_top_info_li"><a href="/logout">로그아웃</a></li>
 			</ul>

@@ -11,10 +11,14 @@
 		connectionTimeout="30000"
 		idleTimeout="60000"
 		maxLifetime="1800000"
-		jdbcUrl="jdbc:mysql://192.168.0.25/managementsystem?serverTimezone=Asia/Seoul" 
+		jdbcUrl="jdbc:mysql://localhost:3306/managementsystem?serverTimezone=Asia/Seoul" 
 		driverClassName="com.mysql.cj.jdbc.Driver"
 		username="root"
+<<<<<<< HEAD
 		password="asd123"/>
+=======
+		password="040220"/>
+>>>>>>> f9fb528665f7e2d3c431fa86cdc49752de8eea15
 
 </Context>
 

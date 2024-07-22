@@ -25,6 +25,7 @@ public class UserController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+<<<<<<< HEAD
 		String action = request.getPathInfo();
 		System.out.println("DOGET PathInfo : " + action);
 		switch (action) {
@@ -40,6 +41,9 @@ public class UserController extends HttpServlet {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			break;
 		}
+=======
+
+>>>>>>> f9fb528665f7e2d3c431fa86cdc49752de8eea15
 	}
 
 	
@@ -60,6 +64,7 @@ public class UserController extends HttpServlet {
 		}
 	}
 
+<<<<<<< HEAD
 	private void handleSignIn(HttpServletRequest request, HttpServletResponse response)
 			throws IOException, ServletException {
 
@@ -76,6 +81,26 @@ public class UserController extends HttpServlet {
 
 		} 
 
+=======
+	private void handleSignIn(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		
+		// index.jsp 에서 입력한 아이디, 비밀번호 값을 userId, password 라는 곳에 담기.
+		int userId = Integer.parseInt(request.getParameter("username")); // 23000001
+		System.out.println(userId);
+		String password = request.getParameter("password"); // 123123
+		
+		// userRepository의 getUserInfoById(유저 정보 끌고 오기)를 사용하여 principal 이라는 곳에 담기.
+		UserDTO principal = userRepository.getUserInfoById(userId);
+		HttpSession session = request.getSession();
+		
+		// 입력한 값(userId, password)이 dto 값과 일치하는지 확인)
+		if(userId == principal.getId() && password.equals(principal.getPassword())) {
+			System.out.println("Login Success : " + principal);
+			session.setAttribute("principal", principal); // header.jsp, 각종 info 에 끌고 오기 위해 속성 설정해주기.
+			response.sendRedirect("/six/user/home.jsp");
+		} else {
+			response.sendRedirect(request.getContextPath() + "/user?message=invalid");
+>>>>>>> f9fb528665f7e2d3c431fa86cdc49752de8eea15
 		}
 
 

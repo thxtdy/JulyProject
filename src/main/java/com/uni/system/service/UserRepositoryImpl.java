@@ -10,10 +10,10 @@ import com.uni.system.utils.DBUtil;
 public class UserRepositoryImpl implements UserRepository {
 	
 	final String SELECT_USER_BY_PASSWORD = " SELECT * FROM user_tb WHERE id = ? AND password = ? " ;
-	String query = " SELECT * FROM user_tb WHERE id = ? ";
+	final String GET_USER_INFO = " SELECT u.*, s.name FROM user_tb as u LEFT JOIN student_tb AS s ON u.id = s.id where u.id = ? ";
 	
 	@Override
-	public UserDTO getUserbyUsername(int username, String password) {
+	public UserDTO getUserbyIdPassword(int username, String password) {
 		UserDTO user = null;
 		try (Connection conn = DBUtil.getConnection()){
 			PreparedStatement pstmt = conn.prepareStatement(SELECT_USER_BY_PASSWORD);
@@ -38,10 +38,10 @@ public class UserRepositoryImpl implements UserRepository {
 	}
 
 	@Override
-	public UserDTO getUserbyRole(int userId) {
+	public UserDTO getUserInfoById(int userId) {
 		UserDTO dto = null;
 		try (Connection conn = DBUtil.getConnection()) {
-			PreparedStatement pstmt = conn.prepareStatement(query);
+			PreparedStatement pstmt = conn.prepareStatement(GET_USER_INFO);
 			pstmt.setInt(1, userId);
 			ResultSet rs =  pstmt.executeQuery();
 			if(rs.next()) {
@@ -49,6 +49,7 @@ public class UserRepositoryImpl implements UserRepository {
 						.id(rs.getInt("id"))
 						.password(rs.getString("password"))
 						.userRole(rs.getString("user_role"))
+						.name(rs.getString("name"))
 						.build();
 			}
 			
@@ -57,9 +58,6 @@ public class UserRepositoryImpl implements UserRepository {
 		}
 		return dto;
 	}
-
-
-				
 		
 
 }

@@ -5,7 +5,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%
-Student student = new Student();
+request.getAttribute("principal");
+request.getAttribute("studentInfo");
 %>
 	<h1>내 정보 조회</h1>
 	<div class="line">
@@ -19,21 +20,21 @@ Student student = new Student();
 		<tbody>
 			<tr>
 				<th>학번</th>
-				<td>${student.id}</td>
+				<td>${principal.id}</td>
 				<th>소속</th>
-				<td>testAD</td>
+				<td>${studentInfo.college} ${studentInfo.department}</td>
 			</tr>
 			<tr>
 				<th>학년</th>
-				<td>testgrade</td>
+				<td>${studentInfo.grade}</td>
 				<th>학기</th>
-				<td>testDurate</td>
+				<td>${studentInfo.semester}</td>
 			</tr>
 			<tr>
 				<th>입학일</th>
-				<td>testDate</td>
+				<td>${studentInfo.entranceDate}</td>
 				<th>졸업일</th>
-				<td>testgraduate</td>
+				<td>${studentInfo.graduationDate}</td>
 			</tr>
 		</tbody>
 		<%-- <c:if test="${board.userId == userId }">
@@ -51,21 +52,21 @@ Student student = new Student();
 		<tbody>
 			<tr>
 				<th>이름</th>
-				<td>testname</td>
+				<td>${studentInfo.name}</td>
 				<th>생년월일</th>
-				<td>testBirth</td>
+				<td>${studentInfo.birthDate}</td>
 			</tr>
 			<tr>
 				<th>성별</th>
-				<td>testgender</td>
+				<td>${studentInfo.gender}</td>
 				<th>주소</th>
-				<td>testaddress</td>
+				<td>${studentinfo.address}</td>
 			</tr>
 			<tr>
 				<th>연락처</th>
-				<td>testcontact</td>
+				<td>${studentInfo.tel}</td>
 				<th>email</th>
-				<td>testemail</td>
+				<td>${studentInfo.email}</td>
 			</tr>
 		</tbody>
 	</table>

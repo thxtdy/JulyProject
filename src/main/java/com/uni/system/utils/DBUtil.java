@@ -8,7 +8,6 @@ import javax.sql.DataSource;
 
 public class DBUtil {
 
-
 	private static DataSource dataSource;
 
 	static {
@@ -20,10 +19,9 @@ public class DBUtil {
 			e.printStackTrace();
 		}
 	}
-	
-	public static Connection getConnection() throws SQLException {
-		
-		return dataSource.getConnection();
 
-}
+	public static Connection getConnection() throws SQLException {
+
+		return dataSource.getConnection();
+	}
 }
