@@ -1,10 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<<<<<<< HEAD
 <!DOCTYPE html>
 <%@ include file="/WEB-INF/views/layout/header.jsp"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 </head>
 <body>
+=======
+<%@ include file= "/WEB-INF/views/layout/header.jsp" %>
+
+>>>>>>> 62f88b3e307687ba6b7aac02246f1295ac079fd5
 	<!-- 세부 메뉴 + 메인 -->
 	<div>
 		<div class="sub_menu">
