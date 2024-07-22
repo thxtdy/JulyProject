@@ -14,8 +14,12 @@ public class SubjectRepositoryImpl implements SubjectRepository {
 
 	@Override
 	public List<SubjectLectureList> selectByYearAndSemester(int year, int semester) {
-//		String sql = " SELECT sub.sub_year, sub.semester, coll.name AS college_name, dept.name AS dept_name, sub.id AS subject_id, sub.type, sub.name AS subject_name, pro.name AS professor_name, sub.grades, sub.num_of_student, sub.capacity FROM subject_tb AS sub LEFT JOIN professor_tb AS pro ON pro.id = sub.professor_id LEFT JOIN department_tb AS dept ON dept.id = sub.dept_id LEFT JOIN college_tb AS coll ON coll.id = dept.college_id WHERE sub.sub_year = ? AND sub.semester = ? " ;
-		String sql = " SELECT * FROM subject_tb WHERE sub_year = ? AND semester = ? " ;
+		String sql = " SELECT sub.sub_year, sub.semester, coll.name AS college_name, dept.name AS dept_name, sub.id AS subject_id, sub.type, sub.name AS subject_name, pro.name AS professor_name, sub.grades, sub.num_of_student, sub.capacity "
+				+ "FROM subject_tb AS sub "
+				+ "LEFT JOIN professor_tb AS pro ON pro.id = sub.professor_id "
+				+ "LEFT JOIN department_tb AS dept ON dept.id = sub.dept_id "
+				+ "LEFT JOIN college_tb AS coll ON coll.id = dept.college_id "
+				+ "WHERE sub.sub_year = ? AND sub.semester = ? " ;
 		List<SubjectLectureList> subjectList = new ArrayList<SubjectLectureList>();
 		try (Connection conn = DBUtil.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(sql)) {
