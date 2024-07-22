@@ -17,7 +17,7 @@
 			<ul class="header_top_info_ul">
 				<li class="header_top_info_li">${principal.name}님id:${principal.id}</li>
 				<li class="header_top_info_li" style="margin: 0 15px;"></li>
-				<li class="header_top_info_li"><a href="/logout">로그아웃</a></li>
+				<li class="header_top_info_li"><a href="/six/index.jsp">로그아웃</a></li>
 			</ul>
 		</div>
 

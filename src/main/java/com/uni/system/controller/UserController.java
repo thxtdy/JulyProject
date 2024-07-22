@@ -8,6 +8,7 @@ import com.uni.system.service.UserRepositoryImpl;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -81,6 +82,12 @@ public class UserController extends HttpServlet {
 		System.out.println(userId);
 		String password = request.getParameter("password"); // 123123
 
+		Cookie cookie = new Cookie("id", String.valueOf(userId));
+		cookie.setMaxAge(3600);
+		response.addCookie(cookie);
+		
+		
+		
 		// userRepository의 getUserInfoById(유저 정보 끌고 오기)를 사용하여 principal 이라는 곳에 담기.
 		UserDTO principal = userRepository.getUserInfoById(userId);
 		HttpSession session = request.getSession();
@@ -90,7 +97,6 @@ public class UserController extends HttpServlet {
 			System.out.println("Login Success : " + principal);
 			session.setAttribute("principal", principal); // header.jsp, 각종 info 에 끌고 오기 위해 속성 설정해주기.
 			response.sendRedirect(request.getContextPath() + "/user/home");
-			System.out.println("홈제에스피 되나");
 		} else {
 			response.sendRedirect(request.getContextPath() + "/user?message=invalid");
 		}
