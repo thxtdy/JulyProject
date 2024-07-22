@@ -26,11 +26,7 @@ request.getAttribute("principal");
 			<ul class="header_menu_bar">
 				<li class="header_menu_bar_li"><a href="${pageContext.request.contextPath}/home.jsp">홈</a>
 				<li class="header_menu_bar_li"><a href="${pageContext.request.contextPath}/info/student">MY</a>
-<<<<<<< HEAD
-				<li class="header_menu_bar_li"><a href="${pageContext.request.contextPath}/subject/subject">수업</a>
-=======
 				<li class="header_menu_bar_li"><a href="${pageContext.request.contextPath}/subject">수업</a>
->>>>>>> 6bad83f6fdbc590012f781b95cd42acfdcba5a45
 				<li class="header_menu_bar_li"><a href="/six/header.jsp"><img src="${pageContext.request.contextPath}/resources/img/logo.png" alt="로고이미지"></a>
 				<li class="header_menu_bar_li"><a href="${pageContext.request.contextPath}/sugang">수강신청</a>
 				<li class="header_menu_bar_li"><a href="${pageContext.request.contextPath}/thisSemester">성적</a>
