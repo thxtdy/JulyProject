@@ -153,6 +153,7 @@
 							<th>단과대학</th>
 							<th>개설학과</th>
 							<th>학수번호</th>
+							<th>강의구분</th>
 							<th>강의명</th>
 							<th>담당교수</th>
 							<th>학점</th>
@@ -174,6 +175,7 @@
                     <td>${subject.grades}</td>
                     <td>${subject.numOfStudent}</td>
                     <td>${subject.capacity}</td>
+                    <td>조회</td>
                 </tr>
             </c:forEach>
 					</tbody>
