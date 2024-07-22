@@ -25,31 +25,65 @@ public class SubjectController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		String action = request.getPathInfo();
-		System.out.println("GET action: " + action);
-		
+		handleList(request, response);
+//		String action = request.getPathInfo();
+//		System.out.println("GET action: " + action);
+//		switch (action) {
+//		case "/subject":
+//			handleSubject(request, response);
+//			break;
+//		case "/list":
+//			break;
+//
+//		default:
+//			response.sendError(HttpServletResponse.SC_NOT_FOUND);
+//			break;
+//		}
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		String action = request.getPathInfo();
+	private void handleSubject(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		List<SubjectLectureList> subjectList = subjectRepository.selectAllTable();
+		System.out.println("subjectList : " + subjectList.toString());
+		request.setAttribute("subjectList", subjectList);
+		response.sendRedirect(request.getContextPath() + "/subject.jsp");
+	}
+
+	private void handleList(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		String year = request.getParameter("year");
 		String semester = request.getParameter("semester");
 		String deptName = request.getParameter("dept_id");
 		int deptId = Integer.parseInt(deptName);
 		String lectureName = request.getParameter("lecture_name");
-		System.out.println("year : " + year);
-		System.out.println("semester : " + semester);
-		System.out.println("deptname : " + deptName);
-		System.out.println("lectureName : " + lectureName);
-		
-		List<SubjectLectureList> subjectList = new ArrayList<SubjectLectureList>();
-		
-		if(year != null && semester != null && deptId== -1 && lectureName.isEmpty()) {
-			System.out.println("deptId : " + deptId);
-			subjectList = subjectRepository.selectByYearAndSemester(Integer.parseInt(year) ,Integer.parseInt(semester));
-			System.out.println(subjectList);
+		List<SubjectLectureList> subjectList = subjectRepository.selectByYearAndSemester(Integer.parseInt(year),
+				Integer.parseInt(semester));
+		request.setAttribute("subjectList", subjectList);
+
+		if (year != null && semester != null && deptId == -1 && lectureName.isEmpty()) {
+			subjectList = subjectRepository.selectByYearAndSemester(Integer.parseInt(year), Integer.parseInt(semester));
+			System.out.println("개설학과와 강의명을 선택 안했을경우 : " + subjectList);
+
+		} else if (year != null && semester != null && deptId != -1 && lectureName.isEmpty()) {
+			subjectList = subjectRepository.selectBySemesterAndDeptAndName(Integer.parseInt(year),
+					Integer.parseInt(semester), deptId);
+			System.out.println("강의명을 선택 안했을경우 :  " + subjectList);
+
+		} else if (year != null && semester != null && deptId != -1 && !lectureName.isEmpty()) {
+			subjectList = subjectRepository.selectBySemesterAndDeptAndNameAndTpye(Integer.parseInt(year),
+					Integer.parseInt(semester), deptId, lectureName);
+			System.out.println("다 선택했을 경우 : " + subjectList);
+
+		} else if (year != null && semester != null && deptId == -1 && !lectureName.isEmpty()) {
+			subjectList = subjectRepository.selectByYearAndSemesterAndType(Integer.parseInt(year),
+					Integer.parseInt(semester), lectureName);
+			System.out.println("개설학과만 선택 안했을 경우 : " + subjectList);
 		}
+		request.setAttribute("subjectList", subjectList);
+		request.getRequestDispatcher(request.getContextPath() + "/subject.jsp").forward(request, response);
+
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 	}
 
 }
