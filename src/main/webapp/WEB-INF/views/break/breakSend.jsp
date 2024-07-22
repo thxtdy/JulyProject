@@ -1,40 +1,55 @@
+<%@page import="com.uni.system.repository.model.Student"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/layout/header.jsp"%>
 <%@ include file="/WEB-INF/views/student/subMenuMY.jsp"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
+<%
+request.getAttribute("principal");
+session.getAttribute("studentInfo");
+System.out.print(session.getAttribute("studentInfo"));
+%>
 <div class="breakList">
+<form action="${pageContext.request.contextPath}/break/send" method="post">
 	<h3>휴학 신청서</h3>
 	<table border="1">
 		<tbody>
 			<tr>
 				<th>단 과 대</th>
-				<td>testCollege</td>
+				<td>${studentInfo.college}</td>
 				<th>학과</th>
-				<td>testDepartment</td>
+				<td>${studentInfo.department}</td>
 			</tr>
 			<tr>
 				<th>학번</th>
-				<td>testStudentNum</td>
+				<td>${principal.id}</td>
 				<th>학년</th>
-				<td>testGrade</td>
+				<td>${studentInfo.grade}</td>
 			</tr>
 			<tr>
 				<th>주소</th>
-				<td>testAddress</td>
+				<td>${studentInfo.address}</td>
 			</tr>
 			<tr>
 				<th>기간</th>
-				<td>2024학년 1학기부터 <select>
-						<option>2024</option>
-						<option>2025</option>
-						<option>2026</option>
-				</select>년도 <select>
-						<option>1</option>
-						<option>2</option>
+				<td>2024학년 <!-- fromYear -->
+				
+				<select id="fromSemester" name = "fromSemester">
+						<option value="1">1</option>
+						<option value="2">2</option>
+				</select> 
+				
+				<select id="toYear" name = "toYear">
+						<option value="2024">2024</option>
+						<option value="2025">2025</option>
+						<option value="2026">2026</option>
+				</select>년도 
+				
+				<select id="toSemester" name = "toSemester"> <!-- toYear -->
+						<option value="1">1</option>
+						<option value="2">2</option>
 				</select>학기까지
-
 				</td>
 			</tr>
 			<tr>
@@ -67,6 +82,7 @@
 		</tbody>
 	</table>
 	<button type="submit">신청하기</button>
+	</form>
 </div>
 </body>
 </html>

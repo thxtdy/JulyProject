@@ -55,7 +55,7 @@ public class InfoController extends HttpServlet {
 		}
 		Student studentInfo = studentRepository.viewMyInfo(dto.getId()); // student 반
 		System.out.println("Student Infomation : " + studentInfo);
-		request.setAttribute("studentInfo", studentInfo);
+		session.setAttribute("studentInfo", studentInfo);
 
 		request.getRequestDispatcher("/WEB-INF/views/user/studentInfo.jsp").forward(request, response);
 	}

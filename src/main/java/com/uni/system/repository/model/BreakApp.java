@@ -21,7 +21,7 @@ public class BreakApp {
 	private int fromSemester;
 	private int toYear;
 	private int toSemester;
-	private String type;
+	private String type; // 휴학 구분
 	private Date appDate;
 	private String status;
 	// dev1 TEST

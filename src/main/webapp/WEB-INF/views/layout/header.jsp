@@ -27,7 +27,7 @@ request.getAttribute("principal");
 				<li class="header_menu_bar_li"><a href="${pageContext.request.contextPath}/home.jsp">홈</a>
 				<li class="header_menu_bar_li"><a href="${pageContext.request.contextPath}/info/student">MY</a>
 				<li class="header_menu_bar_li"><a href="${pageContext.request.contextPath}/subject">수업</a>
-				<li class="header_menu_bar_li"><a href="/six/header.jsp"><img src="${pageContext.request.contextPath}/resources/img/bazzi_front.png" alt="로고이미지"></a>
+				<li class="header_menu_bar_li"><a href="/six/header.jsp"><img src="${pageContext.request.contextPath}/resources/img/logo.png" alt="로고이미지"></a>
 				<li class="header_menu_bar_li"><a href="${pageContext.request.contextPath}/sugang">수강신청</a>
 				<li class="header_menu_bar_li"><a href="${pageContext.request.contextPath}/thisSemester">성적</a>
 				<li class="header_menu_bar_li"><a href="${pageContext.request.contextPath}/notice">학사정보</a>

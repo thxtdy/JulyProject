@@ -76,7 +76,7 @@ public class UserController extends HttpServlet {
 		if(userId == principal.getId() && password.equals(principal.getPassword())) {
 			System.out.println("Login Success : " + principal);
 			session.setAttribute("principal", principal); // header.jsp, 각종 info 에 끌고 오기 위해 속성 설정해주기.
-			response.sendRedirect("/six/user/home.jsp");
+			response.sendRedirect(request.getContextPath() + "/home.jsp"); // ("/WEB-INF/home.jsp").forward(request, response);
 		} else {
 			response.sendRedirect(request.getContextPath() + "/user?message=invalid");
 		}
