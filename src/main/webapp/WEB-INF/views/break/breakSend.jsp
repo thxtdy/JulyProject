@@ -4,25 +4,28 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
+<%
+request.getAttribute("studentInfo");
+%>
 <div class="breakList">
 	<h3>휴학 신청서</h3>
 	<table border="1">
 		<tbody>
 			<tr>
 				<th>단 과 대</th>
-				<td>testCollege</td>
+				<td>${studentInfo.college}</td>
 				<th>학과</th>
-				<td>testDepartment</td>
+				<td>${studentInfo.department}</td>
 			</tr>
 			<tr>
 				<th>학번</th>
-				<td>testStudentNum</td>
+				<td>${studentInfo.id}</td>
 				<th>학년</th>
-				<td>testGrade</td>
+				<td>${studentInfo.grade}</td>
 			</tr>
 			<tr>
 				<th>주소</th>
-				<td>testAddress</td>
+				<td>${studentInfo.address}</td>
 			</tr>
 			<tr>
 				<th>기간</th>

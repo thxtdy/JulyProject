@@ -19,4 +19,14 @@
     <servlet-name>servletTemp</servlet-name>
     <url-pattern>/servletTemp</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>BreakRepositoryImpl</display-name>
+    <servlet-name>BreakRepositoryImpl</servlet-name>
+    <servlet-class>com.uni.system.service.BreakRepositoryImpl</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BreakRepositoryImpl</servlet-name>
+    <url-pattern>/BreakRepositoryImpl</url-pattern>
+  </servlet-mapping>
 </web-app>
