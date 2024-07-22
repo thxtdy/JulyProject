@@ -29,7 +29,7 @@
 				<form action="${pageContext.request.contextPath}/subject/list" method="GET">
 					<label>연도</label>
 					<!-- 개설연도 숫자 -->
-					<input type="number" value="2024" name="year" id="year" min="2017" max="2033"> <label>학기</label> <select name="semester" id="semester">
+					<input type="number" value="2023" name="year" id="year" min="2017" max="2033"> <label>학기</label> <select name="semester" id="semester">
 						<option value="1">1학기</option>
 						<option value="2">2학기</option>
 					</select> <label>개설학과</label> <select name="dept_id">
@@ -154,6 +154,7 @@
 							<th>단과대학</th>
 							<th>개설학과</th>
 							<th>학수번호</th>
+							<th>강의구분</th>
 							<th>강의명</th>
 							<th>담당교수</th>
 							<th>학점</th>
@@ -175,6 +176,7 @@
                     <td>${subject.grades}</td>
                     <td>${subject.numOfStudent}</td>
                     <td>${subject.capacity}</td>
+                    <td>조회</td>
                 </tr>
             </c:forEach>
 					</tbody>
