@@ -60,7 +60,7 @@ request.getAttribute("studentInfo");
 				<th>성별</th>
 				<td>${studentInfo.gender}</td>
 				<th>주소</th>
-				<td>${studentinfo.address}</td>
+				<td>${studentInfo.address}</td>
 			</tr>
 			<tr>
 				<th>연락처</th>

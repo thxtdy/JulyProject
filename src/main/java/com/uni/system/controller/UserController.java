@@ -25,7 +25,6 @@ public class UserController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-<<<<<<< HEAD
 		String action = request.getPathInfo();
 		System.out.println("DOGET PathInfo : " + action);
 		switch (action) {
@@ -41,9 +40,6 @@ public class UserController extends HttpServlet {
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			break;
 		}
-=======
-
->>>>>>> f9fb528665f7e2d3c431fa86cdc49752de8eea15
 	}
 
 	
@@ -64,24 +60,7 @@ public class UserController extends HttpServlet {
 		}
 	}
 
-<<<<<<< HEAD
-	private void handleSignIn(HttpServletRequest request, HttpServletResponse response)
-			throws IOException, ServletException {
 
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
-		UserDTO principal = userRepository.getUserbyUsername(Integer.parseInt(username), password);
-
-		if (principal != null && principal.getPassword().equals(password)) {
-			HttpSession session = request.getSession();
-			session.setAttribute("principal", principal);
-
-			response.sendRedirect(request.getContextPath() + "/six/subject.jsp");
-			response.sendRedirect(request.getContextPath() + "/subject.jsp");
-
-		} 
-
-=======
 	private void handleSignIn(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		
 		// index.jsp 에서 입력한 아이디, 비밀번호 값을 userId, password 라는 곳에 담기.
@@ -100,8 +79,7 @@ public class UserController extends HttpServlet {
 			response.sendRedirect("/six/user/home.jsp");
 		} else {
 			response.sendRedirect(request.getContextPath() + "/user?message=invalid");
->>>>>>> f9fb528665f7e2d3c431fa86cdc49752de8eea15
 		}
 
-
+	}
 }
