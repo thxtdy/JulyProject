@@ -1,21 +1,5 @@
-<<<<<<< HEAD
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-=======
-<%@ page language="java" contentType="text/html; charset=UTF-8"	pageEncoding="UTF-8"%>
->>>>>>> 58c4baee944a8ccbe952f644c66e9ab08bd80544
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/header.css">
-</head>
-<body>
-	<header>
-<<<<<<< HEAD
-		</nav>
-=======
-<<<<<<< HEAD
+
 	<div class="header_top">
 		<ul>
 			<li>(이름)님 id: 123123 들어갈 자리</li>

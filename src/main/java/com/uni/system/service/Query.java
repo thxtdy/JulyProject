@@ -1,14 +1,6 @@
 package com.uni.system.service;
 
-<<<<<<< HEAD
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 
-@Data
-
-=======
->>>>>>> 58c4baee944a8ccbe952f644c66e9ab08bd80544
 public class Query {
 	
 	// 학생 정보 보기 
