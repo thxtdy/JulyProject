@@ -7,6 +7,7 @@
 <%
 request.getAttribute("principal");
 session.getAttribute("studentInfo");
+
 %>
 	<h1>내 정보 조회</h1>
 	<div class="line">
