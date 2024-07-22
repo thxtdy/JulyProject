@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
 <%@ include file="/WEB-INF/views/layout/header.jsp"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
@@ -29,7 +28,7 @@
 				<form action="${pageContext.request.contextPath}/subject/list" method="GET">
 					<label>연도</label>
 					<!-- 개설연도 숫자 -->
-					<input type="number" value="2024" name="year" id="year" min="2017" max="2033"> <label>학기</label> <select name="semester" id="semester">
+					<input type="number" value="2023" name="year" id="year" min="2017" max="2033"> <label>학기</label> <select name="semester" id="semester">
 						<option value="1">1학기</option>
 						<option value="2">2학기</option>
 					</select> <label>개설학과</label> <select name="dept_id">

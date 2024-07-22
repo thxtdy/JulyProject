@@ -15,16 +15,15 @@
 
 		<div class="header_top_box">
 			<ul class="header_top_info_ul">
-				<li class="header_top_info_li">${principal.name}님id:${principal.id}</li>
+				<li class="header_top_info_li">${principal.name}님 id:${principal.id}</li>
 				<li class="header_top_info_li" style="margin: 0 15px;"></li>
 				<li class="header_top_info_li"><a href="/logout">로그아웃</a></li>
 			</ul>
 		</div>
 
 		<nav class="header_menu">
-<<<<<<< HEAD
 			<!-- <h1>-- 학생 접속 시 --</h1> -->
-			<ul class="header_menu_bar">
+			<%-- ul class="header_menu_bar">
 				<li class="header_menu_bar_li"><a href="${pageContext.request.contextPath}/home.jsp">홈</a>
 				<li class="header_menu_bar_li"><a href="${pageContext.request.contextPath}/info/student">MY</a>
 				<li class="header_menu_bar_li"><a href="${pageContext.request.contextPath}/subject/subject">수업</a>
@@ -32,7 +31,7 @@
 				<li class="header_menu_bar_li"><a href="${pageContext.request.contextPath}/sugang">수강신청</a>
 				<li class="header_menu_bar_li"><a href="${pageContext.request.contextPath}/thisSemester">성적</a>
 				<li class="header_menu_bar_li"><a href="${pageContext.request.contextPath}/notice">학사정보</a>
-			</ul>
+			</ul> --%>
 			<%-- <h1>-- 교직원 접속 시 --</h1>
 			<ul>
 				<li><a href="${pageContext.request.contextPath}/header.jsp">홈</a>
@@ -48,7 +47,6 @@
 				<li><a href="${pageContext.request.contextPath}/subject">수업</a>
 				<li><a href="${pageContext.request.contextPath}/notice">학사정보</a>
 			</ul> --%>
-=======
 			<c:choose>
 				<c:when test="${principal.userRole.equals(\"student\")}">
 					<ul class="header_menu_bar">
@@ -56,7 +54,7 @@
 						<li class="header_menu_bar_li"><a href="${pageContext.request.contextPath}/info/student">MY</a>
 						<li class="header_menu_bar_li"><a href="${pageContext.request.contextPath}/subject/subject">수업</a>
 						<li class="header_menu_bar_li"><a href="/six/header.jsp"><img src="${pageContext.request.contextPath}/resources/img/logo.png" alt="로고이미지"></a>
-						<li class="header_menu_bar_li"><a href="${pageContext.request.contextPath}/sugang">수강신청</a>
+						<li class="header_menu_bar_li"><a href="${pageContext.request.contextPath}/sugang/list">수강신청</a>
 						<li class="header_menu_bar_li"><a href="${pageContext.request.contextPath}/thisSemester">성적</a>
 						<li class="header_menu_bar_li"><a href="${pageContext.request.contextPath}/notice">학사정보</a>
 					</ul>
@@ -84,7 +82,6 @@
 				</c:otherwise>
 			</c:choose>
 
->>>>>>> cf4c85da919a84be1be2c50420ee6eb8de508476
 		</nav>
 	</header>
 </body>
