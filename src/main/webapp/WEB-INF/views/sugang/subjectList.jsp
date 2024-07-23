@@ -2,6 +2,7 @@
 <%@ include file="/WEB-INF/views/layout/header.jsp"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/subject.css">
 <!-- 세부 메뉴 + 메인 -->
 <div class="registration_box" style="min-width: 100em">
 
@@ -42,11 +43,11 @@
 		<main>
 			<h1>강의 시간표 조회</h1>
 			<div class="sub_filter">
-				<form action="/sugang/subjectList/search" method="GET">
+				<form action="${pageContext.request.contextPath}/sugang/filter" method="GET">
 				<!-- 강의구분 콤보박스 -->
 				<label for="type">강의구분</label>
 				<select name="type" id="type">
-					<option value="전체">전체</option>
+					<option value="ALL">전체</option>
 				<c:forEach var="sugangType" items="${sugangType}">
 					<option value="${sugangType.type}">${sugangType.type}</option>
 					</c:forEach>
@@ -54,7 +55,7 @@
 				<!-- 대상학과 콤보박스 -->
 				<label for="deptId">개설학과</label>
 				<select name="deptId" id="deptId">
-				<option value="전체">전체</option>
+				<option value="ALL">전체</option>
 				<c:forEach var ="sugangDeptName" items="${sugangDeptName}">
 				<option value="${sugangDeptName.deptName}">${sugangDeptName.deptName}</option>
 				</c:forEach>
@@ -62,17 +63,17 @@
 					<!-- TODO DB 개설학과 가져오기 -->
 				<!-- 강의 검색 -->
 				<label for="subName">강의명</label>
-				<input type="text" name="name" list="subName">
+				<input type="text" name="subName" list="subName">
 				<datalist id="subName">
 				<c:forEach var="sugangLectureName" items="${sugangLectureName}">
-					<option value="${sugangLectureName.lectureName}">${sugangLectureName.lectureName}</option>
+					<option value="${sugangLectureName.lectureName}"></option>
 				</c:forEach>
 				</datalist>
 				<button type="submit">조회</button>
 				</form>
 			</div>
 			<div>
-				<h1>강의목록</h1> [총 00건]
+				<h1>강의목록</h1> [총 ${totalBoards}건]
 				<table border="1">
 					<thead>
 					<tr>
@@ -114,6 +115,18 @@
 						</c:choose>
 					</tbody>
 				</table>
+			</div>
+			<div class="pagination">
+				<c:forEach begin="1" end="${totalPages}" var="i">
+					<c:choose>
+						<c:when test="${i == currentPage}">
+							<span class="current-page">${i}</span>
+							</c:when>
+							<c:otherwise>
+								<span><a href="${pageContext.request.contextPath}/sugang/subjectList?page=${i}">${i}</a></span>
+							</c:otherwise>
+					</c:choose>
+				</c:forEach>
 			</div>
 		</main>
 	</div>

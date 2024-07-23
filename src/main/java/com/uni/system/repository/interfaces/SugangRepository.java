@@ -20,10 +20,11 @@ public interface SugangRepository {
 	
 	
 	// 수강목록들 얻기
-	List<SugangColumn> viewSugangColumn();
+	List<SugangColumn> viewSugangColumn(int pageSize, int offset);
 	
 	// 조회 쿼리
 	
+	List<SugangColumn> viewSugangValues();
 	
 	// 강의구분만 선택시
 	List<SugangColumn> selectType(String type);
@@ -46,6 +47,12 @@ public interface SugangRepository {
 	// 다 선택 했을시
 	List<SugangColumn> selectAllFilter(String type, String deptName, String lectureName);
 	
+	// 모든 조회될 목록들 카운트
+	int getAllCount();
 	
+	// 강의구분만 조회 했을때의 카운트
+	int getSelectedTypeCount(String type);
 	
+	// 개설학과만 선택했을 시
+	int getSelectedDeptId(String deptId);
 }
