@@ -145,7 +145,7 @@
 				<h2>목록</h2>
 				<!-- TODO [총 00건] -->
 				<!-- 나중에 for문 돌려서 강의 목록 페이지 작성! 페이징 처리도 해야함.  -->
-				<h3>[총 00건]</h3>
+				<h3>[총 ${totalBoards}건]</h3>
 				<table border="1">
 					<thead>
 						<tr>
@@ -180,6 +180,18 @@
             </c:forEach>
 					</tbody>
 				</table>
+			</div>
+			<div class="pagination">
+				<c:forEach begin="1" end="${totalPages}" var="i">
+					<c:choose>
+						<c:when test="${i == currentPage}">
+							<span class="current-page">${i}</span>
+							</c:when>
+							<c:otherwise>
+								<span><a href="${pageContext.request.contextPath}/subject/subject?page=${i}">${i}</a></span>
+							</c:otherwise>
+					</c:choose>
+				</c:forEach>
 			</div>
 		</main>
 	</div>

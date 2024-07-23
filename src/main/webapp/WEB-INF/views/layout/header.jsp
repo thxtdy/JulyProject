@@ -25,12 +25,17 @@
 			
 			<c:choose>
 				<c:when test="${principal.userRole.equals(\"student\")}">
-					<ul class="header_menu_bar">
-						<li class="header_menu_bar_li"><a href="${pageContext.request.contextPath}/home.jsp">홈</a>
+					<ul class="header_menu_bar">	
+						<li class="header_menu_bar_li"><a href="${pageContext.request.contextPath}/user/home">홈</a>
 						<li class="header_menu_bar_li"><a href="${pageContext.request.contextPath}/info/student">MY</a>
 						<li class="header_menu_bar_li"><a href="${pageContext.request.contextPath}/subject/subject">수업</a>
+<<<<<<< HEAD
 						<li class="header_menu_bar_li"><a href="/six/header.jsp"><img src="${pageContext.request.contextPath}/resources/img/logo.png" alt="로고이미지"></a>
 						<li class="header_menu_bar_li"><a href="${pageContext.request.contextPath}/sugang/list">수강신청</a>
+=======
+						<li class="header_menu_bar_li"><a href="${pageContext.request.contextPath}/user/home"><img src="${pageContext.request.contextPath}/resources/img/logo.png" alt="로고이미지"></a>
+						<li class="header_menu_bar_li"><a href="${pageContext.request.contextPath}/sugang">수강신청</a>
+>>>>>>> 8b62f0a53b4c4f6c894ac507b4c1b9fba08b3442
 						<li class="header_menu_bar_li"><a href="${pageContext.request.contextPath}/thisSemester">성적</a>
 						<li class="header_menu_bar_li"><a href="${pageContext.request.contextPath}/notice">학사정보</a>
 					</ul>
