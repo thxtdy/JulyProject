@@ -16,5 +16,8 @@ public class UserDTO {
 	private String password;
 	private String userRole;
 	private String name;
+	private String studentName;
+	private String staffName;
+	private String professorName;
 
 }

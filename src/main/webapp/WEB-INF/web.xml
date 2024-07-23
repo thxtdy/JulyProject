@@ -19,4 +19,14 @@
     <servlet-name>servletTemp</servlet-name>
     <url-pattern>/servletTemp</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ManagementController</display-name>
+    <servlet-name>ManagementController</servlet-name>
+    <servlet-class>com.uni.system.controller.ManagementController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ManagementController</servlet-name>
+    <url-pattern>/ManagementController</url-pattern>
+  </servlet-mapping>
 </web-app>
