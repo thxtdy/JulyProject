@@ -39,4 +39,14 @@
     <servlet-name>SubjectController</servlet-name>
     <url-pattern>/SubjectController</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>sugangController</display-name>
+    <servlet-name>sugangController</servlet-name>
+    <servlet-class>com.uni.system.controller.sugangController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>sugangController</servlet-name>
+    <url-pattern>/sugangController</url-pattern>
+  </servlet-mapping>
 </web-app>
