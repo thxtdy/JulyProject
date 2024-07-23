@@ -48,7 +48,7 @@ public class SubjectController extends HttpServlet {
 		try {
 			String pageStr = request.getParameter("page");
 			if (pageStr != null) {
-				page = Integer.parseInt(pageStr);
+				page = Integer.parseInt(pageStr); 
 			}
 		} catch (Exception e) {
 			page = 1;
