@@ -29,7 +29,7 @@
 				<form action="${pageContext.request.contextPath}/subject/list" method="GET">
 					<label>연도</label>
 					<!-- 개설연도 숫자 -->
-					<input type="number" value="2024" name="year" id="year" min="2017" max="2033"> <label>학기</label> <select name="semester" id="semester">
+					<input type="number" value="2023" name="year" id="year" min="2017" max="2033"> <label>학기</label> <select name="semester" id="semester">
 						<option value="1">1학기</option>
 						<option value="2">2학기</option>
 					</select> <label>개설학과</label> <select name="dept_id">
@@ -146,7 +146,7 @@
 				<h2>목록</h2>
 				<!-- TODO [총 00건] -->
 				<!-- 나중에 for문 돌려서 강의 목록 페이지 작성! 페이징 처리도 해야함.  -->
-				<h3>[총 00건]</h3>
+				<h3>[총 ${totalBoards}건]</h3>
 				<table border="1">
 					<thead>
 						<tr>
@@ -154,6 +154,7 @@
 							<th>단과대학</th>
 							<th>개설학과</th>
 							<th>학수번호</th>
+							<th>강의구분</th>
 							<th>강의명</th>
 							<th>담당교수</th>
 							<th>학점</th>
@@ -175,10 +176,23 @@
                     <td>${subject.grades}</td>
                     <td>${subject.numOfStudent}</td>
                     <td>${subject.capacity}</td>
+                    <td>조회</td>
                 </tr>
             </c:forEach>
 					</tbody>
 				</table>
+			</div>
+			<div class="pagination">
+				<c:forEach begin="1" end="${totalPages}" var="i">
+					<c:choose>
+						<c:when test="${i == currentPage}">
+							<span class="current-page">${i}</span>
+							</c:when>
+							<c:otherwise>
+								<span><a href="${pageContext.request.contextPath}/subject/subject?page=${i}">${i}</a></span>
+							</c:otherwise>
+					</c:choose>
+				</c:forEach>
 			</div>
 		</main>
 	</div>
