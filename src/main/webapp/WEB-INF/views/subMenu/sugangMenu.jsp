@@ -28,12 +28,12 @@
 				</tr>
 				<tr>
 					<td>
-					<a href="/sugang/preAppList">수강 신청</a>
+					<a href="${pageContext.request.contextPath}/sugang/appList">수강 신청</a>
 					</td>
 				</tr>
 				<tr>
 					<td>
-					<a href="/sugang/List">수강 신청 내역 조회</a>
+					<a href="${pageContext.request.contextPath}/sugang/appInfo">수강 신청 내역 조회</a>
 					</td>
 				</tr>
 			</tbody>

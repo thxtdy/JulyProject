@@ -43,6 +43,9 @@ public interface SugangRepository {
 	// 다 선택 했을시
 	List<SugangColumn> selectAllFilter(String type, String deptName, String lectureName);
 	
+	// 선택된 예비수강 목록 뽑기
+	List<SugangColumn> viewSelectedPreAdd(int subjectId);
+	
 	// 모든 조회될 목록들 카운트
 	int getAllCount();
 	
@@ -66,4 +69,5 @@ public interface SugangRepository {
 	
 	// 다 선택 했을시
 	int getSelectedAll(String type, String deptId, String lectureName);
+	
 }

@@ -84,8 +84,8 @@
 							<td>${sugangColumnList.numOfStudent}</td>
 							<td>${sugangColumnList.capacity}</td>
 							<td class="selected_sugang_btn">
-							<form action= "${pageContext.request.contextPath}/sugang/detail" method="POST">
-							<button type="submit" name ="selectedList" value= ${sugangColumnList.subjectName} onclick="return confirm('정말 선택할꺼야?');">신청</button>
+							<form action= "${pageContext.request.contextPath}/sugang/selectedList" method="POST">
+							<button type="submit" name ="selectedList" value= "${sugangColumnList.subjectId}" onclick="return confirm('정말 선택할꺼야?');">신청</button>
 							</form>
 							</td>
 						</tr>
