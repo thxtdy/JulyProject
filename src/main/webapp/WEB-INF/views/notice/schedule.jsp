@@ -9,6 +9,23 @@
     <title>전체 일정</title>
 </head>
 <body>
+	<div class="d-flex">
+		<div class="sub-menu">
+			<div class="sub-menu-top">
+				<h3>학사 정보</h3>
+			</div>
+			<table class="sub-menu-middle" border="1">
+				<tbody>
+					<tr>
+						<td><a href="${pageContext.request.contextPath}/notice/notice" class="menu">공지사항</a></td>
+					</tr>
+					<tr>
+						<td><a href="${pageContext.request.contextPath}/schedule/schedule" class="menu">학사일정</a></td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+
     <h1>전체 일정</h1>
     <table border="1">
         <tr>
@@ -17,6 +34,7 @@
             <th>제목</th>
             <th>조회수</th>
         </tr>
+        <tbody>
         <c:forEach items="${scheduleList}" var="schedule">
             <tr>
                 <td>${schedule.id}</td>
@@ -25,6 +43,7 @@
                 <td>${schedule.views}</td>
             </tr>
         </c:forEach>
+        </tbody>
     </table>
 </body>
 </html>
