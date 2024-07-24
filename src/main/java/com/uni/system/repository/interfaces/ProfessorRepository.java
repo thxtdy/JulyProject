@@ -11,7 +11,7 @@ public interface ProfessorRepository {
 	
 	// MY 페이지
 	void viewMyInfo(); // 내 정보 보기
-	void changePassword(); // 비밀번호 변경
+	void changePassword(int id , int password); // 비밀번호 변경
 	
 	// 수업
 	List<Subject> viewAllSubject(); // 전체 강의 조회
