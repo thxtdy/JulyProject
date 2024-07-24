@@ -28,11 +28,35 @@ public class SugangController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getPathInfo();
 		switch (action) {
+			// 강의 시간표 조회
 		case "/subjectList":
 			getChecks(request,response);
+			viewLists(request, response);
+			request.getRequestDispatcher("/WEB-INF/views/sugang/subjectList.jsp").forward(request, response);
 			break;
+			
+			// 강의 시간표 필터
 		case "/filter":
 			viewSlectedLecture(request,response);
+			request.getRequestDispatcher("/WEB-INF/views/sugang/subjectList.jsp").forward(request, response);
+			break;
+			
+			// 예비 수강 신청 필터
+		case "/preFilter":
+			viewSlectedPreLecture(request,response);
+			request.getRequestDispatcher("/WEB-INF/views/sugang/pre.jsp").forward(request, response);
+			break;
+			
+			// 예비 신청 페이지
+		case "/pre":
+			correctList(request,response);
+			request.getRequestDispatcher("/WEB-INF/views/sugang/pre.jsp").forward(request, response);
+			break;
+			
+			// 선택된 예비 신청 목록
+		case "/preAppList":
+			System.out.println("여기로 들어오나요 제발");
+			request.getRequestDispatcher("/WEB-INF/views/sugang/preAppList.jsp").forward(request, response);
 			break;
 		default:
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
@@ -40,6 +64,33 @@ public class SugangController extends HttpServlet {
 		}
 	}
 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String action = request.getPathInfo();
+		switch (action) {
+		case "/detail":
+			System.out.println("여기로 들어오나요 진짜..??");
+			viewSelectedLecture(request,response);
+			break;
+		default:
+			break;
+		}
+	}
+	
+	
+	private void viewSelectedLecture(HttpServletRequest request, HttpServletResponse response) {
+		String sugangList = request.getParameter("selectedList");
+		System.out.println("sugangList : " + sugangList);
+	}
+	private void viewSlectedPreLecture(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		viewSlectedLecture(request, response);
+		
+	}
+	
+	private void correctList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		getChecks(request, response);
+		viewLists(request, response);
+	}
+	
 	private void viewSlectedLecture(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		List<SugangColumn> sugangColumnList = new ArrayList<SugangColumn>();
 		
@@ -95,7 +146,6 @@ public class SugangController extends HttpServlet {
 		
 		request.setAttribute("sugangColumnList", sugangColumnList);
 		request.setAttribute("totalBoards", totalBoards);
-		request.getRequestDispatcher("/WEB-INF/views/sugang/subjectList.jsp").forward(request, response);
 		
 	}
 	private void getChecks(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -118,24 +168,19 @@ public class SugangController extends HttpServlet {
 		
 		List<SugangColumn> sugangColumnList = sugangRepository.viewSugangColumn(pageSize, offset);
 		
-		viewLists(request, response);
 		request.setAttribute("totalBoards", totalBoards);
 		request.setAttribute("totalPages", totalPages);
 		request.setAttribute("currentPage", page);
 		request.setAttribute("sugangColumnList", sugangColumnList);
-		request.getRequestDispatcher("/WEB-INF/views/sugang/subjectList.jsp").forward(request, response);
-		
-	}
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 	}
 	
 	private void viewLists(HttpServletRequest request, HttpServletResponse response) {
-		List<SugangDTO> type= sugangRepository.getSugangType();
+		List<SugangDTO> sugangtype= sugangRepository.getSugangType();
 		List<SugangDTO> sugangDeptName = sugangRepository.getSugangDeptName();
 		List<SugangDTO> sugangLectureName = sugangRepository.getSugangLectureName();
 		
-		request.setAttribute("sugangType", type);
+		
+		request.setAttribute("sugangType", sugangtype);
 		request.setAttribute("sugangDeptName", sugangDeptName);
 		request.setAttribute("sugangLectureName", sugangLectureName);
 	}
