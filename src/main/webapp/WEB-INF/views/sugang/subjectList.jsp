@@ -18,7 +18,7 @@
 			<tbody>
 				<tr>
 					<td>
-						<a href="/sugang/subjectList">강의 시간표 조회</a>
+						<a href="${pageContext.request.contextPath}/sugang/subjectList">강의 시간표 조회</a>
 					</td>
 				</tr>
 				<tr>

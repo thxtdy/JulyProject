@@ -487,6 +487,126 @@ public class SugangRepositoryImpl implements SugangRepository{
 
 	}
 
+	@Override
+	public int getSelectedLectureName(String lectureName) {
+		int rowCount = 0;
+		String query = " SELECT count(*) AS row_count "
+				+ "FROM subject_tb AS sub "
+				+ "LEFT JOIN professor_tb AS pro ON pro.id = sub.professor_id "
+				+ "LEFT JOIN department_tb AS dept ON dept.id = sub.dept_id "
+				+ "LEFT JOIN college_tb AS coll ON coll.id = dept.college_id "
+				+ "WHERE sub.name = ? ";
+		try (Connection conn = DBUtil.getConnection();
+				PreparedStatement pstmt= conn.prepareStatement(query)){
+				pstmt.setString(1, lectureName);
+				ResultSet rs = pstmt.executeQuery();
+				if(rs.next()) {
+				rowCount = rs.getInt(1);
+				}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return rowCount;
+	}
+
+	@Override
+	public int getSelectedTypeAndDept(String type, String deptId) {
+		int rowCount = 0;
+		String query = " SELECT count(*) AS row_count "
+				+ "FROM subject_tb AS sub "
+				+ "LEFT JOIN professor_tb AS pro ON pro.id = sub.professor_id "
+				+ "LEFT JOIN department_tb AS dept ON dept.id = sub.dept_id "
+				+ "LEFT JOIN college_tb AS coll ON coll.id = dept.college_id "
+				+ "WHERE sub.type = ? AND dept.name = ? ";
+		try (Connection conn = DBUtil.getConnection();
+				PreparedStatement pstmt= conn.prepareStatement(query)){
+				pstmt.setString(1, type);
+				pstmt.setString(2, deptId);
+				ResultSet rs = pstmt.executeQuery();
+				if(rs.next()) {
+				rowCount = rs.getInt(1);
+				}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return rowCount;
+	}
+
+	@Override
+	public int getSelectedDeptAndLectureNameCount(String deptId, String lectureName) {
+		int rowCount = 0;
+		String query = " SELECT count(*) AS row_count "
+				+ "FROM subject_tb AS sub "
+				+ "LEFT JOIN professor_tb AS pro ON pro.id = sub.professor_id "
+				+ "LEFT JOIN department_tb AS dept ON dept.id = sub.dept_id "
+				+ "LEFT JOIN college_tb AS coll ON coll.id = dept.college_id "
+				+ "WHERE dept.name = ? AND sub.name = ? ";
+		try (Connection conn = DBUtil.getConnection();
+				PreparedStatement pstmt= conn.prepareStatement(query)){
+				pstmt.setString(1, deptId);
+				pstmt.setString(2, lectureName);
+				ResultSet rs = pstmt.executeQuery();
+				if(rs.next()) {
+				rowCount = rs.getInt(1);
+				}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return rowCount;
+	}
+
+	@Override
+	public int getSelectedTypeAndLectureNameCount(String type, String lectureName) {
+		int rowCount = 0;
+		String query = " SELECT count(*) AS row_count "
+				+ "FROM subject_tb AS sub "
+				+ "LEFT JOIN professor_tb AS pro ON pro.id = sub.professor_id "
+				+ "LEFT JOIN department_tb AS dept ON dept.id = sub.dept_id "
+				+ "LEFT JOIN college_tb AS coll ON coll.id = dept.college_id "
+				+ "WHERE sub.type = ? AND sub.name = ? ";
+		try (Connection conn = DBUtil.getConnection();
+				PreparedStatement pstmt= conn.prepareStatement(query)){
+				pstmt.setString(1, type);
+				pstmt.setString(2, lectureName);
+				ResultSet rs = pstmt.executeQuery();
+				if(rs.next()) {
+				rowCount = rs.getInt(1);
+				}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return rowCount;
+	}
+
+	@Override
+	public int getSelectedAll(String type, String deptId, String lectureName) {
+		int rowCount = 0;
+		String query = " SELECT count(*) AS row_count "
+				+ "FROM subject_tb AS sub "
+				+ "LEFT JOIN professor_tb AS pro ON pro.id = sub.professor_id "
+				+ "LEFT JOIN department_tb AS dept ON dept.id = sub.dept_id "
+				+ "LEFT JOIN college_tb AS coll ON coll.id = dept.college_id "
+				+ "WHERE sub.type = ? AND dept.name = ? AND sub.name = ? ";
+		try (Connection conn = DBUtil.getConnection();
+				PreparedStatement pstmt= conn.prepareStatement(query)){
+				pstmt.setString(1, type);
+				pstmt.setString(2, deptId);
+				pstmt.setString(3, lectureName);
+				ResultSet rs = pstmt.executeQuery();
+				if(rs.next()) {
+				rowCount = rs.getInt(1);
+				}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return rowCount;
+	}
+
 
 
 }
