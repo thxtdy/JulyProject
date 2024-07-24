@@ -28,16 +28,13 @@ public class UserController extends HttpServlet {
 		String action = request.getPathInfo();
 		System.out.println("DOGET PathInfo : " + action);
 		switch (action) {
-<<<<<<< HEAD
 		case "/notice":
 			request.getRequestDispatcher("/WEB-INF/six/user/notice.jsp").forward(request, response);
 			break;
 		case "/signup":
 			request.getRequestDispatcher("/WEB-INF/six/user/signup.jsp").forward(request, response);
 			break;
-=======
 
->>>>>>> 4dccce652c615dee71927bf0c6cbb0e7d0c09c8b
 		case "/professor":
 			request.getRequestDispatcher("/WEB-INF/views/user/professorInfo.jsp").forward(request, response);
 			break;

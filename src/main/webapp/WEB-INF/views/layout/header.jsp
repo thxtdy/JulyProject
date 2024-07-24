@@ -13,7 +13,6 @@
 	%>
 	<header>
 
-<<<<<<< HEAD
 		<div class="header_top_box">
 			<ul class="header_top_info_ul">
 				<li class="header_top_info_li">${principal.name}님id:${principal.id}</li>
@@ -21,8 +20,6 @@
 				<li class="header_top_info_li"><a href="/six/index.jsp">로그아웃</a></li>
 			</ul>
 		</div>
-=======
->>>>>>> 4dccce652c615dee71927bf0c6cbb0e7d0c09c8b
 
 		<nav class="header_menu">
 			

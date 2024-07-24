@@ -3,6 +3,7 @@
 <%@ include file="/WEB-INF/views/layout/header.jsp"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+
 </head>
 <body>
 
@@ -50,6 +51,7 @@
 						<thead>
 							<tr>
 								<th scope="col" class="th-num">번호</th>
+								<th scope="col" class="th-category">말머리</th>
 								<th scope="col" class="th-title">제목</th>
 								<th scope="col" class="th-date">등록일</th>
 							</tr>
@@ -58,6 +60,7 @@
 							<c:forEach items="${noticelist}" var="notice">
 								<tr>
 									<td>${notice.id}</td>
+									<td>${notice.category}</td>
 									<td><a href="#!">${notice.title}</a></td>
 									<td>${notice.createdTime}</td>
 								</tr>
@@ -69,6 +72,8 @@
 		</section>
 	</div>
 
+<form action="${pageContext.request.contextPath}/notice/register" method="get">
+		<button type="submit">등록</button>
 	<%@ include file="/WEB-INF/views/layout/footer.jsp"%>
 </body>
 </html>

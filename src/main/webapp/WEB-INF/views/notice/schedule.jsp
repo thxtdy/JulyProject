@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ include file="/WEB-INF/views/layout/header.jsp"%>
 <!DOCTYPE html>
 <html>
@@ -35,12 +36,12 @@
             <th>조회수</th>
         </tr>
         <tbody>
-        <c:forEach items="${scheduleList}" var="schedule">
+        <c:forEach items="${schedulelist}" var="schedule">
             <tr>
-                <td>${schedule.id}</td>
-                <td>${schedule.category}</td>
-                <td>${schedule.title}</td>
-                <td>${schedule.views}</td>
+                <td>${schedule.staffId}</td>
+                <td>${schedule.startDay}</td>
+                <td>${schedule.endDay}</td>
+                <td>${schedule.information}</td>
             </tr>
         </c:forEach>
         </tbody>

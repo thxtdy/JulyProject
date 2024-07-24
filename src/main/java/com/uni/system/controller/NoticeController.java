@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.List;
 
 import com.uni.system.repository.interfaces.NoticeRepository;
+import com.uni.system.repository.model.Notice;
 import com.uni.system.repository.model.NoticeList;
 import com.uni.system.service.NoticeRepositoryImpl;
 
@@ -24,12 +25,15 @@ public class NoticeController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		// notice/register
 		String action = request.getPathInfo();
 		System.out.println("GET action: " + action);
 		switch (action) {
 		case "/notice":
 			handleNotice(request, response);
+			break;
+		case "/register":
+			request.getRequestDispatcher("/WEB-INF/views/notice/noticeRegister.jsp").forward(request, response);
 			break;
 
 		default:
@@ -41,13 +45,44 @@ public class NoticeController extends HttpServlet {
 	private void handleNotice(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		List<NoticeList> noticelist = noticeRepository.selectAllTable();
-		
+
 		request.setAttribute("noticelist", noticelist);
 		request.getRequestDispatcher("/WEB-INF/views/notice/notice.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
+		String action = request.getPathInfo();
+		switch (action) {
+		case "/addregister":
+			addNotice(request, response);
+			break;
+
+		default:
+			break;
+		}
+
+	}
+
+	private void addNotice(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+	
+		
+		String category = request.getParameter("category");
+		String title = request.getParameter("title");
+		String content = request.getParameter("content");
+		
+		Notice notice = Notice.builder()
+						.category(category)
+						.title(title)
+						.content(content)
+						.build();
+		
+		response.sendRedirect(request.getContextPath() + "/notice/notice");
+		noticeRepository.insertTable(notice);
+		
+		
 	}
 
 }
