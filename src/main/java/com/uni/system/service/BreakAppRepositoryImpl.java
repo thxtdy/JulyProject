@@ -42,7 +42,7 @@ public class BreakAppRepositoryImpl implements BreakAppRepository {
 	}
 
 	@Override
-	public BreakApp showBreakList(int userId) {
+	public BreakApp getBreakList(int userId) {
 		List<BreakApp> breakList = new ArrayList<BreakApp>();
 		BreakApp breakApp = null;
 		try (Connection conn = DBUtil.getConnection()){

@@ -27,10 +27,11 @@ public interface StaffRepository {
 	void addStaff(String name, Date birthDate, String gender, String address, String tel, String email);
 	
 	// TODO 학사관리 - 등록금 고지서 발송
+	List<Tuition> sendTuition();
 	
 	// 학사관리 - 휴학처리
-	void viewAllBreak();
-	
+	List<BreakApp> viewAllBreak();
+	void processBreak(int userId);
 	// TODO 학사관리 - 수강 신청 기간 설청
 	
 	// 등록

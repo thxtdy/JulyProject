@@ -8,24 +8,40 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.uni.system.repository.interfaces.StaffRepository;
+import com.uni.system.repository.model.BreakApp;
 import com.uni.system.repository.model.Notice;
 import com.uni.system.repository.model.Professor;
 import com.uni.system.repository.model.Staff;
+import com.uni.system.repository.model.StuStat;
 import com.uni.system.repository.model.Student;
+import com.uni.system.repository.model.Tuition;
 import com.uni.system.utils.DBUtil;
 
 public class StaffRepositoryImpl implements StaffRepository{
 	
+	// 교수 정보, 비밀번호 변경 쿼리
 	final String STAFF_INFO = " SELECT * FROM staff_tb where id = ? ";
 	final String CHANGE_PASSWORD = " UPDATE user_tb SET password = ? WHERE id = ? ";
+
+	// 학생, 교수, 직원 추가하는 쿼리
 	final String ADD_STUDENT  = " insert into student_tb(name, birth_date, gender, address, tel, email, dept_id, grade, semester, entrance_date) values(?, ?, ?, ?, ?, ?, ?, 1, 1, ?);";
 	final String ADD_PROFESSOR = "INSERT INTO professor_tb(name, birth_date, gender, address, tel, email, dept_id) VALUES (?, ?, ?, ?, ?, ?, ?) ";
 	final String ADD_STAFF = " INSERT INTO staff_tb (name, birth_date, gender, address, tel, email) VALUES (?, ?, ?, ?, ?, ?)";
+	
+	// 학생, 교수 명단 쿼리
 	final String VIEW_ALL_STUDENT = " SELECT * FROM student_tb limit ? offset ? ";
 	final String VIEW_ALL_STUDENT_COUNT = " SELECT count(*) AS row_count FROM student_tb ";
 	final String VIEW_ALL_PROFESSOR = " SELECT * FROM professor_tb limit ? offset ? ";
 	final String VIEW_ALL_PROFESSOR_COUNT  = " SELECT count(*) AS row_count FROM professor_tb ";
 	
+	// 등록/장학금 관련 쿼리
+	final String SEND_ALL_TUITION_TYPE2 = " INSERT INTO tuition_tb (student_id, tui_year, semester, tui_amount, sch_type, sch_amount) SELECT s.id,2023, 1, 4868500, sh.type, sh.max_amount FROM student_tb AS s LEFT JOIN stu_sch_tb AS sc ON s.id = sc.student_id LEFT JOIN scholarship_tb as sh ON sc.sch_type = sh.type LEFT JOIN stu_stat_tb as st ON s.id = st.student_id WHERE st.status = '재학' ";
+	final String GET_ALL_TUITION_LIST = " SELECT * FROM tuition_tb ";
+	final String GET_STUDENT_STATUS = " SELECT * FROM stu_stat_tb ";
+	
+	// 휴학 신청 목록 쿼리
+	final String GET_BREAK_LIST = " SELECT * FROM break_app_tb ";
+	final String PROCESS_BREAK = " UPDATE break_app_tb SET status = '완료' WHERE student_id = ? ";
 	
 	@Override
 	public Staff viewMyInfo(int userId) {
@@ -253,9 +269,85 @@ public class StaffRepositoryImpl implements StaffRepository{
 			e.printStackTrace();
 		}
 	}
+	
 
 	@Override
-	public void viewAllBreak() {
+	public List<Tuition> sendTuition() {
+		List<Tuition> tuitionList = new ArrayList<Tuition>();
+		try (Connection conn = DBUtil.getConnection()){
+			try (PreparedStatement pstmt1 = conn.prepareStatement(SEND_ALL_TUITION_TYPE2)){
+				pstmt1.executeUpdate();
+				try (PreparedStatement pstmt2 = conn.prepareStatement(GET_ALL_TUITION_LIST)) {
+					ResultSet rs = pstmt2.executeQuery();
+					while(rs.next()) {
+						Tuition tuition = Tuition.builder()
+								.studentId(rs.getInt("student_id"))
+								.tuiYear(rs.getInt("tui_year"))
+								.semester(rs.getInt("semester"))
+								.tuiAmount(rs.getInt("tui_amount"))
+								.schType(rs.getInt("sch_type"))
+								.schAmount(rs.getInt("sch_amount"))
+								.status(rs.getInt("status"))
+								.build();
+						tuitionList.add(tuition);
+					}
+				} catch (Exception e) {
+					
+				}
+			} catch (Exception e) {
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return tuitionList;
+	}
+
+
+	
+	@Override
+	public List<BreakApp> viewAllBreak() {
+		List<BreakApp> breakList = new ArrayList<BreakApp>();
+		BreakApp breakApp = null;
+		try (Connection conn = DBUtil.getConnection()){
+			try (PreparedStatement pstmt = conn.prepareStatement(GET_BREAK_LIST)){
+				ResultSet rs = pstmt.executeQuery();
+					while(rs.next()) {
+					breakApp = BreakApp.builder()
+							.studentId(rs.getInt("student_id"))
+							.studentGrade(rs.getInt("student_grade"))
+							.fromYear(rs.getInt("from_year"))
+							.fromSemester(rs.getInt("from_semester"))
+							.toYear(rs.getInt("to_year"))
+							.toSemester(rs.getInt("to_semester"))
+							.type(rs.getString("type"))
+							.appDate(rs.getDate("app_date"))
+							.status(rs.getString("status"))
+							.build();
+					System.out.println("breakApp in Repository : " + breakApp.toString());
+					breakList.add(breakApp);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return breakList;
+	}
+	
+	@Override
+	public void processBreak(int userId) {
+		try (Connection conn = DBUtil.getConnection()){
+			try (PreparedStatement pstmt = conn.prepareStatement(PROCESS_BREAK)){
+				pstmt.setInt(1, userId);
+				pstmt.executeUpdate();
+			} catch (Exception e) {
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 
@@ -293,6 +385,7 @@ public class StaffRepositoryImpl implements StaffRepository{
 	public void viewAcademicSchedule() {
 		
 	}
+
 
 
 }
