@@ -25,8 +25,9 @@
 				<div class="login--container">
 					<div class="id--container">
 						<div class="login--id">
-							<label for="username"></label> <input type="number"
-								max="2147483647" name="idusername" id="username"
+							<label for="username"></label> 
+							<input type="number"
+								max="2147483647" name="username" id="username"
 								value="2023000001" placeholder="아이디를 입력하세요" required>
 
 
