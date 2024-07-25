@@ -8,6 +8,7 @@ import com.uni.system.service.UserRepositoryImpl;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -27,6 +28,12 @@ public class UserController extends HttpServlet {
 		String action = request.getPathInfo();
 		System.out.println("DOGET PathInfo : " + action);
 		switch (action) {
+		case "/notice":
+			request.getRequestDispatcher("/WEB-INF/six/user/notice.jsp").forward(request, response);
+			break;
+		case "/signup":
+			request.getRequestDispatcher("/WEB-INF/six/user/signup.jsp").forward(request, response);
+			break;
 
 		case "/professor":
 			request.getRequestDispatcher("/WEB-INF/views/user/professorInfo.jsp").forward(request, response);
@@ -78,6 +85,12 @@ public class UserController extends HttpServlet {
 		System.out.println(userId);
 		String password = request.getParameter("password"); // 123123
 
+		Cookie cookie = new Cookie("id", String.valueOf(userId));
+		cookie.setMaxAge(3600);
+		response.addCookie(cookie);
+		
+		
+		
 		// userRepository의 getUserInfoById(유저 정보 끌고 오기)를 사용하여 principal 이라는 곳에 담기.
 		UserDTO principal = userRepository.getUserInfoById(userId);
 		HttpSession session = request.getSession();
