@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/layout/header.jsp"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%
+request.getAttribute("principal");
+session.getAttribute("professorInfo");
+%>
 <div class="alltable">
 	<div class = "sub-bar">
 		<div class = "sub-bar-top">
@@ -7,12 +13,12 @@
 				<tbody>
 					<tr>
 						<td>
-							<a href="/info/student" class="seleted-menu">내 정보 조회</a>
+							<a href="${pageContext.request.contextPath}/info/professor" class="seleted-menu">내 정보 조회</a>
 						</td>
 					</tr>
 					<tr>
 						<td>
-							<a href="/password">비밀번호 변경</a>
+							<a href="${pageContext.request.contextPath}/info/professorPassword">비밀번호 변경</a>
 						</td>
 					</tr>
 		
@@ -32,9 +38,9 @@
 		<tbody>
 			<tr>
 				<th>ID</th>
-				<td>test123</td>
+				<td>${principal.id}</td>
 				<th>소속</th>
-				<td>testSubject</td>
+				<td>${professorInfo.college} ${professorInfo.department}</td>
 			</tr>
 		</tbody>
 	</table>
@@ -48,21 +54,21 @@
 		<tbody>
 			<tr>
 				<th>이름</th>
-				<td>testname</td>
+				<td>${professorInfo.name}</td>
 				<th>생년월일</th>
-				<td>testBirth</td>
+				<td>${professorInfo.birthDate}</td>
 			</tr>
 			<tr>
 				<th>성별</th>
-				<td>testgender</td>
+				<td>${professorInfo.gender}</td>
 				<th>주소</th>
-				<td>testaddress</td>
+				<td>${professorInfo.address}</td>
 			</tr>
 			<tr>
 				<th>연락처</th>
-				<td>testcontact</td>
+				<td>${professorInfo.tel}</td>
 				<th>email</th>
-				<td>testemail</td>
+				<td>${professorInfo.email}</td>
 			</tr>
 		</tbody>
 	</table>

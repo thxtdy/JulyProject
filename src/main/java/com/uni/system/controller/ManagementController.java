@@ -73,7 +73,8 @@ public class ManagementController extends HttpServlet {
 	private void handleBreak(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		List<BreakApp> breakList = staffRepository.viewAllBreak();
-		session.setAttribute("breakList", breakList);
+		
+		request.setAttribute("breakList", breakList);
 		request.getRequestDispatcher("/WEB-INF/views/user/processBreak.jsp").forward(request, response);
 	}
 
@@ -173,6 +174,7 @@ public class ManagementController extends HttpServlet {
 		} else {
 			// tuition.type = 2
 		}
+		staffRepository.addtuition(dto.getId(), 0, 0);
 		
 	}
 

@@ -1,24 +1,14 @@
-<<<<<<< HEAD
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-=======
->>>>>>> 2da229930aa0eb27fd9ffc52b6bba3383cccf211
 <!DOCTYPE html>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Login</title>
-
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/login.css">
-
-
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/login.css">
 </head>
 <body>
 
 	<div class="container">
-<<<<<<< HEAD
 		<h2>로그인</h2>
 
 		<form action="${pageContext.request.contextPath}/user/signIn" method="post">
@@ -32,14 +22,7 @@
 
 			</div>
 		</form>
-
-
-
 	</div>
-
-
-
-=======
 		<div class="login--div">
 			<div class="main--logo">
 				<a href="#"><img class="logo" alt=""
@@ -81,9 +64,7 @@
 				</ul>
 			</form>
 		</div>
-	</div>
 
 
->>>>>>> 2da229930aa0eb27fd9ffc52b6bba3383cccf211
 </body>
 </html>
