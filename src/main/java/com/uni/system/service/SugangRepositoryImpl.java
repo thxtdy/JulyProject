@@ -687,6 +687,29 @@ public class SugangRepositoryImpl implements SugangRepository{
 		}
 	}
 
+	@Override
+	public void addSugangList(int principalId, int subjectId) {
+		String query = " INSERT INTO stu_sub_tb (student_id, subject_id, grade ) VALUES ( ? , ? , ? ) ";
+		try (Connection conn= DBUtil.getConnection()){
+			conn.setAutoCommit(false);
+			try (PreparedStatement pstmt = conn.prepareStatement(query)){
+				pstmt.setInt(1, principalId);
+				pstmt.setInt(2, subjectId);
+				pstmt.setString(3, "F");
+				pstmt.executeUpdate();
+				conn.commit();
+			} catch (Exception e) {
+				conn.rollback();
+				e.printStackTrace();
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+
 
 
 }
