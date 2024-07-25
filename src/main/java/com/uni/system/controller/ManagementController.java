@@ -71,7 +71,6 @@ public class ManagementController extends HttpServlet {
 	}
 
 	private void handleBreak(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
 		List<BreakApp> breakList = staffRepository.viewAllBreak();
 		
 		request.setAttribute("breakList", breakList);
@@ -144,16 +143,16 @@ public class ManagementController extends HttpServlet {
 			System.out.println("/sendTuition 호출");
 			sendTuition(request, response);
 			break;
-		case "/processTuition":
-			System.out.println("/processTuition 호출");
-			processTuition(request, response);
+		case "/processBreak":
+			System.out.println("/processBreak 호출");
+			processBreak(request, response);
 		default:
 			break;
 		}
 		
 	}
 	// git test
-	private void processTuition(HttpServletRequest request, HttpServletResponse response) {
+	private void processBreak(HttpServletRequest request, HttpServletResponse response) {
 		int studentId = Integer.parseInt(request.getParameter("clickButton")); 
 		System.out.println("학생 ID 클릭으로 뽑아보기" + studentId);
 		
