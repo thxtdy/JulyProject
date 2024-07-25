@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
  <Context>
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
 	<Resource 
 		name="jdbc/six"
 		auth="Container"
@@ -20,27 +17,3 @@
 		password="asd123"/>
 	
 </Context>
-
-=======
->>>>>>> a708ee4785604a7967e43a0ee1cbf9c4614969c3
-    <Resource 
-        name="jdbc/six"
-        auth="Container"
-        type="javax.sql.DataSource"
-        factory="com.zaxxer.hikari.HikariJNDIFactory"
-        uniqueResourceName="MySix"
-        minimumIdle="5"
-        maximumPoolSize="10"
-        connectionTimeout="30000"
-        idleTimeout="60000"
-        maxLifetime="1800000"
-        jdbcUrl="jdbc:mysql://192.168.0.25:3306/managementsystem?serverTimezone=Asia/Seoul" 
-        driverClassName="com.mysql.cj.jdbc.Driver"
-        username="green1"
-        password="1q2w3e4r5t!"/>
-    
-</Context>
-<<<<<<< HEAD
-=======
->>>>>>> a384df66409daaf35b72d3c68a5e138c2e861ee1
->>>>>>> a708ee4785604a7967e43a0ee1cbf9c4614969c3

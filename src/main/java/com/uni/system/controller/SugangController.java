@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.uni.system.repository.interfaces.SugangRepository;
-import com.uni.system.repository.model.SubjectLectureList;
 import com.uni.system.repository.model.SugangColumn;
 import com.uni.system.repository.model.SugangDTO;
+import com.uni.system.repository.model.SugangPreAppList;
 import com.uni.system.service.SugangRepositoryImpl;
 
 import jakarta.servlet.ServletException;
@@ -42,12 +42,10 @@ public class SugangController extends HttpServlet {
 			// 예비 수강 신청 필터
 		case "/preFilter":
 			viewSlectedPreLecture(request,response);
-			request.getRequestDispatcher("/WEB-INF/views/sugang/pre.jsp").forward(request, response);
 			break;
 			// 예비 신청 페이지
 		case "/pre":
 			correctList(request,response);
-			request.getRequestDispatcher("/WEB-INF/views/sugang/pre.jsp").forward(request, response);
 			break;
 			// 선택된 예비 신청 목록
 		case "/preAppList":
@@ -65,38 +63,71 @@ public class SugangController extends HttpServlet {
 		}
 	}
 
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getPathInfo();
 		switch (action) {
 		case "/selectedList":
 			viewSelectedLecture(request,response);
-			request.getRequestDispatcher("/WEB-INF/views/sugang/pre.jsp").forward(request, response);
+			break;
+		case "/deleteApp":
+			deletePreApp(request, response);
 			break;
 		default:
 			break;
 		}
 	}
 	
-	// 예비수강 페이지에서 선택한 목록뽑기
-	private void viewSelectedLecture(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String selectedList = request.getParameter("selectedList");
-		// 선택된 강의 학수번호
-		int selectedLecNum = Integer.parseInt(selectedList); 
-		List<SugangColumn> selectedLect = sugangRepository.viewSelectedPreAdd(selectedLecNum);
+//	// 선택한 예비신청 목록 보기 
+//	private void viewSelectedPreAppList(HttpServletRequest request, HttpServletResponse response) {
+//	}
+
+	
+	// 예비 수강 신청 목록 삭제!
+	private void deletePreApp(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String haksuNumStr = request.getParameter("selectedList");
+		String principalStr = request.getParameter("principal");
+		
+		int haksuNum = Integer.parseInt(haksuNumStr);
+		int principalId = Integer.parseInt(principalStr);
+		sugangRepository.deletePreAdd(haksuNum);
+		List<SugangPreAppList> selectedLect = sugangRepository.viewSelectedPreAdd(principalId);
 		request.setAttribute("selectedLect", selectedLect);
-		System.out.println(selectedLect);
 		
 		getChecks(request, response);
 		viewLists(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/sugang/preAppList.jsp").forward(request, response);
+	}
+	
+	
+	// 예비수강 페이지에서 선택한 목록뽑기
+	private void viewSelectedLecture(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String selectedListStr = request.getParameter("selectedList");
+		String principalIdStr = request.getParameter("principal");
+		int selectedLec = Integer.parseInt(selectedListStr); 
+		int principalId = Integer.parseInt(principalIdStr);
+		
+		// 예비신청 리스트에 추가하기
+		sugangRepository.addSelectedPreAdd(principalId, selectedLec);
+		
+		// 선택된 강의 학수번호
+		List<SugangPreAppList> selectedLect = sugangRepository.viewSelectedPreAdd(principalId);
+		request.setAttribute("selectedLect", selectedLect);
+		
+		getChecks(request, response);
+		viewLists(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/sugang/preAppList.jsp").forward(request, response);
 	}
 	
 	private void viewSlectedPreLecture(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		viewSlectedLecture(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/sugang/pre.jsp").forward(request, response);
 	}
 	
 	private void correctList(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		getChecks(request, response);
 		viewLists(request, response);
+		request.getRequestDispatcher("/WEB-INF/views/sugang/pre.jsp").forward(request, response);
 	}
 	
 	private void viewSlectedLecture(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

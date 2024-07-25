@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.uni.system.repository.model.SugangColumn;
 import com.uni.system.repository.model.SugangDTO;
+import com.uni.system.repository.model.SugangPreAppList;
 
 public interface SugangRepository {
 	
@@ -44,7 +45,12 @@ public interface SugangRepository {
 	List<SugangColumn> selectAllFilter(String type, String deptName, String lectureName);
 	
 	// 선택된 예비수강 목록 뽑기
-	List<SugangColumn> viewSelectedPreAdd(int subjectId);
+	List<SugangPreAppList> viewSelectedPreAdd(int subjectId);
+	
+	void deletePreAdd(int haksuNum);
+	
+	// 예비 수강 목록 추가하기 (studentId, subjectId)
+	void addSelectedPreAdd(int principalId ,int subjectId);
 	
 	// 모든 조회될 목록들 카운트
 	int getAllCount();
