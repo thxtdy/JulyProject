@@ -39,4 +39,24 @@
     <servlet-name>sugangController</servlet-name>
     <url-pattern>/sugangController</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>NoticeController</display-name>
+    <servlet-name>NoticeController</servlet-name>
+    <servlet-class>com.uni.system.controller.NoticeController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>NoticeController</servlet-name>
+    <url-pattern>/NoticeController</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ScheduleController</display-name>
+    <servlet-name>ScheduleController</servlet-name>
+    <servlet-class>com.uni.system.controller.ScheduleController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ScheduleController</servlet-name>
+    <url-pattern>/ScheduleController</url-pattern>
+  </servlet-mapping>
 </web-app>
