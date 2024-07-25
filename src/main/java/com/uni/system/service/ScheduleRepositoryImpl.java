@@ -15,7 +15,7 @@ import lombok.Data;
 @Data
 public class ScheduleRepositoryImpl implements ScheduleRepository {
 	
-	private static final String SELECT_ALL_SCHEDULE = " SELECT * FROM schedule_tb ";
+	private static final String SELECT_ALL_SCHEDULE = " SELECT * FROM schedule_tb order by id desc ";
 
 	@Override
 	public List<Schedule> selectAllscheduleTable() {

@@ -7,11 +7,10 @@
 <%
 request.getAttribute("principal");
 session.getAttribute("studentInfo");
-
 %>
-	<h1>내 정보 조회</h1>
-	<div class="line">
-	<table class="idtable" border = "1">
+<h1>내 정보 조회</h1>
+<div class="line">
+	<table class="idtable" border="1">
 		<colgroup>
 			<col class="col1">
 			<col class="col2">
@@ -23,7 +22,7 @@ session.getAttribute("studentInfo");
 				<th>학번</th>
 				<td>${principal.id}</td>
 				<th>소속</th>
-				<td>${studentInfo.college} ${studentInfo.department}</td>
+				<td>${studentInfo.college}${studentInfo.department}</td>
 			</tr>
 			<tr>
 				<th>학년</th>
@@ -44,12 +43,13 @@ session.getAttribute("studentInfo");
 			</c:if> --%>
 	</table>
 	<table class="infotable">
-		<colgroup>
-			<col class="col1">
-			<col class="col2">
-			<col class="col3">
-			<col class="col4">
-		</colgroup>
+		<form action="${pageContext.request.contextPath}/info/updatestudent" method="get">
+			<colgroup>
+				<col class="col1">
+				<col class="col2">
+				<col class="col3">
+				<col class="col4">
+			</colgroup>
 		<tbody>
 			<tr>
 				<th>이름</th>
@@ -71,8 +71,10 @@ session.getAttribute("studentInfo");
 			</tr>
 		</tbody>
 	</table>
-	<button type="button">수정하기</button>
-	</div>
-	
+	<button type="submit">수정하기</button>
+</div>
+<%@ include file="/WEB-INF/views/layout/footer.jsp"%>
+
+
 </body>
 </html>

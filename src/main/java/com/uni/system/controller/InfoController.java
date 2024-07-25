@@ -44,6 +44,10 @@ public class InfoController extends HttpServlet {
 
 		String action = request.getPathInfo();
 		switch (action) {
+		case "/updatestudent":
+			System.out.println("업데이트스튜던트");
+			request.getRequestDispatcher("/WEB-INF/views/user/updatestudent.jsp").forward(request, response);
+			break;
 		case "/student":
 			System.out.println("Student");
 			showStudentInfo(request, response);
@@ -59,10 +63,13 @@ public class InfoController extends HttpServlet {
 			System.out.println("staffPassowrd");
 			request.getRequestDispatcher("/WEB-INF/views/user/staffChangePassword.jsp").forward(request, response);
 		default:
+			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			break;
 		}
 
 	}
+
+		
 
 	private void showStaffInfo(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		HttpSession session = request.getSession();

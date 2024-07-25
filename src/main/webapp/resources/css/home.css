@@ -1,0 +1,50 @@
+@charset "UTF-8";
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+/* 헤더 스타일 */
+.background {
+    text-align: center;
+}
+
+/* 공지사항 및 학사일정 스타일 */
+.notice_bar {
+    margin-top: 20px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.board-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.board-table th, .board-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+
+.board-table th {
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+.board-table td {
+    background-color: #fff;
+}
+
+.board-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.board-table tr:hover {
+    background-color: #f1f1f1;
+}

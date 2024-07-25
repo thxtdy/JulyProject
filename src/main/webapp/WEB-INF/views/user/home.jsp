@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/layout/header.jsp"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <%-- <%
 request.getAttribute("principal");
@@ -43,7 +44,7 @@ request.getAttribute("principal");
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${noticelist}" var="notice">
+							<c:forEach items="${noticeList}" var="notice">
 								<tr>
 									<td>${notice.id}</td>
 									<td>${notice.category}</td>
@@ -62,8 +63,26 @@ request.getAttribute("principal");
 		<div>
 			<h1>학사일정</h1>
 		</div>
-			<h1>${principal.name}님, 환영합니다</h1>  	
-	</div>
+			<h1>${principal.name}님, 환영합니다</h1> 
+			 <h1>전체 일정</h1>
+    <table border="1">
+        <tr>
+            <th>번호</th>
+            <th>카테고리</th>
+            <th>제목</th>
+            <th>조회수</th>
+        </tr>
+        <tbody>
+        <c:forEach items="${schedulelist}" var="schedule">
+            <tr>
+                <td>${schedule.staffId}</td>
+                <td>${schedule.startDay}</td>
+                <td>${schedule.endDay}</td>
+                <td>${schedule.information}</td>
+            </tr>
+        </c:forEach>
+        </tbody>
+    </table> 	
 	
 </body>
 </html>
