@@ -150,7 +150,7 @@ public class ManagementController extends HttpServlet {
 		}
 		
 	}
-
+	// git test
 	private void processTuition(HttpServletRequest request, HttpServletResponse response) {
 		int studentId = Integer.parseInt(request.getParameter("clickButton")); 
 		System.out.println("학생 ID 클릭으로 뽑아보기" + studentId);
