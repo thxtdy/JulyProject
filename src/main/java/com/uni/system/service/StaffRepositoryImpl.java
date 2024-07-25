@@ -34,6 +34,9 @@ public class StaffRepositoryImpl implements StaffRepository{
 	final String VIEW_ALL_PROFESSOR = " SELECT * FROM professor_tb limit ? offset ? ";
 	final String VIEW_ALL_PROFESSOR_COUNT  = " SELECT count(*) AS row_count FROM professor_tb ";
 	
+	// 학생, 교수 검색 쿼리
+	
+	
 	// 등록/장학금 관련 쿼리
 	final String SEND_ALL_TUITION_TYPE2 = " INSERT INTO tuition_tb (student_id, tui_year, semester, tui_amount, sch_type, sch_amount) SELECT s.id,2023, 1, 4868500, sh.type, sh.max_amount FROM student_tb AS s LEFT JOIN stu_sch_tb AS sc ON s.id = sc.student_id LEFT JOIN scholarship_tb as sh ON sc.sch_type = sh.type LEFT JOIN stu_stat_tb as st ON s.id = st.student_id WHERE st.status = '재학' ";
 	final String GET_ALL_TUITION_LIST = " SELECT * FROM tuition_tb ";
