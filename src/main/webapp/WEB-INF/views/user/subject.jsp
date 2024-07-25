@@ -16,7 +16,7 @@
 				<table class="sub_menu_table" border="1">
 					<tbody>
 						<tr>
-							<td><a href="subject.jsp" class="selected_menu">전체 강의 조회</a></td>
+							<td><a href="${pageContext.request.contextPath}/subject/subject" class="selected_menu">전체 강의 조회</a></td>
 						</tr>
 					</tbody>
 				</table>
