@@ -7,6 +7,7 @@ import java.util.List;
 import com.uni.system.repository.interfaces.StaffRepository;
 import com.uni.system.repository.interfaces.UserRepository;
 import com.uni.system.repository.model.BreakApp;
+import com.uni.system.repository.model.Grade;
 import com.uni.system.repository.model.Professor;
 import com.uni.system.repository.model.StuStat;
 import com.uni.system.repository.model.Student;
@@ -160,11 +161,19 @@ public class ManagementController extends HttpServlet {
 	}
 
 	private void sendTuition(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		HttpSession session = request.getSession();
 		
-		List<Tuition> tuitionList = staffRepository.sendTuition();
-		session.setAttribute("tutition", tuitionList);
-		response.sendRedirect(request.getContextPath() + "/management/sendTutition?message=success");
+		HttpSession session = request.getSession();
+		UserDTO dto =  (UserDTO)session.getAttribute("principal");
+		// TODO grade(성적) 끌고 와야 함.
+		Grade grade = (Grade)session.getAttribute("grade");
+		
+		// 예비로 해놓은것. grade에 builder패턴으로 만들고 grade.value를 가져와야 함.
+		if(grade.getGrade_value() >= 4.0) {
+			// tuition.type = 1
+		} else {
+			// tuition.type = 2
+		}
+		
 	}
 
 	private void addStaff(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
