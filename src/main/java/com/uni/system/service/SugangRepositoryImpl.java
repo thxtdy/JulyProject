@@ -606,6 +606,44 @@ public class SugangRepositoryImpl implements SugangRepository{
 		
 		return rowCount;
 	}
+	
+	
+	// 예비 페이지에서 선택된 목록
+	@Override
+	public List<SugangColumn> viewSelectedPreAdd(int selectedList) {
+		List<SugangColumn> sugangList = new ArrayList<SugangColumn>();
+		String query = " SELECT coll.name AS college_name, dept.name AS dept_name, sub.id AS subject_id, sub.type, sub.name AS subject_name, pro.name AS professor_name, sub.grades, sub.sub_day,sub.start_time,sub.end_time,sub.room_id ,sub.num_of_student, sub.capacity "
+				+ "FROM subject_tb as sub "
+				+ "LEFT JOIN professor_tb AS pro ON pro.id = sub.professor_id "
+				+ "LEFT JOIN department_tb AS dept ON dept.id = sub.dept_id "
+				+ "LEFT JOIN college_tb AS coll ON coll.id = dept.college_id "
+				+ "WHERE sub.id = ? " ;
+		try (Connection conn= DBUtil.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(query)){
+				pstmt.setInt(1, selectedList);
+				ResultSet rs = pstmt.executeQuery();
+				while(rs.next()) {
+					SugangColumn sugangDTO = SugangColumn.builder()
+							.collegeName(rs.getString("college_name"))
+							.deptName(rs.getString("dept_name"))
+							.subjectId(rs.getInt("subject_id"))
+							.type(rs.getString("type"))
+							.subjectName(rs.getString("subject_name"))
+							.professorName(rs.getString("professor_name"))
+							.grades(rs.getInt("grades"))
+							.subDay(rs.getString("sub_day"))
+							.startTime(rs.getInt("start_time"))
+							.endTime(rs.getInt("end_time"))
+							.roomId(rs.getString("room_id"))
+							.numOfStudent(rs.getInt("num_of_student"))
+							.capacity(rs.getInt("capacity"))
+							.build();
+					sugangList.add(sugangDTO);
+				}
+		} catch (Exception e) {
+		}
+		return sugangList;
+	}
 
 
 

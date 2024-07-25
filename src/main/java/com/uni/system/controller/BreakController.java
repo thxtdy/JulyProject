@@ -48,7 +48,7 @@ public class BreakController extends HttpServlet {
 	private void showAllBreak(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
 		UserDTO dto = (UserDTO) session.getAttribute("principal");
-		BreakApp breakApp = breakAppRepository.showBreakList(dto.getId());
+		BreakApp breakApp = breakAppRepository.getBreakList(dto.getId());
 		session.setAttribute("breakApp", breakApp);
 		
 	}
@@ -97,6 +97,7 @@ public class BreakController extends HttpServlet {
 		
 		} else { // 쓴 적이 없다. null 이다.
 				breakAppRepository.addBreak(studentInfo.getId(), studentInfo.getGrade(), 2024, fromSemester, toYear, toSemster, breakKinds);
+				session.setAttribute("breakedStudent", studentInfo.getId());
 				response.sendRedirect(request.getContextPath() + "/info/student");
 				return;
 			}
