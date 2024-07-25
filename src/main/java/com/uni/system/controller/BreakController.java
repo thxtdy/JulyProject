@@ -36,7 +36,7 @@ public class BreakController extends HttpServlet {
 
 		case "/list":
 			showAllBreak(request, response);
-			request.getRequestDispatcher("/WEB-INF/views/break/breakList.jsp").forward(request, response);
+			
 			break;
 
 		default:
@@ -45,12 +45,15 @@ public class BreakController extends HttpServlet {
 
 	}
 
-	private void showAllBreak(HttpServletRequest request, HttpServletResponse response) {
+	private void showAllBreak(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
 		UserDTO dto = (UserDTO) session.getAttribute("principal");
-		BreakApp breakApp = breakAppRepository.getBreakList(dto.getId());
-		session.setAttribute("breakApp", breakApp);
 		
+		List<BreakApp> breakApp = breakAppRepository.getBreakList(dto.getId());
+		System.out.println("BreakApp in Controller :" + breakApp.toString());
+		request.setAttribute("breakAppList", breakApp);
+		
+		request.getRequestDispatcher("/WEB-INF/views/break/breakList.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)

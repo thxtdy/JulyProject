@@ -5,6 +5,9 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/subject.css">
 </head>
 <body>
+<%
+session.getAttribute("pricipal");
+%>
 
 	<!-- 세부 메뉴 + 메인 -->
 	<div>
@@ -17,6 +20,12 @@
 					<tbody>
 						<tr>
 							<td><a href="${pageContext.request.contextPath}/subject/subject" class="selected_menu">전체 강의 조회</a></td>
+							<c:choose>
+								<c:when test="${principal.userRole.equals(\"professor\")}">
+									<td><a href="${pageContext.request.contextPath}/professor/myClass" class="selected_menu">내 강의 조회</a></td>
+									<td><a href="${pageContext.request.contextPath}/professor/myClassEvaluation" class="selected_menu">내 강의 평가</a></td>
+								</c:when>
+							</c:choose>
 						</tr>
 					</tbody>
 				</table>

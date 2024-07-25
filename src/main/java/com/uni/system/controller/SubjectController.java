@@ -34,12 +34,12 @@ public class SubjectController extends HttpServlet {
 		case "/list":
 			handleList(request, response);
 			break;
-
 		default:
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			break;
 		}
 	}
+
 
 	private void handleSubject(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
