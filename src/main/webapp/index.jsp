@@ -7,7 +7,7 @@
 <title>Login</title>
 
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/css/login.css">
+	href="${pageContext.request.contextPath}/resources/css/login.css">
 
 
 </head>

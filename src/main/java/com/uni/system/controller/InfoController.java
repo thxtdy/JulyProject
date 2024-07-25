@@ -58,6 +58,9 @@ public class InfoController extends HttpServlet {
 		case "/staffPassword":
 			System.out.println("staffPassowrd");
 			request.getRequestDispatcher("/WEB-INF/views/user/staffChangePassword.jsp").forward(request, response);
+		case "/professorMy":
+			request.getRequestDispatcher("/WEB-INF/views/user/professorMyInfo.jsp").forward(request, response);
+			break;
 		default:
 			break;
 		}

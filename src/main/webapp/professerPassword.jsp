@@ -10,7 +10,7 @@
 	<main>
 		<h1>비밀번호 변경</h1>
 		<div class="split--div"></div>
-		<form action="/password" method="post" class="form--container">
+		<form action="${pageContext.request.contextPath}/professor/pwd" method="POST" class="form--container">
 			<input type="hidden" name="_method" value="put">
 			<table class="table--container">
 				<tbody>
