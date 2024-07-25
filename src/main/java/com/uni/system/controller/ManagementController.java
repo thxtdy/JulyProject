@@ -6,8 +6,12 @@ import java.util.List;
 
 import com.uni.system.repository.interfaces.StaffRepository;
 import com.uni.system.repository.interfaces.UserRepository;
+import com.uni.system.repository.model.BreakApp;
 import com.uni.system.repository.model.Professor;
+import com.uni.system.repository.model.StuStat;
 import com.uni.system.repository.model.Student;
+import com.uni.system.repository.model.Tuition;
+import com.uni.system.repository.model.UserDTO;
 import com.uni.system.service.StaffRepositoryImpl;
 import com.uni.system.service.UserRepositoryImpl;
 
@@ -16,6 +20,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 @WebServlet("/management/*")
 public class ManagementController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -55,13 +60,20 @@ public class ManagementController extends HttpServlet {
 			request.getRequestDispatcher("/WEB-INF/views/user/sendTuition.jsp").forward(request, response);
 			break;
 		case "/breakList":
-			request.getRequestDispatcher("/WEB-INF/views/user/breakList.jsp").forward(request, response);
+			handleBreak(request, response);
 			break;
 		default:
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			break;
 		}
 		
+	}
+
+	private void handleBreak(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
+		List<BreakApp> breakList = staffRepository.viewAllBreak();
+		session.setAttribute("breakList", breakList);
+		request.getRequestDispatcher("/WEB-INF/views/user/processBreak.jsp").forward(request, response);
 	}
 
 	private void handleProfessor(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -127,17 +139,32 @@ public class ManagementController extends HttpServlet {
 			addStaff(request, response);
 			break;
 		case "/sendTuition":
-			sendTutition(request, response);
+			System.out.println("/sendTuition 호출");
+			sendTuition(request, response);
 			break;
+		case "/processTuition":
+			System.out.println("/processTuition 호출");
+			processTuition(request, response);
 		default:
 			break;
 		}
 		
 	}
+	// git test
+	private void processTuition(HttpServletRequest request, HttpServletResponse response) {
+		int studentId = Integer.parseInt(request.getParameter("clickButton")); 
+		System.out.println("학생 ID 클릭으로 뽑아보기" + studentId);
+		
+		
+		staffRepository.processBreak(studentId);
+	}
 
-	private void sendTutition(HttpServletRequest request, HttpServletResponse response) {
+	private void sendTuition(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		HttpSession session = request.getSession();
 		
-		
+		List<Tuition> tuitionList = staffRepository.sendTuition();
+		session.setAttribute("tutition", tuitionList);
+		response.sendRedirect(request.getContextPath() + "/management/sendTutition?message=success");
 	}
 
 	private void addStaff(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

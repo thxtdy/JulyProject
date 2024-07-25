@@ -5,7 +5,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/subject.css">
 
-<form action="${pageContext.request.contextPath}/management/sendTuition">
+<form action="${pageContext.request.contextPath}/management/sendTuition" method="post">
 	<input type="submit" value="등록금 고지서 발송"> 
 </form> 
 

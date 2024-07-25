@@ -3,18 +3,17 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/subject.css">
-<!-- 세부 메뉴 + 메인 -->
-<div class="registration_box" style="min-width: 100em">
 
-	<!-- 세부 메뉴 div -->
-	<div class="sub_menu">
-	<%@ include file="/WEB-INF/views/subMenu/sugangMenu.jsp"%>
-	
-		<!-- 메인 div -->
+	<!-- 세부 메뉴 + 메인 -->
+	<div class="registration_box" style="min-width: 100em">
+		<!-- 세부 메뉴 div -->
+		<div class="sub_menu">
+			<%@ include file="/WEB-INF/views/subMenu/sugangMenu.jsp"%>
+			<!-- 메인 div -->
 		<main> 
 			<h1>강의 시간표 조회</h1>
 			<div class="sub_filter">
-				<form action="${pageContext.request.contextPath}/sugang/filter" method="GET">
+				<form action="${pageContext.request.contextPath}/sugang/preFilter" method="GET">
 				<!-- 강의구분 콤보박스 -->
 				<label for="type">강의구분</label>
 				<select name="type" id="type">
@@ -42,6 +41,10 @@
 				</datalist>
 				<button type="submit">조회</button>
 				</form>
+				
+				<a href="${pageContext.request.contextPath}/sugang/preAppList">
+				<button>예비 수강 신청 내역</button>
+				</a>
 			</div>
 			<div>
 				<h1>강의목록</h1> [총 ${totalBoards}건]
@@ -58,10 +61,11 @@
 					<th>요일시간 (강의실)</th>
 					<th>현재인원</th>
 					<th>정원</th>
-					<th>강의계획서</th>
+					<th>수강신청서</th>
 					</tr>
 					</thead>
 					<tbody>
+					
 					<c:choose>
 					<c:when test="${empty sugangColumnList}">
 						<h1>검색된 내용이 없습니다.</h1>
@@ -73,13 +77,17 @@
 							<td>${sugangColumnList.deptName}</td>
 							<td>${sugangColumnList.subjectId}</td>
 							<td>${sugangColumnList.type}</td>
-							<td>${sugangColumnList.subjectName}</td>
+							<td class="selected_subject_name" >${sugangColumnList.subjectName}</td>
 							<td>${sugangColumnList.professorName}</td>
 							<td>${sugangColumnList.grades}</td>
 							<td>${sugangColumnList.subDay} ${sugangColumnList.startTime}:00 - ${sugangColumnList.endTime}:00 (${sugangColumnList.roomId})</td>
 							<td>${sugangColumnList.numOfStudent}</td>
 							<td>${sugangColumnList.capacity}</td>
-							<td>조회</td>						
+							<td class="selected_sugang_btn">
+							<form action= "${pageContext.request.contextPath}/sugang/selectedList" method="POST">
+							<button type="submit" name ="selectedList" value= "${sugangColumnList.subjectId}" onclick="return confirm('정말 선택할꺼야?');">신청</button>
+							</form>
+							</td>
 						</tr>
 						</c:forEach>
 						</c:otherwise>
@@ -94,13 +102,14 @@
 							<span class="current-page">${i}</span>
 							</c:when>
 							<c:otherwise>
-								<span><a href="${pageContext.request.contextPath}/sugang/subjectList?page=${i}">${i}</a></span>
+								<span><a href="${pageContext.request.contextPath}/sugang/pre?page=${i}">${i}</a></span>
 							</c:otherwise>
 					</c:choose>
 				</c:forEach>
 			</div>
 		</main>
-	</div>
-</div>
+
+		</div>
+		</div>
 </body>
 </html>

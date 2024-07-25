@@ -39,7 +39,7 @@
 					</tr>
 					<tr>
 						<td>
-							<a href="${pageContext.request.contextPath}/management/sendtuition">등록금 고지서 발송</a>
+							<a href="${pageContext.request.contextPath}/management/sendTuition">등록금 고지서 발송</a>
 						</td>
 					</tr>
 					<tr>
