@@ -1,14 +1,6 @@
 package com.uni.system.controller;
 
-import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
-import jakarta.servlet.http.HttpServlet;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-
 import java.io.IOException;
-import java.util.List;
 
 import com.uni.system.repository.interfaces.ProfessorRepository;
 import com.uni.system.repository.interfaces.StaffRepository;
@@ -17,12 +9,18 @@ import com.uni.system.repository.interfaces.UserRepository;
 import com.uni.system.repository.model.Professor;
 import com.uni.system.repository.model.Staff;
 import com.uni.system.repository.model.Student;
-import com.uni.system.repository.model.User;
 import com.uni.system.repository.model.UserDTO;
 import com.uni.system.service.ProfessorRepositoryimpl;
 import com.uni.system.service.StaffRepositoryImpl;
 import com.uni.system.service.StudentRepositoryImpl;
 import com.uni.system.service.UserRepositoryImpl;
+
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/info/*")
 public class InfoController extends HttpServlet {
@@ -34,7 +32,7 @@ public class InfoController extends HttpServlet {
 
 	public InfoController() {
 	}
-	
+
 	@Override
 	public void init() throws ServletException {
 		studentRepository = new StudentRepositoryImpl();
@@ -62,7 +60,7 @@ public class InfoController extends HttpServlet {
 		case "/staffPassword":
 			System.out.println("staffPassowrd");
 			request.getRequestDispatcher("/WEB-INF/views/user/staffChangePassword.jsp").forward(request, response);
-			break;
+
 		case "/professor":
 			showProfessorInfo(request, response);
 			break;
@@ -78,33 +76,34 @@ public class InfoController extends HttpServlet {
 
 	}
 
-	private void showProfessorInfo(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	private void showProfessorInfo(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
 		HttpSession session = request.getSession();
 		UserDTO dto = (UserDTO) session.getAttribute("principal");
-		
 
-		if(dto.getId() == 0) {
+		if (dto.getId() == 0) {
 			response.sendRedirect(request.getContextPath() + "/info?message=invalid");
 			return;
 		}
 		Professor professor = professorRepository.viewMyInfo(dto.getId());
 		session.setAttribute("professorInfo", professor);
-		
+
 		request.getRequestDispatcher("/WEB-INF/views/user/professorInfo.jsp").forward(request, response);
-		
+
 	}
 
-	private void showStaffInfo(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+	private void showStaffInfo(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
 		HttpSession session = request.getSession();
 		UserDTO dto = (UserDTO) session.getAttribute("principal");
-		
-		if(dto.getId() == 0) {
+
+		if (dto.getId() == 0) {
 			response.sendRedirect(request.getContextPath() + "/info?message=invalid");
 			return;
 		}
 		Staff staffInfo = staffRepository.viewMyInfo(dto.getId());
 		session.setAttribute("staffInfo", staffInfo);
-		
+
 		request.getRequestDispatcher("/WEB-INF/views/user/staffInfo.jsp").forward(request, response);
 	}
 
@@ -127,14 +126,14 @@ public class InfoController extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		String action = request.getPathInfo();
 		switch (action) {
-		
-		case "/studentPassword" :
+
+		case "/studentPassword":
 			changePassword(request, response);
 			break;
-		case "/staffPassword" :
+		case "/staffPassword":
 			changePassword(request, response);
 			break;
 		case "/professorPassword":
@@ -144,9 +143,9 @@ public class InfoController extends HttpServlet {
 		}
 	}
 
+	private void changePassword(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-	private void changePassword(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		System.out.println("changedPassword Method 호출");
 		HttpSession session = request.getSession();
 		UserDTO dto = (UserDTO) session.getAttribute("principal");
@@ -156,12 +155,12 @@ public class InfoController extends HttpServlet {
 		System.out.println("현재 입력한 비밀번호 : " + currentPassword);
 		System.out.println("바꾸려고 하는 비밀번호 : " + changePassword);
 		System.out.println("DB에 있는 비번 : " + dto.getPassword());
-		
+
 		if (dto.getId() != 0 && currentPassword.equals(dto.getPassword())) {
 			userRepository.changePassword(changePassword, dto.getId());
 			response.sendRedirect(request.getContextPath() + "/user/home");
-		
-		} else if (dto.getUserRole().equals("student") && currentPassword != dto.getPassword()){
+
+		} else if (dto.getUserRole().equals("student") && currentPassword != dto.getPassword()) {
 			response.sendRedirect(request.getContextPath() + "/info/student?error");
 		} else if (dto.getUserRole().equals("staff") && currentPassword != dto.getPassword()) {
 			response.sendRedirect(request.getContextPath() + "/info/staff?error");

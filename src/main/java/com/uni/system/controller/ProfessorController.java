@@ -6,6 +6,7 @@ import java.util.List;
 import com.uni.system.repository.interfaces.ProfessorRepository;
 import com.uni.system.repository.model.Subject;
 import com.uni.system.repository.model.UserDTO;
+import com.uni.system.service.ProfessorRepositoryimpl;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -14,14 +15,16 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
+
 @WebServlet("/professor/*")
 public class ProfessorController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	ProfessorRepository professorRepository;
-
+	
+		
 	@Override
 	public void init() throws ServletException {
-
+		professorRepository = new ProfessorRepositoryimpl();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -62,5 +65,5 @@ public class ProfessorController extends HttpServlet {
 		request.getRequestDispatcher("/WEB-INF/views/user/professorClass.jsp").forward(request, response);
 
 	}
+	}
 
-}

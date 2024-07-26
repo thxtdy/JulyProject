@@ -1,11 +1,9 @@
 package com.uni.system.service;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.sql.SQLException;
 import java.util.List;
 
 import com.uni.system.repository.interfaces.ProfessorRepository;
@@ -22,6 +20,7 @@ public class ProfessorRepositoryimpl implements ProfessorRepository {
 	final String PROFESSOR_CLASS = " SELECT s.* FROM subject_tb AS s LEFT JOIN professor_tb AS p ON s.professor_id = p.id WHERE p.id = ? ";
 
 	@Override
+
 	public Professor viewMyInfo(int userId) {
 		Professor professor = null;
 		try (Connection conn = DBUtil.getConnection()) {
@@ -44,9 +43,7 @@ public class ProfessorRepositoryimpl implements ProfessorRepository {
 		return professor;
 	}
 
-	public void viewMyInfo() {
 
-	}
 
 	@Override
 	public List<Subject> viewAllSubject() {
