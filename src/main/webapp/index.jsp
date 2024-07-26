@@ -1,3 +1,4 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <meta charset="UTF-8">
@@ -19,8 +20,7 @@
 				<div class="login--container">
 					<div class="id--container">
 						<div class="login--id">
-							<label for="username"></label> 
-							<input type="number"
+							<label for="username"></label> <input type="number"
 								max="2147483647" name="username" id="username"
 								value="2023000001" placeholder="아이디를 입력하세요" required>
 
@@ -36,7 +36,7 @@
 					</div>
 				</div>
 				<div>
-					<button type="submit"  id="input--submit">로그인</button>
+					<button type="submit" id="input--submit">로그인</button>
 				</div>
 				<ul class="login--info">
 					<li><a href="/find/id"

@@ -1,5 +1,20 @@
 package com.uni.system.controller;
 
+import java.io.IOException;
+
+import com.uni.system.repository.interfaces.ProfessorRepository;
+import com.uni.system.repository.interfaces.StaffRepository;
+import com.uni.system.repository.interfaces.StudentRepository;
+import com.uni.system.repository.interfaces.UserRepository;
+import com.uni.system.repository.model.Professor;
+import com.uni.system.repository.model.Staff;
+import com.uni.system.repository.model.Student;
+import com.uni.system.repository.model.UserDTO;
+import com.uni.system.service.ProfessorRepositoryimpl;
+import com.uni.system.service.StaffRepositoryImpl;
+import com.uni.system.service.StudentRepositoryImpl;
+import com.uni.system.service.UserRepositoryImpl;
+
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -7,26 +22,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-import java.io.IOException;
-import java.util.List;
-
-import com.uni.system.repository.interfaces.StaffRepository;
-import com.uni.system.repository.interfaces.StudentRepository;
-import com.uni.system.repository.interfaces.UserRepository;
-import com.uni.system.repository.model.Staff;
-import com.uni.system.repository.model.Student;
-import com.uni.system.repository.model.User;
-import com.uni.system.repository.model.UserDTO;
-import com.uni.system.service.StaffRepositoryImpl;
-import com.uni.system.service.StudentRepositoryImpl;
-import com.uni.system.service.UserRepositoryImpl;
-
 @WebServlet("/info/*")
 public class InfoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	UserRepository userRepository;
 	StudentRepository studentRepository;
 	StaffRepository staffRepository;
+	ProfessorRepository professorRepository;
 
 	public InfoController() {
 	}
@@ -36,7 +38,7 @@ public class InfoController extends HttpServlet {
 		studentRepository = new StudentRepositoryImpl();
 		staffRepository = new StaffRepositoryImpl();
 		userRepository = new UserRepositoryImpl();
-
+		professorRepository = new ProfessorRepositoryimpl();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -61,10 +63,33 @@ public class InfoController extends HttpServlet {
 		case "/professorMy":
 			request.getRequestDispatcher("/WEB-INF/views/user/professorMyInfo.jsp").forward(request, response);
 			break;
+		case "/professor":
+			showProfessorInfo(request, response);
+			break;
+		case "/professorPassword":
+			System.out.println("professorPassword");
+			request.getRequestDispatcher("/WEB-INF/views/user/professorPassword.jsp").forward(request, response);
+			break;
 		default:
 			break;
 		}
 
+	}
+
+	private void showProfessorInfo(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+		HttpSession session = request.getSession();
+		UserDTO dto = (UserDTO) session.getAttribute("principal");
+		
+
+		if(dto.getId() == 0) {
+			response.sendRedirect(request.getContextPath() + "/info?message=invalid");
+			return;
+		}
+		Professor professor = professorRepository.viewMyInfo(dto.getId());
+		session.setAttribute("professorInfo", professor);
+		
+		request.getRequestDispatcher("/WEB-INF/views/user/professorInfo.jsp").forward(request, response);
+		
 	}
 
 	private void showStaffInfo(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
@@ -110,6 +135,8 @@ public class InfoController extends HttpServlet {
 		case "/staffPassword" :
 			changePassword(request, response);
 			break;
+		case "/professorPassword":
+			changePassword(request, response);
 		default:
 			break;
 		}
@@ -118,23 +145,26 @@ public class InfoController extends HttpServlet {
 
 	private void changePassword(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		System.out.println("changedPassword Method 호출");
 		HttpSession session = request.getSession();
 		UserDTO dto = (UserDTO) session.getAttribute("principal");
 		String currentPassword = request.getParameter("current_password");
 		String changePassword = request.getParameter("change_password");
-		System.out.println("Current Password : " + dto.getPassword());
-		System.out.println("Changed Password : " + changePassword);
+		System.out.println("유저 아이디" + dto.getId());
+		System.out.println("현재 입력한 비밀번호 : " + currentPassword);
+		System.out.println("바꾸려고 하는 비밀번호 : " + changePassword);
+		System.out.println("DB에 있는 비번 : " + dto.getPassword());
 		
-		if (dto.getId() != 0 && currentPassword == dto.getPassword()) {
+		if (dto.getId() != 0 && currentPassword.equals(dto.getPassword())) {
 			userRepository.changePassword(changePassword, dto.getId());
 			response.sendRedirect(request.getContextPath() + "/user/home");
 		
 		} else if (dto.getUserRole().equals("student") && currentPassword != dto.getPassword()){
 			response.sendRedirect(request.getContextPath() + "/info/student?error");
 		} else if (dto.getUserRole().equals("staff") && currentPassword != dto.getPassword()) {
-			response.sendRedirect(request.getContextPath() + "/info/staff");
+			response.sendRedirect(request.getContextPath() + "/info/staff?error");
 		} else if (dto.getUserRole().equals("professor") && currentPassword != dto.getPassword())
-			response.sendRedirect(request.getContextPath() + "/info/professor");
+			response.sendRedirect(request.getContextPath() + "/info/professor?error");
 	}
 
 }
