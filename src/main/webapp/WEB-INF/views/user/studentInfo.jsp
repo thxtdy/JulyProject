@@ -71,7 +71,7 @@ session.getAttribute("studentInfo");
 			</tr>
 		</tbody>
 	</table>
-	<button type="button">수정하기</button>
+	<button  onclick="location.href='studentMyInfoUpdate.jsp';"  type="button">수정하기</button>
 	</div>
 	
 </body>

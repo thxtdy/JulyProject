@@ -40,7 +40,6 @@ public class ProfessorController extends HttpServlet {
 		String afterPW = request.getParameter("afterPW");
 		String beforePW = request.getParameter("beforePW");
 		System.out.println( "id : " + id +" afterPW : "+ afterPW + "beforePW" + beforePW);
-		// TODO Auto-generated method stub
 
 	}
 

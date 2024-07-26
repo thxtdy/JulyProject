@@ -1,24 +1,13 @@
-<<<<<<< HEAD
-=======
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
->>>>>>> 87f9e9e6acd49b45b866d3cd73c791d3ad73940e
-<!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<html>
-<head>
 <meta charset="UTF-8">
 <title>Login</title>
-
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/login.css">
-
-
 </head>
 <body>
 
 	<div class="container">
-<<<<<<< HEAD
 		<div class="login--div">
 			<div class="main--logo">
 				<a href="#"><img class="logo" alt=""
@@ -35,7 +24,6 @@
 								max="2147483647" name="username" id="username"
 								value="2023000001" placeholder="아이디를 입력하세요" required>
 
-
 						</div>
 					</div>
 					<div class="pwd--container">
@@ -48,7 +36,7 @@
 					</div>
 				</div>
 				<div>
-					<input type="submit" value="로그인" id="input--submit">
+					<button type="submit"  id="input--submit">로그인</button>
 				</div>
 				<ul class="login--info">
 					<li><a href="/find/id"
@@ -61,29 +49,5 @@
 			</form>
 		</div>
 	</div>
-
-
-=======
-		<h2>로그인</h2>
-
-		<form action="${pageContext.request.contextPath}/user/signIn" method="post">
-			<div>
-				<label for="username">사용자 이름:</label>
-				<input type="text" id="username" name="username" value="${cookie.id.value}"> 
-				<label for="password">비밀번호:</label> 
-				<input type="password" id="password" name="password" value="0000">
-				<button type="submit">로그인</button>
-				<input type="checkbox" id="checkbox" name="checkbox">ID 저장
-
-			</div>
-		</form>
-
-
-
-	</div>
-
-
-
->>>>>>> 87f9e9e6acd49b45b866d3cd73c791d3ad73940e
 </body>
 </html>
