@@ -26,7 +26,7 @@
                     <td>${breakList.type}</td>
                     <td>${breakList.fromSemester}</td>
                     <td>${breakList.toSemester}</td>
-                    <form action="${pageContext.request.contextPath}/management/processTuition" method="post">
+                    <form action="${pageContext.request.contextPath}/management/processBreak" method="post">
                     <td><button type="submit" name="clickButton" value="${breakList.studentId}">Click</button></td>
                     </form>
                 </tr>

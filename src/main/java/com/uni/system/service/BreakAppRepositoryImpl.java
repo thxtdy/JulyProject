@@ -42,7 +42,7 @@ public class BreakAppRepositoryImpl implements BreakAppRepository {
 	}
 
 	@Override
-	public BreakApp getBreakList(int userId) {
+	public List<BreakApp> getBreakList(int userId) {
 		List<BreakApp> breakList = new ArrayList<BreakApp>();
 		BreakApp breakApp = null;
 		try (Connection conn = DBUtil.getConnection()){
@@ -64,6 +64,7 @@ public class BreakAppRepositoryImpl implements BreakAppRepository {
 							.build();
 					System.out.println("breakApp in Repository : " + breakApp.toString());
 					breakList.add(breakApp);
+					System.out.println("breakList : " + breakList.toString() );
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -71,7 +72,7 @@ public class BreakAppRepositoryImpl implements BreakAppRepository {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return breakApp;
+		return breakList;
 	}
 
 	@Override

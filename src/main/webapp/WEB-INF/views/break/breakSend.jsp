@@ -75,7 +75,7 @@ System.out.print(session.getAttribute("studentInfo"));
 			</tr>
 			<tr>
 				<a>위와 같이 휴학하고자 하오니 허가하여 주시기 바랍니다.</a>
-				<p><fmt:formatDate value="${breakApp.appdate}" pattern="yyyy-MM-dd HH:mm"/></p>
+				<p><fmt:formatDate value="${breakApp.appDate}" pattern="yyyy-MM-dd HH:mm"/></p>
 			</tr>
 			
 

@@ -46,6 +46,9 @@ public class StaffRepositoryImpl implements StaffRepository{
 	final String GET_BREAK_LIST = " SELECT * FROM break_app_tb ";
 	final String PROCESS_BREAK = " UPDATE break_app_tb SET status = '완료' WHERE student_id = ? ";
 	
+	// 등록금 전송 쿼리
+	final String SEND_TUITION = " INSERT INTO tuition_tb() VALUES (?, ?, ?, ?, ?, ?, ?) ";
+	
 	@Override
 	public Staff viewMyInfo(int userId) {
 		Staff staff = null;
@@ -273,41 +276,6 @@ public class StaffRepositoryImpl implements StaffRepository{
 		}
 	}
 	
-
-	@Override
-	public List<Tuition> sendTuition() {
-		List<Tuition> tuitionList = new ArrayList<Tuition>();
-		try (Connection conn = DBUtil.getConnection()){
-			try (PreparedStatement pstmt1 = conn.prepareStatement(SEND_ALL_TUITION_TYPE2)){
-				pstmt1.executeUpdate();
-				try (PreparedStatement pstmt2 = conn.prepareStatement(GET_ALL_TUITION_LIST)) {
-					ResultSet rs = pstmt2.executeQuery();
-					while(rs.next()) {
-						Tuition tuition = Tuition.builder()
-								.studentId(rs.getInt("student_id"))
-								.tuiYear(rs.getInt("tui_year"))
-								.semester(rs.getInt("semester"))
-								.tuiAmount(rs.getInt("tui_amount"))
-								.schType(rs.getInt("sch_type"))
-								.schAmount(rs.getInt("sch_amount"))
-								.status(rs.getInt("status"))
-								.build();
-						tuitionList.add(tuition);
-					}
-				} catch (Exception e) {
-					
-				}
-			} catch (Exception e) {
-				
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return tuitionList;
-	}
-
-
-	
 	@Override
 	public List<BreakApp> viewAllBreak() {
 		List<BreakApp> breakList = new ArrayList<BreakApp>();
@@ -346,7 +314,7 @@ public class StaffRepositoryImpl implements StaffRepository{
 				pstmt.setInt(1, userId);
 				pstmt.executeUpdate();
 			} catch (Exception e) {
-
+				e.printStackTrace();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -375,8 +343,27 @@ public class StaffRepositoryImpl implements StaffRepository{
 	}
 
 	@Override
-	public void addtuition() {
+	public void addtuition(int userId, int type, int maxAmount) {
 		
+		try (Connection conn = DBUtil.getConnection()) {
+			conn.setAutoCommit(false);
+			try (PreparedStatement pstmt = conn.prepareStatement(SEND_TUITION)){
+				pstmt.setInt(1, userId);
+				pstmt.setInt(2, 2023);
+				pstmt.setInt(3, 1);
+				pstmt.setInt(4, 4868500);
+				pstmt.setInt(5, type);
+				pstmt.setInt(6, maxAmount);
+				pstmt.executeUpdate();
+				conn.commit();
+			} catch (Exception e) {
+				conn.rollback();
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
