@@ -80,14 +80,15 @@ public class SugangController extends HttpServlet {
 			break;
 		case "/addSugang":
 			handleSub(request, response);
-			request.getRequestDispatcher("/WEB-INF/views/sugang/appList.jsp").forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/sugang/appList?principal=" + request.getParameter("principal"));
+//			request.getRequestDispatcher("/WEB-INF/views/sugang/appList.jsp").forward(request, response);
 			break;
 		default:
 			break;
 		}
 	}
 
-
+	
 	/**
 	 *  수강신청 페이지에서 예비 수강 신청한 데이터 신청버튼 누르고 찐 수강 리스트에 올리기
 	 * @param request
@@ -148,7 +149,8 @@ public class SugangController extends HttpServlet {
 		String principalIdStr = request.getParameter("principal");
 		int selectedLec = Integer.parseInt(selectedListStr);
 		int principalId = Integer.parseInt(principalIdStr);
-
+		
+		
 		// 예비신청 리스트에 추가하기
 		sugangRepository.addSelectedPreAdd(principalId, selectedLec);
 
