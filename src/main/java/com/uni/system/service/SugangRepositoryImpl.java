@@ -9,6 +9,7 @@ import java.util.List;
 import com.uni.system.repository.interfaces.SugangRepository;
 import com.uni.system.repository.model.SugangColumn;
 import com.uni.system.repository.model.SugangDTO;
+import com.uni.system.repository.model.SugangPreAppList;
 import com.uni.system.utils.DBUtil;
 
 public class SugangRepositoryImpl implements SugangRepository{
@@ -608,28 +609,25 @@ public class SugangRepositoryImpl implements SugangRepository{
 	}
 	
 	
-	// 예비 페이지에서 선택된 목록
+	// 예비 페이지에서 선택된 목록보기
 	@Override
-	public List<SugangColumn> viewSelectedPreAdd(int selectedList) {
-		List<SugangColumn> sugangList = new ArrayList<SugangColumn>();
-		String query = " SELECT coll.name AS college_name, dept.name AS dept_name, sub.id AS subject_id, sub.type, sub.name AS subject_name, pro.name AS professor_name, sub.grades, sub.sub_day,sub.start_time,sub.end_time,sub.room_id ,sub.num_of_student, sub.capacity "
-				+ "FROM subject_tb as sub "
-				+ "LEFT JOIN professor_tb AS pro ON pro.id = sub.professor_id "
+	public List<SugangPreAppList> viewSelectedPreAdd(int principalId) {
+		List<SugangPreAppList> sugangList = new ArrayList<SugangPreAppList>();
+		String query = " SELECT sub.id AS sub_id, sub.name AS sub_name, pro.name AS pro_name , sub.grades , sub.sub_day, sub.start_time, sub.end_time, sub.room_id, sub.num_of_student, sub.capacity "
+				+ "FROM subject_tb AS sub "
+				+ "LEFT JOIN pre_stu_sub_tb AS pre ON pre.subject_id = sub.id "
 				+ "LEFT JOIN department_tb AS dept ON dept.id = sub.dept_id "
-				+ "LEFT JOIN college_tb AS coll ON coll.id = dept.college_id "
-				+ "WHERE sub.id = ? " ;
+				+ "LEFT JOIN professor_tb AS pro ON pro.id = sub.professor_id "
+				+ "WHERE pre.student_id = ? " ;
 		try (Connection conn= DBUtil.getConnection();
 				PreparedStatement pstmt = conn.prepareStatement(query)){
-				pstmt.setInt(1, selectedList);
+				pstmt.setInt(1, principalId);
 				ResultSet rs = pstmt.executeQuery();
 				while(rs.next()) {
-					SugangColumn sugangDTO = SugangColumn.builder()
-							.collegeName(rs.getString("college_name"))
-							.deptName(rs.getString("dept_name"))
-							.subjectId(rs.getInt("subject_id"))
-							.type(rs.getString("type"))
-							.subjectName(rs.getString("subject_name"))
-							.professorName(rs.getString("professor_name"))
+					SugangPreAppList sugangDTO = SugangPreAppList.builder()
+							.haksuNum(rs.getInt("sub_id"))
+							.lectureName(rs.getString("sub_name"))
+							.professorName(rs.getString("pro_name"))
 							.grades(rs.getInt("grades"))
 							.subDay(rs.getString("sub_day"))
 							.startTime(rs.getInt("start_time"))
@@ -641,9 +639,76 @@ public class SugangRepositoryImpl implements SugangRepository{
 					sugangList.add(sugangDTO);
 				}
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return sugangList;
 	}
+
+	@Override
+	public void addSelectedPreAdd(int principalId, int subjectId) {
+		String query = " INSERT INTO pre_stu_sub_tb (student_id, subject_id) "
+				+ "SELECT s.id, sb.id "
+				+ "FROM student_tb AS s "
+				+ "LEFT JOIN subject_tb AS sb ON s.dept_id = sb.dept_id "
+				+ "WHERE s.id = ? AND sb.id = ? " ;
+		try (Connection conn= DBUtil.getConnection()){
+			conn.setAutoCommit(false);
+			try (PreparedStatement pstmt = conn.prepareStatement(query)){
+				pstmt.setInt(1, principalId);
+				pstmt.setInt(2, subjectId);
+				pstmt.executeUpdate();
+				conn.commit();
+			} catch (Exception e) {
+				conn.rollback();
+				e.printStackTrace();
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void deletePreAdd(int haksuNum) {
+		String query = " DELETE FROM pre_stu_sub_tb WHERE subject_id = ? ";
+		try (Connection conn = DBUtil.getConnection()){
+			conn.setAutoCommit(false);
+			try (PreparedStatement pstmt = conn.prepareStatement(query)){
+				pstmt.setInt(1, haksuNum);
+				pstmt.executeUpdate();
+				conn.commit();
+			} catch (Exception e) {
+				e.printStackTrace();
+				conn.commit();
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void addSugangList(int principalId, int subjectId) {
+		String query = " INSERT INTO stu_sub_tb (student_id, subject_id, grade ) VALUES ( ? , ? , ? ) ";
+		try (Connection conn= DBUtil.getConnection()){
+			conn.setAutoCommit(false);
+			try (PreparedStatement pstmt = conn.prepareStatement(query)){
+				pstmt.setInt(1, principalId);
+				pstmt.setInt(2, subjectId);
+				pstmt.setString(3, "F");
+				pstmt.executeUpdate();
+				conn.commit();
+			} catch (Exception e) {
+				conn.rollback();
+				e.printStackTrace();
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
 
 
 
