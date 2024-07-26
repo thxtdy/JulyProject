@@ -18,12 +18,6 @@ import com.uni.system.repository.model.SugangColumn;
 import com.uni.system.utils.DBUtil;
 
 public class ProfessorRepositoryimpl implements ProfessorRepository {
-<<<<<<< HEAD
-
-	final String PROFESSOR_INFO = " SELECT p.*, c.name as college, d.name as department FROM college_tb as c LEFT JOIN department_tb AS d ON c.id = d.college_id LEFT JOIN professor_tb as p on p.dept_id = d.id where p.id = ? ";
-	final String PROFESSOR_CLASS = " SELECT s.* FROM subject_tb AS s LEFT JOIN professor_tb AS p ON s.professor_id = p.id WHERE p.id = ? ";
-
-=======
 	
 	// 교수 정보 쿼리, 교수가 담당하고 있는 강의 쿼리, 교수의 수업을 신청한 학생 조회 쿼리
 	final String PROFESSOR_INFO = " SELECT p.*, c.name as college, d.name as department FROM college_tb AS c LEFT JOIN department_tb AS d ON c.id = d.college_id LEFT JOIN professor_tb as p on p.dept_id = d.id where p.id = ? ";
@@ -36,7 +30,6 @@ public class ProfessorRepositoryimpl implements ProfessorRepository {
 	// 교수가 학생의 점수를 기입하는 쿼리입니다.
 	final String EVALUATION_STUDENT = " INSERT INTO stu_sub_detail_tb (id, student_id, subject_id, absent, lateness, homework, mid_exam, final_exam, converted_mark) SELECT sub.id, sub.student_id, sub.subject_id, ?, ?, ?, ?, ?, ? FROM stu_sub_tb AS sub WHERE sub.student_id = ? AND sub.subject_id = ? ";
 	
->>>>>>> 82c9410c758019cffde7185715dea250bcdd2512
 	@Override
 
 	public Professor viewMyInfo(int userId) {
