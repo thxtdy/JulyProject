@@ -61,7 +61,7 @@
 						</tbody>
 						</table>
 					<div>
-						<h1>신청 내역</h1>
+						<h1>신청 내역</h1><span>[총 ${sumOfGrades}학점]</span>
 						<table border="1">
 						<thead>
 							<tr>
@@ -77,29 +77,31 @@
 						</thead>
 						<tbody>
 							<c:choose>
-								<c:when test="${empty selectedLect}">
+								<c:when test="${empty selectedRealLect}">
 									<h1>신청 내역이 없습니다</h1>
 								</c:when>
 								<c:otherwise>
-									<c:forEach var="selectedLect" items="${selectedLect}">
+									<c:forEach var="selectedRealLect" items="${selectedRealLect}">
 										<tr>
-											<td>${selectedLect.haksuNum}</td>
-											<td>${selectedLect.lectureName}</td>
-											<td>${selectedLect.professorName}</td>
-											<td>${selectedLect.grades}</td>
-											<td>${selectedLect.subDay}${selectedLect.startTime}:00-
-												${selectedLect.endTime}:00 (${selectedLect.roomId})</td>
-											<td>${selectedLect.numOfStudent}</td>
-											<td>${selectedLect.capacity}</td>
+											<td>${selectedRealLect.haksuNum}</td>
+											<td>${selectedRealLect.lectureName}</td>
+											<td>${selectedRealLect.professorName}</td>
+											<td>${selectedRealLect.grades}</td>
+											<td>${selectedRealLect.subDay}${selectedRealLect.startTime}:00-
+												${selectedRealLect.endTime}:00 (${selectedRealLect.roomId})</td>
+											<td>${selectedRealLect.numOfStudent}</td>
+											<td>${selectedRealLect.capacity}</td>
 											<td>
 												<form
-													action="${pageContext.request.contextPath}/sugang/addSugang"
+													action="${pageContext.request.contextPath}/sugang/cansleSugang"
 													method="POST">
-													<button type="submit" name="selectedList"
-														value="${selectedLect.haksuNum}"
+													<button type="submit" name="cansleSugang"
+														
 														onclick="return confirm('수강을 취소 하시겠습니까?');">취소</button>
 													<input type="hidden" name="principal"
 														value="${principal.id}">
+													<input type="hidden" name="haksuNum"
+														value="${selectedRealLect.haksuNum}">
 												</form>
 											</td>
 										</tr>

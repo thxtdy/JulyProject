@@ -25,7 +25,10 @@
 							</tr>
 						</thead>
 						<tbody>
-
+							<h1>예비 수강 신청</h1>
+							
+							<h2>신청 내역</h2>
+							<h3>[총 ${preGradeSum}학점]</h3>
 							<c:choose>
 								<c:when test="${empty selectedLect}">
 									<h1>수강신청 내역이 없습니다..?</h1>
@@ -44,6 +47,7 @@
 												<form action="${pageContext.request.contextPath}/sugang/deleteApp" method="POST">
 													<button type="submit" name="selectedList" value="${selectedLect.haksuNum}" onclick="return confirm('정말 삭제할꺼야??');">삭제!</button>
 													<input type="hidden" name="principal" value="${principal.id}">
+													<input type="hidden" name="numOfStudent" value="${selectedLect.numOfStudent}">
 												</form>
 											</td>
 										</tr>

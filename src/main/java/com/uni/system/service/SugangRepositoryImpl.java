@@ -679,10 +679,11 @@ public class SugangRepositoryImpl implements SugangRepository{
 				conn.commit();
 			} catch (Exception e) {
 				e.printStackTrace();
-				conn.commit();
+				conn.rollback();
 			}
 			
 		} catch (Exception e) {
+			
 			e.printStackTrace();
 		}
 	}
@@ -702,6 +703,154 @@ public class SugangRepositoryImpl implements SugangRepository{
 				conn.rollback();
 				e.printStackTrace();
 			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public List<SugangPreAppList> viewSelectedAdd(int studentId) {
+		List<SugangPreAppList> sugangList = new ArrayList<SugangPreAppList>();
+		String query = " SELECT sub.id AS sub_id, sub.name AS sub_name  , pro.name AS pro_name, sub.grades , sub.sub_day, sub.start_time,sub.end_time,sub.room_id, sub.num_of_student, sub.capacity "
+				+ "FROM stu_sub_tb AS stu "
+				+ "LEFT JOIN subject_tb AS sub on stu.subject_id = sub.id "
+				+ "LEFT JOIN professor_tb AS pro on sub.professor_id = pro.id "
+				+ "WHERE stu.student_id = ? " ;
+		try (Connection conn= DBUtil.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(query)){
+				pstmt.setInt(1, studentId);
+				ResultSet rs = pstmt.executeQuery();
+				while(rs.next()) {
+					SugangPreAppList sugangDTO = SugangPreAppList.builder()
+							.haksuNum(rs.getInt("sub_id"))
+							.lectureName(rs.getString("sub_name"))
+							.professorName(rs.getString("pro_name"))
+							.grades(rs.getInt("grades"))
+							.subDay(rs.getString("sub_day"))
+							.startTime(rs.getInt("start_time"))
+							.endTime(rs.getInt("end_time"))
+							.roomId(rs.getString("room_id"))
+							.numOfStudent(rs.getInt("num_of_student"))
+							.capacity(rs.getInt("capacity"))
+							.build();
+					sugangList.add(sugangDTO);
+				}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return sugangList;
+	}
+
+	@Override
+	public void deleteAdd(int haksuNum) {
+		String query = " DELETE FROM stu_sub_tb WHERE subject_id = ? " ;
+		try (Connection conn = DBUtil.getConnection()){
+			conn.setAutoCommit(false);
+			try (PreparedStatement pstmt = conn.prepareStatement(query)){
+				pstmt.setInt(1, haksuNum);
+				pstmt.executeUpdate();
+				conn.commit();
+			} catch (Exception e) {
+				e.printStackTrace();
+				conn.rollback();
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public int sumGrade(int principal) {
+		int sum = 0;
+		String query = " SELECT sum(grades) "
+				+ "FROM stu_sub_tb AS stu "
+				+ "LEFT JOIN subject_tb AS sub on stu.subject_id = sub.id "
+				+ "LEFT JOIN professor_tb AS pro on sub.professor_id = pro.id "
+				+ "WHERE stu.student_id = ? " ;
+		try (Connection conn= DBUtil.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(query)){
+			pstmt.setInt(1, principal);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				sum = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return sum;
+	}
+
+	@Override
+	public int sumPreGrade(int principal) {
+		int sum = 0;
+		String query = " SELECT sum(grades) "
+				+ "FROM pre_stu_sub_tb AS pre "
+				+ "LEFT JOIN subject_tb AS sub ON pre.subject_id = sub.id "
+				+ "LEFT JOIN student_tb AS stu ON pre.student_id = stu.id "
+				+ "WHERE stu.id = ? " ;
+		try (Connection conn= DBUtil.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(query)){
+			pstmt.setInt(1, principal);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				sum = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return sum;
+	}
+
+	@Override
+	public void plusPreNumOfStudent(int numOfStudent, int haksuNum) {
+		String query = "UPDATE subject_tb "
+				+ "SET num_of_student = ? "
+				+ "WHERE id = ? " ;
+		try (Connection conn = DBUtil.getConnection()){
+			try(PreparedStatement pstmt = conn.prepareStatement(query)) {
+				conn.setAutoCommit(false);
+				pstmt.setInt(1,numOfStudent);
+				pstmt.setInt(2, haksuNum);
+				
+				pstmt.executeUpdate();
+				
+				conn.commit();
+			} catch (Exception e) {
+				e.printStackTrace();
+				conn.rollback();
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
+	@Override
+	public void minusPreNumOfStudent(int haksuNum, int numOfStudent) {
+		String query = " UPDATE subject_tb "
+				+ "SET num_of_student = ? "
+				+ "WHERE id = ? " ;
+		try (Connection conn = DBUtil.getConnection()){
+			conn.setAutoCommit(false);
+			try(PreparedStatement pstmt = conn.prepareStatement(query)) {
+				pstmt.setInt(1, numOfStudent--);
+				pstmt.setInt(2, haksuNum);
+				pstmt.executeUpdate();
+				
+				conn.commit();
+			} catch (Exception e) {
+				e.printStackTrace();
+				conn.rollback();
+			}
+			
 			
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -82,6 +82,7 @@
 											<form action="${pageContext.request.contextPath}/sugang/selectedList" method="POST">
 												<button type="submit" name="selectedList" value="${sugangColumnList.subjectId}" onclick="return confirm('정말 선택할꺼야?');">신청</button>
 												<input type="hidden" name="principal" value="${principal.id}">
+												<input type="hidden" name="numOfStudent" value="${sugangColumnList.numOfStudent}">
 											</form>
 										</td>
 									</tr>
