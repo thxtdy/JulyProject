@@ -25,9 +25,7 @@ public interface StaffRepository {
 	void addStudent(String name, Date birthDate, String gender, String address, String tel, String email, int deptId, Date entraceDate);
 	void addProfessor(String name, Date birthDate, String gender, String address, String tel, String email, int deptId);
 	void addStaff(String name, Date birthDate, String gender, String address, String tel, String email);
-	
-	// TODO 학사관리 - 등록금 고지서 발송
-	List<Tuition> sendTuition();
+
 	
 	// 학사관리 - 휴학처리
 	List<BreakApp> viewAllBreak();
@@ -39,7 +37,7 @@ public interface StaffRepository {
 	void addDepartment();
 	void addClassRoom();
 	void addClass();
-	void addtuition();
+	void addtuition(int userId, int type, int maxAmount);
 	
 	// 학사정보
 	
