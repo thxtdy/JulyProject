@@ -10,11 +10,7 @@
 	<main>
 		<h1>비밀번호 변경</h1>
 		<div class="split--div"></div>
-<<<<<<<< HEAD:src/main/webapp/WEB-INF/views/user/professorPassword.jsp
-		<form action="${pageContext.request.contextPath}/info/professorPassword" method="post" class="form--container">
-========
 		<form action="${pageContext.request.contextPath}/professor/pwd" method="POST" class="form--container">
->>>>>>>> 4ef0af0d87a6eb645ebcd792c25fb9c2db1e4f43:src/main/webapp/WEB-INF/views/user/professerPassword.jsp
 			<input type="hidden" name="_method" value="put">
 			<table class="table--container">
 				<tbody>
