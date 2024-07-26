@@ -15,8 +15,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-<<<<<<< HEAD
-=======
 import java.io.IOException;
 import java.util.List;
 
@@ -27,8 +25,6 @@ import com.uni.system.repository.model.Subject;
 import com.uni.system.repository.model.SubjectLectureList;
 import com.uni.system.repository.model.UserDTO;
 import com.uni.system.service.ProfessorRepositoryimpl;
-
->>>>>>> 82c9410c758019cffde7185715dea250bcdd2512
 
 @WebServlet("/professor/*")
 public class ProfessorController extends HttpServlet {
@@ -41,12 +37,8 @@ public class ProfessorController extends HttpServlet {
 		professorRepository = new ProfessorRepositoryimpl();
 	}
 
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String action = request.getPathInfo();
 		System.out.println("professor my : " + action);
@@ -55,9 +47,6 @@ public class ProfessorController extends HttpServlet {
 		case "/myClass":
 			handleSubject(request, response);
 			break;
-<<<<<<< HEAD
-
-=======
 			// 수강 신청한 학생 목록 보는 것입니다.
 		case "/myClassStudent":
 			handleMyStudent(request, response);
@@ -67,7 +56,6 @@ public class ProfessorController extends HttpServlet {
 			System.out.println("evaluationStudent 호출");
 			handleEvaluation(request, response);
 			break;
->>>>>>> 82c9410c758019cffde7185715dea250bcdd2512
 		case "/myClassEvaluation":
 
 			break;
@@ -77,11 +65,7 @@ public class ProfessorController extends HttpServlet {
 		}
 	}
 
-<<<<<<< HEAD
-	private void handleSubject(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
 
-=======
 	/**
 	 * 학생 성적에 대한 상세 정보를 확인합니다
 	 * @param request
@@ -121,7 +105,6 @@ public class ProfessorController extends HttpServlet {
 	 */
 	private void handleSubject(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
->>>>>>> 82c9410c758019cffde7185715dea250bcdd2512
 		HttpSession session = request.getSession();
 		UserDTO dto = (UserDTO) session.getAttribute("principal");
 		System.out.println("자 교수의 아이디를 뽑아볼까? " + dto.getId());
@@ -133,10 +116,7 @@ public class ProfessorController extends HttpServlet {
 		request.getRequestDispatcher("/WEB-INF/views/user/professorClass.jsp").forward(request, response);
 
 	}
-	}
 
-<<<<<<< HEAD
-=======
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String action = request.getPathInfo();
@@ -179,4 +159,3 @@ public class ProfessorController extends HttpServlet {
 	}
 
 }
->>>>>>> 82c9410c758019cffde7185715dea250bcdd2512
