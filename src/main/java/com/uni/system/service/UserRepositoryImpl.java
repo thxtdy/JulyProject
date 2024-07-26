@@ -56,7 +56,7 @@ public class UserRepositoryImpl implements UserRepository {
 						.build();
 			}
 			
-		} catch (Exception e) {http://localhost:8080/six/index.jsp#
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return dto;

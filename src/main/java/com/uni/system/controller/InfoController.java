@@ -81,10 +81,8 @@ public class InfoController extends HttpServlet {
 
 	}
 
-<<<<<<< HEAD
 		
 
-=======
 	private void showProfessorInfo(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		HttpSession session = request.getSession();
 		UserDTO dto = (UserDTO) session.getAttribute("principal");
@@ -101,7 +99,6 @@ public class InfoController extends HttpServlet {
 		
 	}
 
->>>>>>> 3613fa7bb6d2287b02d28dee367d7f9b08c78132
 	private void showStaffInfo(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		HttpSession session = request.getSession();
 		UserDTO dto = (UserDTO) session.getAttribute("principal");

@@ -19,6 +19,7 @@ public class StudentRepositoryImpl implements StudentRepository{
 	Query query;
 	private String STUDENT_INFO = "SELECT s.*, c.name as college, d.name as department FROM college_tb as c LEFT JOIN department_tb AS d ON c.id = d.college_id LEFT JOIN student_tb as s on s.dept_id = d.id where s.id = ? ";
 	private String CHANGE_PASSWORD = " UPDATE user_tb SET password = ? WHERE id = ? ";
+	private String UPDATE_ADDRESS = " update student_tb set address = ? where id = ? " ;
 	
 	@Override
 	public Student viewMyInfo(int userid) {
@@ -154,6 +155,28 @@ public class StudentRepositoryImpl implements StudentRepository{
 	@Override
 	public void viewAcademicSchedule() {
 		
+	}
+	@Override
+	public Student changeAddress(int id) {
+		Student student = null;
+		try(Connection conn = DBUtil.getConnection()) {
+			conn.setAutoCommit(false);
+			
+			try (PreparedStatement pstmt = conn.prepareStatement(CHANGE_PASSWORD)){
+				pstmt.setString(1, student.getAddress());
+				pstmt.setInt(2, student.getId());
+				pstmt.executeUpdate();
+				conn.commit();
+			} catch (Exception e) {
+				conn.rollback();
+				e.printStackTrace();
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return student;
 	}
 	
 
