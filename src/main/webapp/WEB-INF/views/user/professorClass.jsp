@@ -25,6 +25,13 @@
 		    <td>${subject.id}</td>
 		    <td>${subject.name}</td>
 		    <td>${subject.subDay}  ${subject.startTime}:00 - ${subject.endTime}:00 (${subject.roomId})</td>
+		    <td>조회</td>
+		    <td>
+		    <form action ="${pageContext.request.contextPath}/professor/myClassStudent" method="get">
+		    <button type="submit" name="subjectId" value ="${subject.id}">조회</button>
+		    </form>
+		    </td>
+		    
 		</tbody>
 </c:forEach>
 	</table>

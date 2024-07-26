@@ -311,7 +311,7 @@ public class StaffRepositoryImpl implements StaffRepository{
 				pstmt.setInt(1, userId);
 				pstmt.executeUpdate();
 			} catch (Exception e) {
-
+				e.printStackTrace();
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
