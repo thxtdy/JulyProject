@@ -26,4 +26,5 @@ public class SugangColumn {
 	String roomId;
 	int numOfStudent;
 	int capacity;
+	int deptId;
 }

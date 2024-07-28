@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.uni.system.repository.interfaces.SugangRepository;
+import com.uni.system.repository.model.PreStuSub;
 import com.uni.system.repository.model.SugangColumn;
 import com.uni.system.repository.model.SugangDTO;
 import com.uni.system.repository.model.SugangPreAppList;
@@ -78,7 +79,7 @@ public class SugangRepositoryImpl implements SugangRepository{
 	@Override
 	public List<SugangColumn> viewSugangColumn(int pageSize, int offset) {
 		List<SugangColumn> sugangList = new ArrayList<SugangColumn>();
-		String sql = " SELECT coll.name AS college_name, dept.name AS dept_name, sub.id AS subject_id, sub.type, sub.name AS subject_name, pro.name AS professor_name, sub.grades, sub.sub_day,sub.start_time,sub.end_time,sub.room_id ,sub.num_of_student, sub.capacity "
+		String sql = " SELECT dept.id AS dept_id, coll.name AS college_name, dept.name AS dept_name, sub.id AS subject_id, sub.type, sub.name AS subject_name, pro.name AS professor_name, sub.grades, sub.sub_day,sub.start_time,sub.end_time,sub.room_id ,sub.num_of_student, sub.capacity "
 				+ "FROM subject_tb as sub "
 				+ "LEFT JOIN professor_tb AS pro ON pro.id = sub.professor_id "
 				+ "LEFT JOIN department_tb AS dept ON dept.id = sub.dept_id "
@@ -104,6 +105,7 @@ public class SugangRepositoryImpl implements SugangRepository{
 												.roomId(rs.getString("room_id"))
 												.numOfStudent(rs.getInt("num_of_student"))
 												.capacity(rs.getInt("capacity"))
+												.deptId(rs.getInt("dept_id"))
 												.build();
 											sugangList.add(sugangDTO);
 				}
@@ -841,11 +843,15 @@ public class SugangRepositoryImpl implements SugangRepository{
 		try (Connection conn = DBUtil.getConnection()){
 			conn.setAutoCommit(false);
 			try(PreparedStatement pstmt = conn.prepareStatement(query)) {
-				pstmt.setInt(1, numOfStudent--);
+				if(numOfStudent < 0) {
+					numOfStudent = 0;
+				} else {
+				pstmt.setInt(1, numOfStudent);
 				pstmt.setInt(2, haksuNum);
 				pstmt.executeUpdate();
 				
 				conn.commit();
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 				conn.rollback();
@@ -856,6 +862,94 @@ public class SugangRepositoryImpl implements SugangRepository{
 			e.printStackTrace();
 		}
 		
+	}
+
+	@Override
+	public int protectDuplicatedPreAppPrinciapl(int principalId) {
+		int id = 0;
+		String query = " SELECT * "
+				+ "FROM pre_stu_sub_tb "
+				+ "WHERE student_id = ? " ; 
+		try (Connection conn = DBUtil.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(query)){
+			pstmt.setInt(1, principalId);
+			ResultSet rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				id = rs.getInt("student_id");
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		 
+		return id;
+	}
+
+	@Override
+	public int protectDuplicatedPreAppHaksuNum(int haksuNum) {
+		int subjectId = 0;
+		String query = " SELECT * "
+				+ "FROM pre_stu_sub_tb "
+				+ "WHERE subject_id = ? " ; 
+		try (Connection conn = DBUtil.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(query)){
+			pstmt.setInt(1, haksuNum);
+			ResultSet rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				subjectId = rs.getInt("subject_id");
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		 
+		return subjectId;
+	}
+
+	@Override
+	public List<PreStuSub> duplicateCheck() {
+		List<PreStuSub> pss = new ArrayList<>();
+		String query = " SELECT * "
+				+ "FROM pre_stu_sub_tb " ;
+			
+		try (Connection conn = DBUtil.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(query)){
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				PreStuSub ps = PreStuSub.builder()
+						.studentId(rs.getInt("student_id"))
+						.subjectId(rs.getInt("subject_id"))
+						.build();
+						pss.add(ps);
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		 
+		return pss;
+	}
+
+	@Override
+	public int getDeptId(int principal) {
+		int deptId = 0;
+		String query =  " SELECT dept_id FROM student_tb WHERE id = ? ";
+		try (Connection conn = DBUtil.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(query)){
+				pstmt.setInt(1, principal);
+				ResultSet rs = pstmt.executeQuery();
+				if(rs.next()) {
+					deptId = rs.getInt("dept_id");
+				}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return deptId;
 	}
 
 

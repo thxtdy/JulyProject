@@ -5,22 +5,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style>
-	.link-style {
-        color: blue;
-        text-decoration: underline;
-        cursor: pointer;
-        display: inline-block;
-    }
-
-    .hidden-form {
-        display: inline;
-    }
-
-    .hidden-button {
-        display: none;
-    }
-</style>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/hiddenATag.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/subMenu.css">
 </head>
 <body>
 
@@ -39,7 +25,11 @@
 				</tr>
 				<tr>
 					<td>
-					<a href="${pageContext.request.contextPath}/sugang/pre">예비 수강 신청</a>
+					<form class="hidden-form" action="${pageContext.request.contextPath}/sugang/pre" method="get">
+                        <input type="hidden" name="principal" value="${principal.id}">
+                        <a class="link-style" href="#" onclick="this.parentNode.submit();">예비 수강 신청</a>
+                        <input type="submit" class="hidden-button" value="Submit">
+                        </form>
 					</td>
 				</tr>
 				<tr>

@@ -2,12 +2,15 @@
 <%@ include file="/WEB-INF/views/layout/header.jsp"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+	<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/subjectList.css">
 </head>
 <body>
 	<div class="registration_box" style="min-width: 100em">
 		<!-- 세부 메뉴 div -->
 		<div class="sub_menu">
 			<%@ include file="/WEB-INF/views/subMenu/sugangMenu.jsp"%>
+			</div>
 			<!-- 메인 div -->
 			<main>
 				<div>
@@ -59,6 +62,5 @@
 				</div>
 			</main>
 		</div>
-	</div>
 </body>
 </html>

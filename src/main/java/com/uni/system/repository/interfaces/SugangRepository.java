@@ -2,6 +2,7 @@ package com.uni.system.repository.interfaces;
 
 import java.util.List;
 
+import com.uni.system.repository.model.PreStuSub;
 import com.uni.system.repository.model.SugangColumn;
 import com.uni.system.repository.model.SugangDTO;
 import com.uni.system.repository.model.SugangPreAppList;
@@ -49,6 +50,11 @@ public interface SugangRepository {
 	
 	// 수강신청 페이지에서 예비수강을 신청하면 예비수강 테이블 바로밑에 나오게 하는 메소드
 	List<SugangPreAppList> viewSelectedAdd(int studentId);
+	
+	// 사전수강 신청 목록에서 자기 예비 수강신청 했던 목록 취소 버튼으로 변환 하기위해 신청했던 목록 찾기
+	int protectDuplicatedPreAppPrinciapl(int principalId);
+	int protectDuplicatedPreAppHaksuNum(int haksuNum);
+	List<PreStuSub> duplicateCheck();
 	
 	
 	// subjectId 삭제
@@ -98,4 +104,7 @@ public interface SugangRepository {
 	
 	// 예비신청 취소하면 신청한 인원수 줄이기
 	void minusPreNumOfStudent(int haksuNum, int numOfStudent);
+	
+	// 어쩔 수 없는 스튜던트 인포 얻기
+	int getDeptId(int principal);
 }

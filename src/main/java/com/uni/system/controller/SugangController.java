@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.uni.system.repository.interfaces.SugangRepository;
+import com.uni.system.repository.model.PreStuSub;
 import com.uni.system.repository.model.SugangColumn;
 import com.uni.system.repository.model.SugangDTO;
 import com.uni.system.repository.model.SugangPreAppList;
@@ -23,6 +24,7 @@ public class SugangController extends HttpServlet {
 
 	@Override
 	public void init() throws ServletException {
+		
 		sugangRepository = new SugangRepositoryImpl();
 	}
 
@@ -48,6 +50,8 @@ public class SugangController extends HttpServlet {
 		// 예비 신청 페이지
 		case "/pre":
 			correctList(request, response);
+			handleCansleSelectBtn(request, response);
+			request.getRequestDispatcher("/WEB-INF/views/sugang/pre.jsp").forward(request, response);
 			break;
 		// 선택된 예비 신청 목록
 		case "/preAppList":
@@ -70,6 +74,19 @@ public class SugangController extends HttpServlet {
 		}
 	}
 
+	// 사전 수강신청 페이지에서 중복/ 다른과 신청하는거 방지 
+	private void handleCansleSelectBtn(HttpServletRequest request, HttpServletResponse response) {
+		String principalId = request.getParameter("principal");
+		int principal = Integer.parseInt(principalId);
+		int deptId = sugangRepository.getDeptId(principal);
+		
+		System.out.println("deptId : " + deptId);
+		
+		List<PreStuSub> ps = sugangRepository.duplicateCheck();
+		
+		request.setAttribute("deptId", deptId);
+		request.setAttribute("duplicateCheck", ps);
+	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -84,7 +101,6 @@ public class SugangController extends HttpServlet {
 		case "/addSugang":
 			handleSub(request, response);
 			response.sendRedirect(request.getContextPath() + "/sugang/appList?principal=" + request.getParameter("principal"));
-//			request.getRequestDispatcher("/WEB-INF/views/sugang/appList.jsp").forward(request, response);
 			break;
 			// 수강신청 페이지에서 취소 눌렀을때 수강 취소하기 
 		case "/cansleSugang":
@@ -134,6 +150,7 @@ public class SugangController extends HttpServlet {
 		String principalStr = request.getParameter("principal");
 		int haksuNum = Integer.parseInt(haksuNumStr);
 		int principalId = Integer.parseInt(principalStr);
+		
 		sugangRepository.addSugangList(principalId, haksuNum);
 		List<SugangPreAppList> selectedLect = sugangRepository.viewSelectedPreAdd(principalId);
 		request.setAttribute("selectedLect", selectedLect);
@@ -219,12 +236,15 @@ public class SugangController extends HttpServlet {
 
 	private void correctList(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		// 페이징처리!!!!!
 		getChecks(request, response);
 
 		// 검색필터 목록값들!!
 		viewLists(request, response);
-		request.getRequestDispatcher("/WEB-INF/views/sugang/pre.jsp").forward(request, response);
+		
+		// 이미 신청한 과목들을 취소버튼으로 변경하기 위해 이미 예비수강신청을 했는지 확인하는 메소드 
+		
 	}
 
 	// 강의 목록 필터!!

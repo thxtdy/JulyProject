@@ -1,8 +1,16 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/layout/header.jsp"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/subject.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/subject.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/hiddenATag.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/subjectList.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/subMenu.css">
 </head>
 <body>
 
@@ -16,7 +24,9 @@
 				<table class="sub_menu_table" border="1">
 					<tbody>
 						<tr>
-							<td><a href="${pageContext.request.contextPath}/subject/subject" class="selected_menu">전체 강의 조회</a></td>
+							<td><a
+								href="${pageContext.request.contextPath}/subject/subject"
+								class="selected_menu">전체 강의 조회</a></td>
 						</tr>
 					</tbody>
 				</table>
@@ -26,10 +36,13 @@
 		<main>
 			<h1>전체 강의 조회</h1>
 			<div class="filter">
-				<form action="${pageContext.request.contextPath}/subject/list" method="GET">
+				<form action="${pageContext.request.contextPath}/subject/list"
+					method="GET">
 					<label>연도</label>
 					<!-- 개설연도 숫자 -->
-					<input type="number" value="2023" name="year" id="year" min="2017" max="2033"> <label>학기</label> <select name="semester" id="semester">
+					<input type="number" value="2023" name="year" id="year" min="2017"
+						max="2033"> <label>학기</label> <select name="semester"
+						id="semester">
 						<option value="1">1학기</option>
 						<option value="2">2학기</option>
 					</select> <label>개설학과</label> <select name="dept_id">
@@ -57,8 +70,8 @@
 					</select>
 
 					<!-- 강의 검색 -->
-					<label>강의명</label>
-					 <input type="text" name="lecture_name" list="lecture_name">
+					<label>강의명</label> <input type="text" name="lecture_name"
+						list="lecture_name">
 					<datalist id="lecture_name">
 						<option value="데이터통신"></option>
 						<option value="딥러닝의 기초"></option>
@@ -164,28 +177,38 @@
 						</tr>
 					</thead>
 					<tbody>
-					<c:choose>
-					<c:when test="${empty subjectList}">
-						<h1>검색된 내용이 없습니다.</h1>
-						</c:when>
-						<c:otherwise>
-						<c:forEach var="subject" items="${subjectList}">
-                <tr>
-                    <td>${subject.subYear}-${subject.semester}학기</td>
-                    <td>${subject.collegeName}</td>
-                    <td>${subject.departmentName}</td>
-                    <td>${subject.haksuNum}</td>
-                    <td>${subject.type}</td>
-                    <td>${subject.lectureName}</td>
-                    <td>${subject.professorName}</td>
-                    <td>${subject.grades}</td>
-                    <td>${subject.numOfStudent}</td>
-                    <td>${subject.capacity}</td>
-                    <td>조회</td>
-                </tr>
-            </c:forEach>
-            </c:otherwise>
-            </c:choose>
+						<c:choose>
+							<c:when test="${empty subjectList}">
+								<h1>검색된 내용이 없습니다.</h1>
+							</c:when>
+							<c:otherwise>
+								<c:forEach var="subject" items="${subjectList}">
+									<tr>
+										<td>${subject.subYear}-${subject.semester}학기</td>
+										<td>${subject.collegeName}</td>
+										<td>${subject.departmentName}</td>
+										<td>${subject.haksuNum}</td>
+										<td>${subject.type}</td>
+										<td>${subject.lectureName}</td>
+										<td>${subject.professorName}</td>
+										<td>${subject.grades}</td>
+										<td>${subject.numOfStudent}</td>
+										<td>${subject.capacity}</td>
+										<td>
+											<form class="hidden-form"
+												action="${pageContext.request.contextPath}/subject/details"
+												method="get">
+												<input type="hidden" name="haksuNum"
+													value="${subject.haksuNum}"> <a class="link-style"
+													href="#" target="_blank"
+													onclick="this.parentNode.submit();">조회</a> <input
+													type="submit" class="hidden-button" value="Submit">
+											</form>
+										</td>
+									</tr>
+								</c:forEach>
+							</c:otherwise>
+						</c:choose>
 					</tbody>
 				</table>
 			</div>
@@ -194,10 +217,11 @@
 					<c:choose>
 						<c:when test="${i == currentPage}">
 							<span class="current-page">${i}</span>
-							</c:when>
-							<c:otherwise>
-								<span><a href="${pageContext.request.contextPath}/subject/subject?page=${i}">${i}</a></span>
-							</c:otherwise>
+						</c:when>
+						<c:otherwise>
+							<span><a
+								href="${pageContext.request.contextPath}/subject/subject?page=${i}">${i}</a></span>
+						</c:otherwise>
 					</c:choose>
 				</c:forEach>
 			</div>
