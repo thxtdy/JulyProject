@@ -17,8 +17,8 @@ import com.uni.system.utils.DBUtil;
 public class StudentRepositoryImpl implements StudentRepository{
 	
 	Query query;
-	private String STUDENT_INFO = "SELECT s.*, c.name as college, d.name as department FROM college_tb as c LEFT JOIN department_tb AS d ON c.id = d.college_id LEFT JOIN student_tb as s on s.dept_id = d.id where s.id = ? ";
-	private String CHANGE_PASSWORD = " UPDATE user_tb SET password = ? WHERE id = ? ";
+	private String STUDENT_INFO = " SELECT s.*, c.name as college, d.name as department FROM college_tb as c LEFT JOIN department_tb AS d ON c.id = d.college_id LEFT JOIN student_tb as s on s.dept_id = d.id where s.id = ? " ;
+	private String CHANGE_PASSWORD = " UPDATE user_tb SET password = ? WHERE id = ? " ;
 	private String UPDATE_ADDRESS = " update student_tb set address = ? where id = ? " ;
 	
 	@Override

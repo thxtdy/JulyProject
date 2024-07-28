@@ -52,8 +52,11 @@ public class InfoController extends HttpServlet {
 			System.out.println("업데이트스튜던트");
 			request.getRequestDispatcher("/WEB-INF/views/user/updatestudent.jsp").forward(request, response);
 			break;
+		case "/updatestaff":
+			System.out.println("업데이트스태프");
+			request.getRequestDispatcher("/WEB-INF/views/user/updatestaff.jsp").forward(request, response);
+			break;
 		case "/student":
-			System.out.println("Student");
 			showStudentInfo(request, response);
 			break;
 		case "/studentPassword":
@@ -83,6 +86,36 @@ public class InfoController extends HttpServlet {
 
 		
 
+	private void updateStudentInfo(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		
+		String password = request.getParameter("password");
+		String email = request.getParameter("email");
+		String address = request.getParameter("address");
+		String tel = request.getParameter("tel");
+		System.out.println("password : " + password);
+		System.out.println("email : " + email);
+		System.out.println("address : " + address);
+		System.out.println("tel : " + tel);
+		HttpSession session = request.getSession();
+		UserDTO principal = (UserDTO) session.getAttribute("principal");
+		String checkPassword = userRepository.checkPassword(principal.getId());
+		System.out.println(" checkpassword : "   + checkPassword);
+		System.out.println("아이디" + principal.getId());
+		System.out.println(" principal.getUserRole() : "   + principal.getUserRole());
+		
+		if (password != null && password.equals(checkPassword)) {
+			// 업데이트 실행
+			if(email != null && address != null && tel != null) {
+				userRepository.updateInfo(principal.getId(), address, tel, email, principal.getUserRole());
+			}
+		} else {
+			
+			
+		}
+		
+
+	}
+	
 	private void showProfessorInfo(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		HttpSession session = request.getSession();
 		UserDTO dto = (UserDTO) session.getAttribute("principal");
@@ -139,11 +172,19 @@ public class InfoController extends HttpServlet {
 		case "/studentPassword" :
 			changePassword(request, response);
 			break;
+		case "/updatestaff" :
+			updateStudentInfo(request, response);
+			response.sendRedirect(request.getContextPath() + "/info/staff");
+			break;
 		case "/staffPassword" :
 			changePassword(request, response);
 			break;
 		case "/professorPassword":
 			changePassword(request, response);
+		case "/updatestudent":
+			updateStudentInfo(request, response);
+			response.sendRedirect(request.getContextPath() + "/info/student");
+			break;
 		default:
 			break;
 		}
