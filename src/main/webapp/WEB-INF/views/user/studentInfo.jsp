@@ -8,6 +8,8 @@
 request.getAttribute("principal");
 session.getAttribute("studentInfo");
 %>
+
+
 <h1>내 정보 조회</h1>
 <div class="line">
 	<table class="idtable" border="1">
@@ -17,6 +19,8 @@ session.getAttribute("studentInfo");
 			<col class="col3">
 			<col class="col4">
 		</colgroup>
+		
+		
 		<tbody>
 			<tr>
 				<th>학번</th>
@@ -77,10 +81,14 @@ session.getAttribute("studentInfo");
 <%@ include file="/WEB-INF/views/layout/footer.jsp"%>
 
 
+<<<<<<< HEAD
 =======
 	<button  onclick="location.href='studentMyInfoUpdate.jsp';"  type="button">수정하기</button>
 	</div>
 	
 >>>>>>> 79ce08346e3ab2a7a4170cc70a269c795c1c2dc8
+=======
+
+>>>>>>> 78bb6702dcfb709d63d2560c6a4be4249d63c2b9
 </body>
 </html>

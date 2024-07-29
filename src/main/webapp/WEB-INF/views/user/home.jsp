@@ -3,9 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
-<%-- <%
-request.getAttribute("principal");
-%> --%>
+<% request.getAttribute("principal");
+ %>
 	<div class="background">
 	<img alt="메인이미지" src="${pageContext.request.contextPath}/resources/img/mainBackground.jpg">
 	</div>

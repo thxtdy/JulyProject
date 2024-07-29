@@ -45,6 +45,7 @@ session.getAttribute("professorInfo");
 		</tbody>
 	</table>
 	<table class="infotable">
+		<form action="${pageContext.request.contextPath}/info/updateprofessor" method="get">
 		<colgroup>
 			<col class="col1">
 			<col class="col2">
@@ -72,7 +73,7 @@ session.getAttribute("professorInfo");
 			</tr>
 		</tbody>
 	</table>
-	<button type="button">수정하기</button>
+	<button type="submit">수정하기</button>
 </div>
 	
 	

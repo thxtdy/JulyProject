@@ -2,6 +2,8 @@
 <%@ include file="/WEB-INF/views/layout/header.jsp"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@page import="com.uni.system.repository.model.Staff"%>
+
 <%
 session.getAttribute("principal");
 session.getAttribute("staffInfo");
@@ -45,7 +47,6 @@ session.getAttribute("staffInfo");
 		</tbody>
 	</table>
 	<table class="infotable" border="1">
-		<form action="${pageContext.request.contextPath}/info/updatestaff" method="get">
 		<colgroup>
 			<col class="col1">
 			<col class="col2">
@@ -75,6 +76,37 @@ session.getAttribute("staffInfo");
 	</table>
 	<button type="submit">수정하기</button>
 </div>
+
+<form action="${pageContext.request.contextPath}/info/updatestaff"
+		method="post">
+		<table class="infotable">
+			<colgroup>
+				<col class="col1">
+				<col class="col2">
+				<col class="col3">
+				<col class="col4">
+			</colgroup>
+			<tbody>
+				<tr>
+					<td><label for="address">주소:</label></td>
+					<td><input type="text" id="address" name="address"
+						value="${staffInfo.address}"></td>
+
+					<td><label for="tel">전화번호</label></td>
+					<td><input type="text" id="tel" name="tel"
+						value="${staffInfo.tel}"></td>
+				</tr>
+				<tr>
+					<td><label for="email">이메일</label></td>
+					<td><input type="text" id="email" name="email"
+						value="${staffInfo.email}"></td>
+					<td><label for="password">비밀번호 확인</label></td>
+					<td><input type="password" id="password" name="password"></td>
+				</tr>
+			</tbody>
+		</table>
+		<button type="submit">수정하기</button>
+	</form>
 	
 	
 </body>
