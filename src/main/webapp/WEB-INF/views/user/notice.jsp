@@ -1,14 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ include file="/WEB-INF/views/layout/header.jsp"%>
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/notice.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/notice.css">
 </head>
 <body>
 	<div class="d-flex">
-		<div class="d-flex justify-content-center align-items-start"
-			style="min-width: 100em;">
+		<div class="d-flex justify-content-center align-items-start" style="min-width: 100em;">
 			<div class="sub-menu">
 				<div class="sub-menu-top">
 					<h3>학사 정보</h3>
@@ -38,9 +35,7 @@
 						<div class="search-window">
 							<form action="">
 								<div class="search-wrap">
-									<label for="search" class="blind">공지사항 내용 검색</label> <input
-										id="search" type="search" name="" placeholder="검색어를 입력해주세요."
-										value="">
+									<label for="search" class="blind">공지사항 내용 검색</label> <input id="search" type="search" name="" placeholder="검색어를 입력해주세요." value="">
 									<button type="submit" class="btn btn-color">검색</button>
 								</div>
 							</form>
@@ -112,7 +107,7 @@
 	</div>
 
 
-<!-- 교직원 용 !  -->
+	<!-- 교직원 용 !  -->
 	<c:choose>
 		<c:when test="${principal.userRole.equals(\"professor\")}">
 			<h1>-- 교직원 접속 시 --</h1>
@@ -149,9 +144,7 @@
 							<div class="search-window">
 								<form action="">
 									<div class="search-wrap">
-										<label for="search" class="blind">공지사항 내용 검색</label> <input
-											id="search" type="search" name="search"
-											placeholder="검색어를 입력해주세요." value="">
+										<label for="search" class="blind">공지사항 내용 검색</label> <input id="search" type="search" name="search" placeholder="검색어를 입력해주세요." value="">
 										<button type="submit" class="btn btn-color">검색</button>
 									</div>
 								</form>
