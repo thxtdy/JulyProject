@@ -75,20 +75,13 @@ session.getAttribute("studentInfo");
 			</tr>
 		</tbody>
 	</table>
-<<<<<<< HEAD
 	<button type="submit">수정하기</button>
 </div>
 <%@ include file="/WEB-INF/views/layout/footer.jsp"%>
 
 
-<<<<<<< HEAD
-=======
-	<button  onclick="location.href='studentMyInfoUpdate.jsp';"  type="button">수정하기</button>
 	</div>
 	
->>>>>>> 79ce08346e3ab2a7a4170cc70a269c795c1c2dc8
-=======
 
->>>>>>> 78bb6702dcfb709d63d2560c6a4be4249d63c2b9
 </body>
 </html>

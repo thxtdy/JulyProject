@@ -16,10 +16,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
-<<<<<<< HEAD
-
-=======
->>>>>>> e30466d3421e84b06593aa77e78570f4f922f957
 @WebServlet("/professor/*")
 public class ProfessorController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -109,8 +105,6 @@ public class ProfessorController extends HttpServlet {
 		request.getRequestDispatcher("/WEB-INF/views/user/professorClass.jsp").forward(request, response);
 
 	}
-<<<<<<< HEAD
-=======
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -133,7 +127,6 @@ public class ProfessorController extends HttpServlet {
 	 * @throws IOException
 	 * @throws ServletException
 	 */
->>>>>>> e30466d3421e84b06593aa77e78570f4f922f957
 
 	private void evaluationStudent(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		

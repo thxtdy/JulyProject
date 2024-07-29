@@ -1,16 +1,9 @@
 package com.uni.system.controller;
 
 import java.io.IOException;
-import java.util.List;
 
-import com.uni.system.repository.interfaces.NoticeRepository;
-import com.uni.system.repository.interfaces.ScheduleRepository;
 import com.uni.system.repository.interfaces.UserRepository;
-import com.uni.system.repository.model.NoticeList;
-import com.uni.system.repository.model.Schedule;
 import com.uni.system.repository.model.UserDTO;
-import com.uni.system.service.NoticeRepositoryImpl;
-import com.uni.system.service.ScheduleRepositoryImpl;
 import com.uni.system.service.UserRepositoryImpl;
 
 import jakarta.servlet.ServletException;
@@ -24,14 +17,11 @@ import jakarta.servlet.http.HttpSession;
 @WebServlet("/user/*")
 public class UserController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private UserRepository userRepository;
-	private NoticeRepository noticeRepository;
-	private ScheduleRepository scheduleRepository;
+	UserRepository userRepository;
 
 	public UserController() {
 		userRepository = new UserRepositoryImpl();
-		noticeRepository = new NoticeRepositoryImpl();
-		scheduleRepository = new ScheduleRepositoryImpl();
+
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -52,7 +42,7 @@ public class UserController extends HttpServlet {
 			handleLogout(request, response);
 			break;
 		case "/home":
-			viewNotice(request, response);
+			request.getRequestDispatcher("/WEB-INF/views/user/home.jsp").forward(request, response);
 			break;
 		case "/employee":
 			request.getRequestDispatcher("/WEB-INF/views/user/employeeInfo.jsp").forward(request, response);
@@ -62,21 +52,6 @@ public class UserController extends HttpServlet {
 			break;
 		}
 	}
-		
-
-	private void viewNotice(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<NoticeList> noticeList = noticeRepository.selectAllTable();
-		List<Schedule> schedulelist = scheduleRepository.selectAllscheduleTable();
-		System.out.println(noticeList);
-		System.out.println(schedulelist);
-		
-		request.setAttribute("noticeList", noticeList);
-		request.setAttribute("schedulelist", schedulelist);
-		request.getRequestDispatcher("/WEB-INF/views/user/home.jsp").forward(request, response);
-
-		
-		
-	}
 
 	private void handleLogout(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		HttpSession session = request.getSession();
@@ -85,7 +60,6 @@ public class UserController extends HttpServlet {
 		response.sendRedirect(request.getContextPath() + "/index.jsp");
 
 	}
-	
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -111,9 +85,11 @@ public class UserController extends HttpServlet {
 		System.out.println(userId);
 		String password = request.getParameter("password"); // 123123
 
-//		Cookie cookie = new Cookie("id", String.valueOf(userId));
-//		cookie.setMaxAge(3600);
-//		response.addCookie(cookie);
+		Cookie cookie = new Cookie("id", String.valueOf(userId));
+		cookie.setMaxAge(3600);
+		response.addCookie(cookie);
+		
+		
 		
 		// userRepository의 getUserInfoById(유저 정보 끌고 오기)를 사용하여 principal 이라는 곳에 담기.
 		UserDTO principal = userRepository.getUserInfoById(userId);

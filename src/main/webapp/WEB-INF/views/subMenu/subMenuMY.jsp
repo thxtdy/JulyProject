@@ -4,7 +4,6 @@
 </head>
 <body>
 	<div class="alltable">
-<<<<<<< HEAD
 	<div class="sub-bar">
 		<div class="sub-bar-top">
 			<table class="sub-bar-list" border="1">
@@ -38,13 +37,12 @@
 					</tr>
 				</tbody>
 			</table>
-=======
 		<div class="sub-bar">
 			<div class="sub-bar-top">
 				<table class="sub-bar-list" border="1">
 					<tbody>
 						<tr>
-							<td><a href="${pageContext.request.contextPath}/info/student" class="seleted-menu">내 정보 조회</a></td>
+					<%-- 		<td><a href="${pageContext.request.contextPath}/info/student" class="seleted-menu">내 정보 조회</a></td>
 						</tr>
 						<tr>
 							<td><a href="${pageContext.request.contextPath}/info/studentPassword">비밀번호 변경</a></td>
@@ -62,11 +60,10 @@
 						</tr>
 						<tr>
 							<td><a href="${pageContext.request.contextPath}/tuition/payment">등록금 납부 고지서</a></td>
-						</tr>
+						</tr> --%>
 					</tbody>
 				</table>
 			</div>
->>>>>>> d9cd0bee4e936fb6eeb81ee19e72b5175d207834
 		</div>
 	</div>
 </body>
