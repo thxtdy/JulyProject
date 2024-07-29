@@ -24,6 +24,7 @@ public interface ProfessorRepository {
 	List<StuSub> viewMyStudent(int subjectId); // 내 강의를 신청한 학생들 명단 조회
 	List<StuSub> viewMyStudentByUserId(int userId);
 	void evaluationStudent(int absent, int lateness, int homework, int midExam, int finalExam, int converted, int studentId, int subjectId); // 학생 평가해버리기
+	void addGradeByStudent(String grade, int userId);
 	
 	List<Evaluation> viewEvaluationById(int id); // 내 강의 평가 (교수 ID)
 	

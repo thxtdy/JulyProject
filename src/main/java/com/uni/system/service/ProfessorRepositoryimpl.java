@@ -29,9 +29,10 @@ public class ProfessorRepositoryimpl implements ProfessorRepository {
 	final String GET_MY_STUDENT_DETAIL_BY_USERID = "SELECT sub.id, sub.student_id,sub.subject_id,stu.name AS student_name, dept.name AS department_name, detail.absent, detail.lateness, detail.homework, detail.mid_exam, detail.final_exam, detail.converted_mark FROM stu_sub_tb AS sub LEFT JOIN stu_sub_detail_tb AS detail ON sub.id = detail.id LEFT JOIN student_tb AS stu ON sub.student_id = stu.id LEFT JOIN department_tb AS dept ON stu.dept_id = dept.id WHERE sub.student_id = ? ";
 	// 교수가 학생의 점수를 기입하는 쿼리입니다.
 	final String EVALUATION_STUDENT = " INSERT INTO stu_sub_detail_tb (id, student_id, subject_id, absent, lateness, homework, mid_exam, final_exam, converted_mark) SELECT sub.id, sub.student_id, sub.subject_id, ?, ?, ?, ?, ?, ? FROM stu_sub_tb AS sub WHERE sub.student_id = ? AND sub.subject_id = ? ";
+	// 교수가 학생의 학점을 관리하는 쿼리입니다.
+	final String EDIT_STUDENT_GRADE = " UPDATE stu_sub_tb as sub SET sub.grade = ? WHERE sub.student_id = (SELECT student_id FROM stu_sub_detail_tb WHERE student_id = ?) ";
 	
 	@Override
-
 	public Professor viewMyInfo(int userId) {
 		Professor professor = null;
 		try (Connection conn = DBUtil.getConnection()) {
@@ -92,10 +93,10 @@ public class ProfessorRepositoryimpl implements ProfessorRepository {
 	
 	@Override
 	public void evaluationStudent(int absent, int lateness, int homework, int midExam, int finalExam, int converted, int studentId, int subjectId) {
-		System.out.println("");
 		try (Connection conn = DBUtil.getConnection()){
 			conn.setAutoCommit(false);
-			try (PreparedStatement pstmt = conn.prepareStatement(GET_MY_STUDENT_DETAIL)){
+			try (PreparedStatement pstmt = conn.prepareStatement(EVALUATION_STUDENT)){
+				System.out.println("absend : " + absent + " lateness : " + lateness + " homework : " + homework + " midExam : " + midExam + " finalExam : " + finalExam  + " converted : " + converted + " studentId  : " + studentId  + " subjectId : " + subjectId);
 				pstmt.setInt(1, absent);
 				pstmt.setInt(2, lateness);
 				pstmt.setInt(3, homework);
@@ -109,12 +110,33 @@ public class ProfessorRepositoryimpl implements ProfessorRepository {
 				conn.commit();
 				
 			} catch (Exception e) {
+				conn.rollback();
 				e.printStackTrace();
 			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@Override
+	public void addGradeByStudent(String grade, int userId) {
+		try (Connection conn = DBUtil.getConnection()){
+			conn.setAutoCommit(false);
+			try (PreparedStatement pstmt = conn.prepareStatement(EDIT_STUDENT_GRADE)){
+				pstmt.setString(1, grade);
+				pstmt.setInt(2, userId);
+			    int rowCount = pstmt.executeUpdate();
+				conn.commit();
+				System.out.println("학점 기입 쿼리 확인용 rowCount : " + rowCount);
+			} catch (Exception e) {
+				conn.rollback();
+			
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	@Override
