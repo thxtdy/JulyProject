@@ -1,0 +1,17 @@
+@charset "UTF-8";
+
+.link-style {
+        color: blue;
+        text-decoration: underline;
+        cursor: pointer;
+        display: inline-block;
+        text-decoration: none;
+    }
+
+    .hidden-form {
+        display: inline;
+    }
+
+    .hidden-button {
+        display: none;
+    }

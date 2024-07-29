@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.uni.system.repository.interfaces.SugangRepository;
+import com.uni.system.repository.model.PreStuSub;
 import com.uni.system.repository.model.SugangColumn;
 import com.uni.system.repository.model.SugangDTO;
 import com.uni.system.repository.model.SugangPreAppList;
@@ -78,7 +79,7 @@ public class SugangRepositoryImpl implements SugangRepository{
 	@Override
 	public List<SugangColumn> viewSugangColumn(int pageSize, int offset) {
 		List<SugangColumn> sugangList = new ArrayList<SugangColumn>();
-		String sql = " SELECT coll.name AS college_name, dept.name AS dept_name, sub.id AS subject_id, sub.type, sub.name AS subject_name, pro.name AS professor_name, sub.grades, sub.sub_day,sub.start_time,sub.end_time,sub.room_id ,sub.num_of_student, sub.capacity "
+		String sql = " SELECT dept.id AS dept_id, coll.name AS college_name, dept.name AS dept_name, sub.id AS subject_id, sub.type, sub.name AS subject_name, pro.name AS professor_name, sub.grades, sub.sub_day,sub.start_time,sub.end_time,sub.room_id ,sub.num_of_student, sub.capacity "
 				+ "FROM subject_tb as sub "
 				+ "LEFT JOIN professor_tb AS pro ON pro.id = sub.professor_id "
 				+ "LEFT JOIN department_tb AS dept ON dept.id = sub.dept_id "
@@ -104,6 +105,7 @@ public class SugangRepositoryImpl implements SugangRepository{
 												.roomId(rs.getString("room_id"))
 												.numOfStudent(rs.getInt("num_of_student"))
 												.capacity(rs.getInt("capacity"))
+												.deptId(rs.getInt("dept_id"))
 												.build();
 											sugangList.add(sugangDTO);
 				}
@@ -679,10 +681,11 @@ public class SugangRepositoryImpl implements SugangRepository{
 				conn.commit();
 			} catch (Exception e) {
 				e.printStackTrace();
-				conn.commit();
+				conn.rollback();
 			}
 			
 		} catch (Exception e) {
+			
 			e.printStackTrace();
 		}
 	}
@@ -707,6 +710,246 @@ public class SugangRepositoryImpl implements SugangRepository{
 			e.printStackTrace();
 		}
 		
+	}
+
+	@Override
+	public List<SugangPreAppList> viewSelectedAdd(int studentId) {
+		List<SugangPreAppList> sugangList = new ArrayList<SugangPreAppList>();
+		String query = " SELECT sub.id AS sub_id, sub.name AS sub_name  , pro.name AS pro_name, sub.grades , sub.sub_day, sub.start_time,sub.end_time,sub.room_id, sub.num_of_student, sub.capacity "
+				+ "FROM stu_sub_tb AS stu "
+				+ "LEFT JOIN subject_tb AS sub on stu.subject_id = sub.id "
+				+ "LEFT JOIN professor_tb AS pro on sub.professor_id = pro.id "
+				+ "WHERE stu.student_id = ? " ;
+		try (Connection conn= DBUtil.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(query)){
+				pstmt.setInt(1, studentId);
+				ResultSet rs = pstmt.executeQuery();
+				while(rs.next()) {
+					SugangPreAppList sugangDTO = SugangPreAppList.builder()
+							.haksuNum(rs.getInt("sub_id"))
+							.lectureName(rs.getString("sub_name"))
+							.professorName(rs.getString("pro_name"))
+							.grades(rs.getInt("grades"))
+							.subDay(rs.getString("sub_day"))
+							.startTime(rs.getInt("start_time"))
+							.endTime(rs.getInt("end_time"))
+							.roomId(rs.getString("room_id"))
+							.numOfStudent(rs.getInt("num_of_student"))
+							.capacity(rs.getInt("capacity"))
+							.build();
+					sugangList.add(sugangDTO);
+				}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return sugangList;
+	}
+
+	@Override
+	public void deleteAdd(int haksuNum) {
+		String query = " DELETE FROM stu_sub_tb WHERE subject_id = ? " ;
+		try (Connection conn = DBUtil.getConnection()){
+			conn.setAutoCommit(false);
+			try (PreparedStatement pstmt = conn.prepareStatement(query)){
+				pstmt.setInt(1, haksuNum);
+				pstmt.executeUpdate();
+				conn.commit();
+			} catch (Exception e) {
+				e.printStackTrace();
+				conn.rollback();
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public int sumGrade(int principal) {
+		int sum = 0;
+		String query = " SELECT sum(grades) "
+				+ "FROM stu_sub_tb AS stu "
+				+ "LEFT JOIN subject_tb AS sub on stu.subject_id = sub.id "
+				+ "LEFT JOIN professor_tb AS pro on sub.professor_id = pro.id "
+				+ "WHERE stu.student_id = ? " ;
+		try (Connection conn= DBUtil.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(query)){
+			pstmt.setInt(1, principal);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				sum = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return sum;
+	}
+
+	@Override
+	public int sumPreGrade(int principal) {
+		int sum = 0;
+		String query = " SELECT sum(grades) "
+				+ "FROM pre_stu_sub_tb AS pre "
+				+ "LEFT JOIN subject_tb AS sub ON pre.subject_id = sub.id "
+				+ "LEFT JOIN student_tb AS stu ON pre.student_id = stu.id "
+				+ "WHERE stu.id = ? " ;
+		try (Connection conn= DBUtil.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(query)){
+			pstmt.setInt(1, principal);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				sum = rs.getInt(1);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return sum;
+	}
+
+	@Override
+	public void plusPreNumOfStudent(int numOfStudent, int haksuNum) {
+		String query = "UPDATE subject_tb "
+				+ "SET num_of_student = ? "
+				+ "WHERE id = ? " ;
+		try (Connection conn = DBUtil.getConnection()){
+			try(PreparedStatement pstmt = conn.prepareStatement(query)) {
+				conn.setAutoCommit(false);
+				pstmt.setInt(1,numOfStudent);
+				pstmt.setInt(2, haksuNum);
+				
+				pstmt.executeUpdate();
+				
+				conn.commit();
+			} catch (Exception e) {
+				e.printStackTrace();
+				conn.rollback();
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
+	@Override
+	public void minusPreNumOfStudent(int haksuNum, int numOfStudent) {
+		String query = " UPDATE subject_tb "
+				+ "SET num_of_student = ? "
+				+ "WHERE id = ? " ;
+		try (Connection conn = DBUtil.getConnection()){
+			conn.setAutoCommit(false);
+			try(PreparedStatement pstmt = conn.prepareStatement(query)) {
+				if(numOfStudent < 0) {
+					numOfStudent = 0;
+				} else {
+				pstmt.setInt(1, numOfStudent);
+				pstmt.setInt(2, haksuNum);
+				pstmt.executeUpdate();
+				
+				conn.commit();
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				conn.rollback();
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	@Override
+	public int protectDuplicatedPreAppPrinciapl(int principalId) {
+		int id = 0;
+		String query = " SELECT * "
+				+ "FROM pre_stu_sub_tb "
+				+ "WHERE student_id = ? " ; 
+		try (Connection conn = DBUtil.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(query)){
+			pstmt.setInt(1, principalId);
+			ResultSet rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				id = rs.getInt("student_id");
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		 
+		return id;
+	}
+
+	@Override
+	public int protectDuplicatedPreAppHaksuNum(int haksuNum) {
+		int subjectId = 0;
+		String query = " SELECT * "
+				+ "FROM pre_stu_sub_tb "
+				+ "WHERE subject_id = ? " ; 
+		try (Connection conn = DBUtil.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(query)){
+			pstmt.setInt(1, haksuNum);
+			ResultSet rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				subjectId = rs.getInt("subject_id");
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		 
+		return subjectId;
+	}
+
+	@Override
+	public List<PreStuSub> duplicateCheck() {
+		List<PreStuSub> pss = new ArrayList<>();
+		String query = " SELECT * "
+				+ "FROM pre_stu_sub_tb " ;
+			
+		try (Connection conn = DBUtil.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(query)){
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				PreStuSub ps = PreStuSub.builder()
+						.studentId(rs.getInt("student_id"))
+						.subjectId(rs.getInt("subject_id"))
+						.build();
+						pss.add(ps);
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		 
+		return pss;
+	}
+
+	@Override
+	public int getDeptId(int principal) {
+		int deptId = 0;
+		String query =  " SELECT dept_id FROM student_tb WHERE id = ? ";
+		try (Connection conn = DBUtil.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(query)){
+				pstmt.setInt(1, principal);
+				ResultSet rs = pstmt.executeQuery();
+				if(rs.next()) {
+					deptId = rs.getInt("dept_id");
+				}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return deptId;
 	}
 
 

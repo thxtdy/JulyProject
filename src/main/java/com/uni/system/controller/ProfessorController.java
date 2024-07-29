@@ -16,7 +16,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> e30466d3421e84b06593aa77e78570f4f922f957
 @WebServlet("/professor/*")
 public class ProfessorController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -28,12 +31,8 @@ public class ProfessorController extends HttpServlet {
 		professorRepository = new ProfessorRepositoryimpl();
 	}
 
+
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
-	}
-
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		String action = request.getPathInfo();
 		System.out.println("professor my : " + action);
@@ -110,6 +109,31 @@ public class ProfessorController extends HttpServlet {
 		request.getRequestDispatcher("/WEB-INF/views/user/professorClass.jsp").forward(request, response);
 
 	}
+<<<<<<< HEAD
+=======
+	
+	@Override
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String action = request.getPathInfo();
+		switch (action) {
+		case "/evaluationStudent":
+			evaluationStudent(request, response);
+			break;
+
+		default:
+			break;
+		}
+		
+	}
+	
+	/**
+	 * 처음 학생의 세부 정보(결석, 지각, 과제, 중간, 기말, 합산)
+	 * @param request
+	 * @param response
+	 * @throws IOException
+	 * @throws ServletException
+	 */
+>>>>>>> e30466d3421e84b06593aa77e78570f4f922f957
 
 	private void evaluationStudent(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		
@@ -121,10 +145,16 @@ public class ProfessorController extends HttpServlet {
 		int converted = Integer.parseInt(request.getParameter("converted"));
 		String grade = request.getParameter("grade");
 		int studentId = Integer.parseInt(request.getParameter("studentId"));
+		
 		System.out.println("evaluation에서 찍는 학생 ID : " + studentId);
+		
 		int subjectId = Integer.parseInt(request.getParameter("subjectId"));
+		
 		System.out.println("evaluation에서 찍는 강의 ID : " + subjectId);
+		
 		professorRepository.evaluationStudent(absent, lateness, homework, midExam, finalExam, converted, studentId, subjectId);
+		professorRepository.addGradeByStudent(grade, studentId);
+		
 		System.out.println("결석" + absent);
 		System.out.println("지각" + lateness);
 		System.out.println("과제" + homework);
@@ -132,7 +162,6 @@ public class ProfessorController extends HttpServlet {
 		System.out.println("기말" + finalExam);
 		System.out.println("합산" + converted);
 		System.out.println("학점" + grade);
-		
 		request.getRequestDispatcher("/WEB-INF/views/user/professorClass.jsp").forward(request, response);
 		
 	}
