@@ -146,8 +146,8 @@ public class ProfessorController extends HttpServlet {
 		
 		System.out.println("evaluation에서 찍는 강의 ID : " + subjectId);
 		
-		professorRepository.addGradeByStudent(grade, studentId);
 		professorRepository.evaluationStudent(absent, lateness, homework, midExam, finalExam, converted, studentId, subjectId);
+		professorRepository.addGradeByStudent(grade, studentId);
 		
 		System.out.println("결석" + absent);
 		System.out.println("지각" + lateness);
