@@ -15,7 +15,7 @@
 				<tr>
 					<td><label for="birthDate">생년월일</label></td>
 					<td><input type="date" name="birthDate" id="birthDate" class="input--box"></td>
-				</tr>
+			</tr>
 				<tr>
 					<td style="padding-top: 7px">
 					<label>성별</label></td>

@@ -84,9 +84,6 @@ public class InfoController extends HttpServlet {
 
 	}
 
-<<<<<<< HEAD
-		
-
 	private void updateStudentInfo(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		
 		String password = request.getParameter("password");
@@ -118,10 +115,6 @@ public class InfoController extends HttpServlet {
 	}
 	
 	private void showProfessorInfo(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
-=======
-	private void showProfessorInfo(HttpServletRequest request, HttpServletResponse response)
-			throws IOException, ServletException {
->>>>>>> 79ce08346e3ab2a7a4170cc70a269c795c1c2dc8
 		HttpSession session = request.getSession();
 		UserDTO dto = (UserDTO) session.getAttribute("principal");
 
@@ -177,15 +170,11 @@ public class InfoController extends HttpServlet {
 		case "/studentPassword":
 			changePassword(request, response);
 			break;
-<<<<<<< HEAD
-		case "/staffPassword":
-=======
 		case "/updatestaff" :
 			updateStudentInfo(request, response);
 			response.sendRedirect(request.getContextPath() + "/info/staff");
 			break;
 		case "/staffPassword" :
->>>>>>> 78bb6702dcfb709d63d2560c6a4be4249d63c2b9
 			changePassword(request, response);
 			break;
 		case "/professorPassword":

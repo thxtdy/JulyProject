@@ -10,7 +10,6 @@
 	href="${pageContext.request.contextPath}/resources/css/header.css">
 </head>
 <body>
-<<<<<<< HEAD
 <%
 request.getAttribute("principal");
 %>
@@ -23,7 +22,6 @@ request.getAttribute("principal");
 <li class="header_top_info_li"><a href="/six/index.jsp">로그아웃</a></li>
 </ul>
 </div>
-=======
 	<%
 	request.getAttribute("principal");
 	%>
@@ -115,7 +113,6 @@ request.getAttribute("principal");
 						<li class="header_menu_bar_li"><a
 							href="${pageContext.request.contextPath}/notice">학사정보</a>
 					</ul>
->>>>>>> 79ce08346e3ab2a7a4170cc70a269c795c1c2dc8
 
 <nav class="header_menu">
 
