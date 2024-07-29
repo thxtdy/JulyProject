@@ -86,7 +86,8 @@
 										<td>${sugangColumnList.numOfStudent}</td>
 										<td>${sugangColumnList.capacity}</td>
 										<td class="selected_sugang_btn">
-										<c:set var="isDuplicate" value="false" />
+										<c:set var="isDuplicate"
+												value="false" />
 												 <c:forEach var="duplicateCheck"
 												items="${duplicateCheck}">
 												<c:if
@@ -113,7 +114,8 @@
 															value="${sugangColumnList.numOfStudent}">
 													</form>
 												</c:otherwise>
-											</c:choose></td>
+											</c:choose>
+											</td>
 									</tr>
 								</c:forEach>
 							</c:otherwise>
