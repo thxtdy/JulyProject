@@ -85,8 +85,8 @@
 											- ${sugangColumnList.endTime}:00 (${sugangColumnList.roomId})</td>
 										<td>${sugangColumnList.numOfStudent}</td>
 										<td>${sugangColumnList.capacity}</td>
-										<td class="selected_sugang_btn"><c:set var="isDuplicate"
-												value="false" />
+										<td class="selected_sugang_btn">
+										<c:set var="isDuplicate" value="false" />
 												 <c:forEach var="duplicateCheck"
 												items="${duplicateCheck}">
 												<c:if
