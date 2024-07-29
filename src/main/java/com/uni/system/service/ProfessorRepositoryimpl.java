@@ -12,9 +12,7 @@ import com.uni.system.repository.model.Notice;
 import com.uni.system.repository.model.Professor;
 import com.uni.system.repository.model.Schedule;
 import com.uni.system.repository.model.StuSub;
-import com.uni.system.repository.model.StuSubDetail;
 import com.uni.system.repository.model.Subject;
-import com.uni.system.repository.model.SugangColumn;
 import com.uni.system.utils.DBUtil;
 
 public class ProfessorRepositoryimpl implements ProfessorRepository {
