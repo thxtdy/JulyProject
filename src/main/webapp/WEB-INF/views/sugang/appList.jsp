@@ -52,6 +52,9 @@
 													<button type="button" onclick="alert('인원이 가득 찼습니다.')">신청
 														불가</button>
 												</c:when>
+												<c:when test="${sumOfGrades >= 17}">
+													<button type="button" onclick= "alert('수강 가능한 최대 학점이 넘었습니다.')">신청</button>
+												</c:when>
 												<c:otherwise>
 													<form
 														action="${pageContext.request.contextPath}/sugang/addSugang"
