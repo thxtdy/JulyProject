@@ -19,7 +19,6 @@
 						<td><a href="${pageContext.request.contextPath}/info/studentPassword">비밀번호 변경</a></td>
 					</tr>
 					<tr>
-						<tr>
 						<td><a href="${pageContext.request.contextPath}/break/send">휴학 신청</a>
 						</td>
 					</tr>

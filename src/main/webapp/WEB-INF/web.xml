@@ -59,4 +59,14 @@
     <servlet-name>ScheduleController</servlet-name>
     <url-pattern>/ScheduleController</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ScoreController</display-name>
+    <servlet-name>ScoreController</servlet-name>
+    <servlet-class>com.uni.system.controller.ScoreController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ScoreController</servlet-name>
+    <url-pattern>/ScoreController</url-pattern>
+  </servlet-mapping>
 </web-app>

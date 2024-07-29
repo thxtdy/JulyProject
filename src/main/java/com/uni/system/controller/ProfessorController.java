@@ -124,6 +124,7 @@ public class ProfessorController extends HttpServlet {
 		switch (action) {
 		case "/evaluationStudent":
 			evaluationStudent(request, response);
+			
 			break;
 
 		default:
@@ -131,7 +132,13 @@ public class ProfessorController extends HttpServlet {
 		}
 		
 	}
-
+	/**
+	 * 처음 학생의 세부 정보(결석, 지각, 과제, 중간, 기말, 합산)
+	 * @param request
+	 * @param response
+	 * @throws IOException
+	 * @throws ServletException
+	 */
 	private void evaluationStudent(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		
 		int absent = Integer.parseInt(request.getParameter("absent"));
@@ -142,10 +149,16 @@ public class ProfessorController extends HttpServlet {
 		int converted = Integer.parseInt(request.getParameter("converted"));
 		String grade = request.getParameter("grade");
 		int studentId = Integer.parseInt(request.getParameter("studentId"));
+		
 		System.out.println("evaluation에서 찍는 학생 ID : " + studentId);
+		
 		int subjectId = Integer.parseInt(request.getParameter("subjectId"));
+		
 		System.out.println("evaluation에서 찍는 강의 ID : " + subjectId);
+		
+		professorRepository.addGradeByStudent(grade, studentId);
 		professorRepository.evaluationStudent(absent, lateness, homework, midExam, finalExam, converted, studentId, subjectId);
+		
 		System.out.println("결석" + absent);
 		System.out.println("지각" + lateness);
 		System.out.println("과제" + homework);
@@ -153,7 +166,6 @@ public class ProfessorController extends HttpServlet {
 		System.out.println("기말" + finalExam);
 		System.out.println("합산" + converted);
 		System.out.println("학점" + grade);
-		
 		request.getRequestDispatcher("/WEB-INF/views/user/professorClass.jsp").forward(request, response);
 		
 	}
