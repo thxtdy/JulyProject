@@ -8,9 +8,9 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/hiddenATag.css">
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/subjectList.css">
-<link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/subMenu.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/subjectList.css">
 </head>
 <body>
 <%
@@ -27,7 +27,6 @@ session.getAttribute("pricipal");
 				<table class="sub_menu_table" border="1">
 					<tbody>
 						<tr>
-							<td><a href="${pageContext.request.contextPath}/subject/subject" class="selected_menu">전체 강의 조회</a></td>
 							<c:choose>
 								<c:when test="${principal.userRole.equals(\"professor\")}">
 									<td><a href="${pageContext.request.contextPath}/professor/myClass" class="selected_menu">내 강의 조회</a></td>

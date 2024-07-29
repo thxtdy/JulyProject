@@ -10,7 +10,6 @@
 <%
 	session.getAttribute("pricipal");
 %>
-	<div>
 		<div class="sub_menu">
 			<div class="sub_menu_top">
 				<h2>수업</h2>
