@@ -16,6 +16,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> d9cd0bee4e936fb6eeb81ee19e72b5175d207834
 @WebServlet("/professor/*")
 public class ProfessorController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -37,6 +41,10 @@ public class ProfessorController extends HttpServlet {
 		case "/myClass":
 			handleSubject(request, response);
 			break;
+<<<<<<< HEAD
+=======
+
+>>>>>>> d9cd0bee4e936fb6eeb81ee19e72b5175d207834
 			// 수강 신청한 학생 목록 보는 것입니다.
 		case "/myClassStudent":
 			handleMyStudent(request, response);
@@ -55,7 +63,10 @@ public class ProfessorController extends HttpServlet {
 		}
 	}
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> d9cd0bee4e936fb6eeb81ee19e72b5175d207834
 	/**
 	 * 학생 성적에 대한 상세 정보를 확인합니다
 	 * @param request
@@ -107,6 +118,7 @@ public class ProfessorController extends HttpServlet {
 
 	}
 
+<<<<<<< HEAD
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String action = request.getPathInfo();
@@ -129,6 +141,9 @@ public class ProfessorController extends HttpServlet {
 	 * @throws IOException
 	 * @throws ServletException
 	 */
+=======
+
+>>>>>>> d9cd0bee4e936fb6eeb81ee19e72b5175d207834
 	private void evaluationStudent(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		
 		int absent = Integer.parseInt(request.getParameter("absent"));

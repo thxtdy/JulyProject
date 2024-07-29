@@ -8,6 +8,7 @@ import java.util.List;
 
 import com.uni.system.repository.interfaces.SubjectRepository;
 import com.uni.system.repository.model.SubjectLectureList;
+import com.uni.system.repository.model.SugangDetail;
 import com.uni.system.utils.DBUtil;
 
 public class SubjectRepositoryImpl implements SubjectRepository {
@@ -319,6 +320,47 @@ public class SubjectRepositoryImpl implements SubjectRepository {
 		}
 		
 		return rowCount;
+	}
+
+	@Override
+	public SugangDetail viewSugangDetail(int subjectId) {
+		SugangDetail sugangDetail = null;
+		String query = " SELECT s.id AS sub_id, s.name AS sub_name, s.sub_year, s.semester, s.grades, s.type, s.sub_day, s.start_time, s.end_time , s.room_id,  u.c_name as c_name,u.d_name as d_name, p.name AS p_name, p.tel, p.email "
+				+ "FROM subject_tb AS s "
+				+ "JOIN "
+				+ "( "
+				+ "SELECT d.id AS id, d.name AS d_name, c.name AS c_name "
+				+ "FROM department_tb AS d JOIN college_tb AS c ON d.college_id = c.id) AS u ON s.dept_id = u.id "
+				+ "JOIN professor_tb AS p ON s.professor_id = p.id " 
+				+ "WHERE s.id = ? ";
+		try (Connection conn= DBUtil.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(query)){
+				pstmt.setInt(1, subjectId);
+				ResultSet rs = pstmt.executeQuery();
+				if(rs.next()) {
+					sugangDetail = SugangDetail.builder()
+								.subjectId(rs.getInt("sub_id"))
+								.subName(rs.getString("sub_name"))
+								.subYear(rs.getInt("sub_year"))
+								.semester(rs.getInt("semester"))
+								.grades(rs.getInt("grades"))
+								.type(rs.getString("type"))
+								.subDay(rs.getString("sub_Day"))
+								.startTime(rs.getInt("start_time"))
+								.endTime(rs.getInt("end_time"))
+								.roomId(rs.getString("room_id"))
+								.collegeName(rs.getString("c_name"))
+								.deptName(rs.getString("d_name"))
+								.professorName(rs.getString("p_name"))
+								.tel(rs.getString("tel"))
+								.email(rs.getString("email"))
+								.build();
+				}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return sugangDetail;
 	}
 	
 }
