@@ -7,12 +7,13 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
 @ToString
 @Builder
-public class PreStuSub {
+@AllArgsConstructor
+@NoArgsConstructor
+public class SugangStudentInfo {
+
 	
-	private int studentId;
-	private int subjectId;
+	private int id;
+	private int dept_id;
 }

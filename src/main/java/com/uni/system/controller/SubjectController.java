@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.uni.system.repository.interfaces.SubjectRepository;
 import com.uni.system.repository.model.SubjectLectureList;
+import com.uni.system.repository.model.SugangDetail;
 import com.uni.system.service.SubjectRepositoryImpl;
 
 import jakarta.servlet.ServletException;
@@ -34,12 +35,25 @@ public class SubjectController extends HttpServlet {
 		case "/list":
 			handleList(request, response);
 			break;
+		case "/details":
+			System.out.println("들어오긴해?");
+			viewDetails(request, response);
+			break;
+
 		default:
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			break;
 		}
 	}
 
+	private void viewDetails(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String haksuNumStr = request.getParameter("haksuNum");
+		int haksuNum = Integer.parseInt(haksuNumStr);
+		SugangDetail details= subjectRepository.viewSugangDetail(haksuNum);
+		
+		request.setAttribute("details", details);
+		request.getRequestDispatcher("/WEB-INF/views/sugang/sugangDetail.jsp").forward(request, response);
+	}
 
 	private void handleSubject(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		

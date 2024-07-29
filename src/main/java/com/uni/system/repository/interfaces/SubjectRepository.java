@@ -3,6 +3,7 @@ package com.uni.system.repository.interfaces;
 import java.util.List;
 
 import com.uni.system.repository.model.SubjectLectureList;
+import com.uni.system.repository.model.SugangDetail;
 
 public interface SubjectRepository {
 		
@@ -35,6 +36,8 @@ public interface SubjectRepository {
 	// 모두 선택시
 	int getBySemesterAndDeptAndNameAndTypeCount(int year, int semester, int deptId, String lectureName);  
 	
+	// 강의 정보 디테일
+	SugangDetail viewSugangDetail(int subjectId);
 	
-	
+	// 
 }
