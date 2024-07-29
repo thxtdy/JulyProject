@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
  <Context>
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 79ce08346e3ab2a7a4170cc70a269c795c1c2dc8
     <Resource 
         name="jdbc/six"
         auth="Container"
@@ -16,4 +21,9 @@
         username="green1"
         password="1q2w3e4r5t!"/>
     
+<<<<<<< HEAD
+=======
+
+>>>>>>> 82c9410c758019cffde7185715dea250bcdd2512
+>>>>>>> 79ce08346e3ab2a7a4170cc70a269c795c1c2dc8
 </Context>

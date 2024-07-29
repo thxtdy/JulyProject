@@ -12,7 +12,7 @@ import lombok.ToString;
 @Builder
 @ToString
 public class Evaluation {
-	
+	// 학생이 교수를 평가하는 DTO입니다.
 	private int evaluationId;
 	private int studentId;
 	private int subjectId;

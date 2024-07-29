@@ -1,28 +1,14 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
+
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <meta charset="UTF-8">
 <title>Login</title>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/login.css">
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath}/resources/css/login.css">
 </head>
 <body>
 
 	<div class="container">
-		<h2>로그인</h2>
-
-		<form action="${pageContext.request.contextPath}/user/signIn" method="post">
-			<div>
-				<label for="username">사용자 이름:</label>
-				<input type="text" id="username" name="username" value="${cookie.id.value}"> 
-				<label for="password">비밀번호:</label> 
-				<input type="password" id="password" name="password" value="0000">
-				<button type="submit">로그인</button>
-				<input type="checkbox" id="checkbox" name="checkbox">ID 저장
-
-			</div>
-		</form>
-	</div>
 		<div class="login--div">
 			<div class="main--logo">
 				<a href="#"><img class="logo" alt=""
@@ -34,11 +20,9 @@
 				<div class="login--container">
 					<div class="id--container">
 						<div class="login--id">
-							<label for="username"></label> 
-							<input type="number"
+							<label for="username"></label> <input type="number"
 								max="2147483647" name="username" id="username"
 								value="2023000001" placeholder="아이디를 입력하세요" required>
-
 
 						</div>
 					</div>
@@ -52,7 +36,7 @@
 					</div>
 				</div>
 				<div>
-					<input type="submit" value="로그인" id="input--submit">
+					<button type="submit" id="input--submit">로그인</button>
 				</div>
 				<ul class="login--info">
 					<li><a href="/find/id"
@@ -64,7 +48,6 @@
 				</ul>
 			</form>
 		</div>
-
-
+	</div>
 </body>
 </html>
