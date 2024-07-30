@@ -7,10 +7,12 @@ import com.uni.system.repository.interfaces.ProfessorRepository;
 import com.uni.system.repository.interfaces.StaffRepository;
 import com.uni.system.repository.interfaces.StudentRepository;
 import com.uni.system.repository.interfaces.UserRepository;
+import com.uni.system.repository.interfaces.FindRepository;
 import com.uni.system.repository.model.Professor;
 import com.uni.system.repository.model.Staff;
 import com.uni.system.repository.model.Student;
 import com.uni.system.repository.model.UserDTO;
+import com.uni.system.service.FindRepositoryImpl;
 import com.uni.system.service.ProfessorRepositoryimpl;
 import com.uni.system.service.StaffRepositoryImpl;
 import com.uni.system.service.StudentRepositoryImpl;
@@ -30,6 +32,7 @@ public class InfoController extends HttpServlet {
 	StudentRepository studentRepository;
 	StaffRepository staffRepository;
 	ProfessorRepository professorRepository;
+	FindRepository findRepository;
 
 	public InfoController() {
 	}
@@ -40,6 +43,7 @@ public class InfoController extends HttpServlet {
 		staffRepository = new StaffRepositoryImpl();
 		userRepository = new UserRepositoryImpl();
 		professorRepository = new ProfessorRepositoryimpl();
+		findRepository = new FindRepositoryImpl();
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -48,25 +52,21 @@ public class InfoController extends HttpServlet {
 		String action = request.getPathInfo();
 		switch (action) {
 		case "/student":
-			System.out.println("Student");
 			showStudentInfo(request, response);
 			break;
 		case "/studentPassword":
 			request.getRequestDispatcher("/WEB-INF/views/user/studentChangePassword.jsp").forward(request, response);
 			break;
 		case "/staff":
-			System.out.println("Staff");
 			showStaffInfo(request, response);
 			break;
 		case "/staffPassword":
-			System.out.println("staffPassowrd");
 			request.getRequestDispatcher("/WEB-INF/views/user/staffChangePassword.jsp").forward(request, response);
 			break;
 		case "/professor":
 			showProfessorInfo(request, response);
 			break;
 		case "/professorPassword":
-			System.out.println("professorPassword");
 			request.getRequestDispatcher("/WEB-INF/views/user/professorPassword.jsp").forward(request, response);
 			break;
 		case "/professorMy":
@@ -80,6 +80,13 @@ public class InfoController extends HttpServlet {
 			break;
 		case "/changeProfessorInfo":
 			request.getRequestDispatcher("/WEB-INF/views/user/professorMyInfoUpdate.jsp").forward(request, response);
+			break;
+		case "/findId":
+			request.getRequestDispatcher("/WEB-INF/views/find/findId.jsp").forward(request, response);
+			break;
+		case "/findPassword":
+			request.getRequestDispatcher("/WEB-INF/views/find/findPw.jsp").forward(request, response);
+			break;
 		default:
 			break;
 		}
@@ -157,9 +164,49 @@ public class InfoController extends HttpServlet {
 			break;
 		case "/updateProfessor":
 			changeInfomartion(request, response);
+			break;
+		case "/findId":
+			findMyID(request, response);
+			break;
+		case "/findPw":
+			findMyPW(request, response);
+			break;
 		default:
 			break;
 		}
+	}
+
+	private void findMyPW(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		int userId = Integer.parseInt(request.getParameter("userId"));
+		UserDTO dto = null;
+		dto = findRepository.findMyPW(userId);
+		request.setAttribute("findMyPw", dto);
+		System.out.println(dto.getPassword());
+		request.getRequestDispatcher("/WEB-INF/views/find/findPw.jsp").forward(request, response);
+	}
+
+	private void findMyID(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String userName = request.getParameter("userName");
+		String email = request.getParameter("email");
+		String type = request.getParameter("type");
+		UserDTO dto = null;
+		if(type.equals("student")) {
+			dto = findRepository.findStudentID(userName, email);
+			request.setAttribute("findMyId", dto);
+			request.getRequestDispatcher("/WEB-INF/views/find/findId.jsp").forward(request, response);
+			return;
+		} else if(type.equals("staff")) {
+			dto = findRepository.findStaffID(userName, email);
+			request.setAttribute("findMyId", dto);
+			request.getRequestDispatcher("/WEB-INF/views/find/findId.jsp").forward(request, response);
+			return;
+		} else if(type.equals("professor")) {
+			dto = findRepository.findProfessor(userName, email);
+			request.setAttribute("findMyId", dto);
+			request.getRequestDispatcher("/WEB-INF/views/find/findId.jsp").forward(request, response);
+			return;
+		}
+		
 	}
 
 	private void changeInfomartion(HttpServletRequest request, HttpServletResponse response) throws IOException {
