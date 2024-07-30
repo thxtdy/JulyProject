@@ -1,6 +1,7 @@
 package com.uni.system.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import com.uni.system.repository.interfaces.UserRepository;
 import com.uni.system.repository.model.UserDTO;
@@ -31,10 +32,6 @@ public class UserController extends HttpServlet {
 		case "/notice":
 			request.getRequestDispatcher("/WEB-INF/six/user/notice.jsp").forward(request, response);
 			break;
-		case "/signup":
-			request.getRequestDispatcher("/WEB-INF/six/user/signup.jsp").forward(request, response);
-			break;
-
 		case "/professor":
 			request.getRequestDispatcher("/WEB-INF/views/user/professorInfo.jsp").forward(request, response);
 			break;
@@ -46,7 +43,7 @@ public class UserController extends HttpServlet {
 			break;
 		case "/employee":
 			request.getRequestDispatcher("/WEB-INF/views/user/employeeInfo.jsp").forward(request, response);
-			
+			break;
 		default:
 			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			break;
@@ -73,7 +70,6 @@ public class UserController extends HttpServlet {
 			break;
 
 		default:
-			response.sendError(HttpServletResponse.SC_NOT_FOUND);
 			break;
 		}
 	}
@@ -100,10 +96,20 @@ public class UserController extends HttpServlet {
 			System.out.println("Login Success : " + principal);
 			session.setAttribute("principal", principal); // header.jsp, 각종 info 에 끌고 오기 위해 속성 설정해주기.
 			response.sendRedirect(request.getContextPath() + "/user/home");
-		} else {
-			response.sendRedirect(request.getContextPath() + "/index.jsp");
+		} else if(userId != principal.getId()){
+			alert(response);
 		}
 
 	}
-
+	public static void alert(HttpServletResponse response) {
+	    try {
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter writer = response.getWriter();
+			writer.write("<script>alert('"+"아이디 또는 비밀번호가 잘못되었습니다."+"');</script>");
+			writer.flush();
+			writer.close();
+	    } catch(Exception e) {
+			e.printStackTrace();
+	    }
+	}
 }

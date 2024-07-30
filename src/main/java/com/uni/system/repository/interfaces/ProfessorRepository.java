@@ -17,6 +17,7 @@ public interface ProfessorRepository {
 	
 	// MY 페이지
 	Professor viewMyInfo(int userId); // 내 정보 보기
+	void changeInfomation(String address, int tel, String email, int userId);
 	
 	List<Subject> viewSubjectById(int userId); // 내가 관리하는 강의 보기
 	// 교수 수업을 신청한 학생들의 목록만 보여주겠습니다. (학생 ID, 학생 이름, 학과, 모든 디테일의 정보) stu_sub_tb
