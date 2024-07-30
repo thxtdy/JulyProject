@@ -10,6 +10,7 @@ public interface StaffRepository {
 	// MY 페이지
 	Staff viewMyInfo(int userId);
 	void changePassword(String password, int userId);
+	void changeInfomation(String address, int tel, String email, int userId);
 	
 	// 학사관리 - 모든 학생, 교수 명단
 	List<Student> viewAllStudent(int limit, int offset);
