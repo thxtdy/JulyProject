@@ -15,13 +15,13 @@
 		<table class="sub_menu_table" border="1">
 			<tbody>
 				<tr>
-					<td><a href="${pageContext.request.contextPath}/registration/subjectList">단과대학</a></td>
+					<td><a href="${pageContext.request.contextPath}/admin/college">단과대학</a></td>
 				</tr>
 				<tr>
-					<td><a href="${pageContext.request.contextPath}/registration/subjectList">학과</a></td>
+					<td><a href="${pageContext.request.contextPath}/admin/deptRegistration">학과</a></td>
 				</tr>
 				<tr>
-					<td><a href="${pageContext.request.contextPath}/registration/subjectList">강의실</a></td>
+					<td><a href="${pageContext.request.contextPath}/admin/room">강의실</a></td>
 				</tr>
 				<tr>
 					<td><a href="${pageContext.request.contextPath}/registration/subjectList">강의</a></td>

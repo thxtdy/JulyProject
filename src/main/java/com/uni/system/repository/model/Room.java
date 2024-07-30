@@ -12,6 +12,6 @@ import lombok.ToString;
 @ToString
 @Builder
 public class Room {
-	int id;
-	int collegeId;
+	private String id;
+	private int collegeId;
 }

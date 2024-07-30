@@ -13,38 +13,33 @@
 		<main>
 			<h1>단과 대학</h1>
 			<div>
-				<a
-					href="${pageContext.request.contextPath}/admin/college?crud=insert">등록</a>
-				<a
-					href="${pageContext.request.contextPath}/admin/collegeDelete">삭제</a>
-				<br>
+				<a href="${pageContext.request.contextPath}/admin/room">등록</a> <a
+					href="${pageContext.request.contextPath}/admin/roomDelete">삭제</a> <br>
 			</div>
-			<c:if test="${not empty crudType}">
-				<div>
-					<c:out value="${crudType}" escapeXml="false" />
-				</div>
-			</c:if>
-				<div>
-					<table border="1">
-						<thead>
+			<div>
+				<h2>삭제할 강의실을 클릭해주세요</h2>
+			</div>
+			<div>
+				<table border="1">
+					<thead>
+						<tr>
+							<th><a>강의실</a></th>
+							<th><a>단과대ID</a></th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="room" items="${roomList}">
 							<tr>
-								<th><a>ID</a></th>
-								<th><a>이름</a></th>
+								<td><a
+									href="${pageContext.request.contextPath}/admin/roomProcess?roomId=${room.id}">${room.id}</a>
+								<td>${room.collegeId}</td>
 							</tr>
-						</thead>
-						<tbody>
 
-							<c:forEach var="college" items="${collegeList}">
-								<tr>
-									<td>${college.id}</td>
-									<td>${college.name}</td>
-								</tr>
+						</c:forEach>
 
-							</c:forEach>
-
-						</tbody>
-					</table>
-				</div>
+					</tbody>
+				</table>
+			</div>
 
 
 		</main>
