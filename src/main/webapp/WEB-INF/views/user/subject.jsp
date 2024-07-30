@@ -30,7 +30,6 @@ session.getAttribute("pricipal");
 							<c:choose>
 								<c:when test="${principal.userRole.equals(\"professor\")}">
 									<td><a href="${pageContext.request.contextPath}/professor/myClass" class="selected_menu">내 강의 조회</a></td>
-									<td><a href="${pageContext.request.contextPath}/professor/myClassEvaluation" class="selected_menu">내 강의 평가</a></td>
 								</c:when>
 							</c:choose>
 							<td><a

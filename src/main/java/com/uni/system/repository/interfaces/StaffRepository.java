@@ -10,6 +10,7 @@ public interface StaffRepository {
 	// MY 페이지
 	Staff viewMyInfo(int userId);
 	void changePassword(String password, int userId);
+	void changeInfomation(String address, int tel, String email, int userId);
 	
 	// 학사관리 - 모든 학생, 교수 명단
 	List<Student> viewAllStudent(int limit, int offset);
@@ -33,7 +34,6 @@ public interface StaffRepository {
 	// TODO 학사관리 - 수강 신청 기간 설청
 	
 	// 등록
-	void addCollege();
 	void addDepartment();
 	void addClassRoom();
 	void addClass();
@@ -43,5 +43,14 @@ public interface StaffRepository {
 	
 	List<Notice> viewNotice();
 	void viewAcademicSchedule();
+	
+	// 단과대학 보기
+	List<College> viewAllCollege();
+	
+	// 	등록 추가하기
+	void addCollege(String name);
+	
+	// 등록 삭제하기
+	void deleteCollege(String name);
 	
 }

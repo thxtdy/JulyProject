@@ -163,7 +163,8 @@ public class ProfessorController extends HttpServlet {
 		
 		professorRepository.editEvaluation(absent, lateness, homework, midExam, finalExam, converted, grade, studentId, studentId, subjectId);
 		professorRepository.addGradeByStudent(grade, studentId);
-		request.getRequestDispatcher("/WEB-INF/professor/myStudent.jsp");
+		
+		response.sendRedirect(request.getContextPath() + "/professor/myClassStudent?subjectId="+subjectId);
 		
 	}
 
@@ -205,7 +206,7 @@ public class ProfessorController extends HttpServlet {
 		System.out.println("합산" + converted);
 		System.out.println("학점" + grade);
 		
-		request.getRequestDispatcher("/WEB-INF/professor/myStudent.jsp");
+		response.sendRedirect(request.getContextPath() + "/professor/myClassStudent?subjectId="+subjectId);
 		
 	}
 

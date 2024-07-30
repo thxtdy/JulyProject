@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.uni.system.repository.interfaces.StaffRepository;
 import com.uni.system.repository.model.BreakApp;
+import com.uni.system.repository.model.College;
 import com.uni.system.repository.model.Notice;
 import com.uni.system.repository.model.Professor;
 import com.uni.system.repository.model.Staff;
@@ -22,6 +23,7 @@ public class StaffRepositoryImpl implements StaffRepository{
 	// 교수 정보, 비밀번호 변경 쿼리
 	final String STAFF_INFO = " SELECT * FROM staff_tb where id = ? ";
 	final String CHANGE_PASSWORD = " UPDATE user_tb SET password = ? WHERE id = ? ";
+	final String CHANGE_MY_INFO = " UPDATE staff_tb SET address = ?, tel = ?, email = ? WHERE id = ? ";
 
 	// 학생, 교수, 직원 추가하는 쿼리
 	final String ADD_STUDENT  = " insert into student_tb(name, birth_date, gender, address, tel, email, dept_id, grade, semester, entrance_date) values(?, ?, ?, ?, ?, ?, ?, 1, 1, ?);";
@@ -97,6 +99,27 @@ public class StaffRepositoryImpl implements StaffRepository{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@Override
+	public void changeInfomation(String address, int tel, String email, int userId) {
+		try (Connection conn = DBUtil.getConnection()){
+			conn.setAutoCommit(false);
+			try (PreparedStatement pstmt = conn.prepareStatement(CHANGE_MY_INFO)){
+				pstmt.setString(1, address);
+				pstmt.setInt(2, tel);
+				pstmt.setString(3, email);
+				pstmt.setInt(4, userId);
+				pstmt.executeUpdate();
+				conn.commit();
+			} catch (Exception e) {
+				System.out.println("rollback");
+				conn.rollback();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+			
 	}
 
 	@Override
@@ -323,8 +346,22 @@ public class StaffRepositoryImpl implements StaffRepository{
 	}
 
 	@Override
-	public void addCollege() {
-		
+	public void addCollege(String name) {
+		String query = " INSERT INTO college_tb(name) values(?)" ;
+		try (Connection conn = DBUtil.getConnection()){
+			conn.setAutoCommit(false);
+			
+			try (PreparedStatement pstmt = conn.prepareStatement(query)){
+				pstmt.setString(1, name);
+				pstmt.executeUpdate();
+				conn.commit();
+			} catch (Exception e) {
+				conn.rollback();
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -373,6 +410,38 @@ public class StaffRepositoryImpl implements StaffRepository{
 
 	@Override
 	public void viewAcademicSchedule() {
+		
+	}
+
+	@Override
+	public List<College> viewAllCollege() {
+		List<College> collegeList = new ArrayList<>();
+		String query = " SELECT * FROM college_tb ORDER BY id asc" ;
+		try (Connection conn = DBUtil.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(query)){
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				College college = College.builder()
+								.id(rs.getInt("id"))
+								.name(rs.getString("name"))
+								.build();
+								collegeList.add(college);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return collegeList;
+	}
+
+	@Override
+	public void deleteCollege(String name) {
+		String query = " DELETE FROM college_tb WHERE = ? ";
+		try {
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 

@@ -1,30 +1,20 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/layout/header.jsp"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/subject.css">
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/subjectList.css">
-<%
-request.getAttribute("principal");
-session.getAttribute("professorInfo");
-%>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/subject.css">
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/subjectList.css">
+
 
 <div class="registration_box" style="min-width: 100em">
 	<div class="sub_menu">
 		<table class="sub-bar-list" border="1">
 			<tbody>
 				<tr>
-					<td><a
-						href="${pageContext.request.contextPath}/info/professor"
-						class="seleted-menu">내 정보 조회</a></td>
+					<td><a href="${pageContext.request.contextPath}/info/professor" class="seleted-menu">내 정보 조회</a></td>
 				</tr>
 				<tr>
-					<td><a
-						href="${pageContext.request.contextPath}/info/professorPassword">비밀번호
-							변경</a></td>
+					<td><a href="${pageContext.request.contextPath}/info/professorPassword">비밀번호 변경</a></td>
 				</tr>
 
 			</tbody>
@@ -77,7 +67,9 @@ session.getAttribute("professorInfo");
 				</tr>
 			</tbody>
 		</table>
-		<button type="button">수정하기</button>
+		<form action="${pageContext.request.contextPath}/info/changeProfessorInfo" method="GET">
+		<button type="submit">수정하기</button>
+		</form>
 	</main>
 </div>
 
