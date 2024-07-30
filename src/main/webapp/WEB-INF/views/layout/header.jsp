@@ -44,7 +44,7 @@
 						</ul>
 					</div>
 					<ul class="header_menu_bar">
-						<li class="header_menu_bar_li"><a href="${pageContext.request.contextPath}/home.jsp">홈</a>
+						<li class="header_menu_bar_li"><a href="${pageContext.request.contextPath}/user/home">홈</a>
 						<li class="header_menu_bar_li"><a href="${pageContext.request.contextPath}/info/professorMy">MY</a>
 						<li class="header_menu_bar_li"><a href="${pageContext.request.contextPath}/info/professor">MY</a>
 						<li class="header_menu_bar_li"><a href="${pageContext.request.contextPath}/subject/subject">수업</a>
