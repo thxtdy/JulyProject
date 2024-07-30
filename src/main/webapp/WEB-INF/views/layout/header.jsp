@@ -41,6 +41,7 @@
 				<c:when test="${principal.userRole.equals(\"student\")}">
 
 					<ul class="header_menu_bar">
+<<<<<<< HEAD
 						<li class="header_menu_bar_li"><a
 							href="${pageContext.request.contextPath}/user/home"><img
 								src="${pageContext.request.contextPath}/resources/img/logo.png"
@@ -57,6 +58,14 @@
 							href="${pageContext.request.contextPath}/thisSemester">성적</a>
 						<li class="header_menu_bar_li"><a
 							href="${pageContext.request.contextPath}/notice/notice">학사정보</a>
+=======
+						<li class="header_menu_bar_li"><a href="${pageContext.request.contextPath}/user/home">홈</a>
+						<li class="header_menu_bar_li"><a href="${pageContext.request.contextPath}/info/professorMy">MY</a>
+						<li class="header_menu_bar_li"><a href="${pageContext.request.contextPath}/info/professor">MY</a>
+						<li class="header_menu_bar_li"><a href="${pageContext.request.contextPath}/subject/subject">수업</a>
+						
+						<li class="header_menu_bar_li"><a href="${pageContext.request.contextPath}/notice">학사정보</a>
+>>>>>>> f7f39b2f0a895ac2f219bfb170d561eecfbfdb47
 					</ul>
 				</c:when>
 
