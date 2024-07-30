@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.uni.system.repository.interfaces.StaffRepository;
 import com.uni.system.repository.model.BreakApp;
+import com.uni.system.repository.model.College;
 import com.uni.system.repository.model.Notice;
 import com.uni.system.repository.model.Professor;
 import com.uni.system.repository.model.Staff;
@@ -323,8 +324,22 @@ public class StaffRepositoryImpl implements StaffRepository{
 	}
 
 	@Override
-	public void addCollege() {
-		
+	public void addCollege(String name) {
+		String query = " INSERT INTO college_tb(name) values(?)" ;
+		try (Connection conn = DBUtil.getConnection()){
+			conn.setAutoCommit(false);
+			
+			try (PreparedStatement pstmt = conn.prepareStatement(query)){
+				pstmt.setString(1, name);
+				pstmt.executeUpdate();
+				conn.commit();
+			} catch (Exception e) {
+				conn.rollback();
+				e.printStackTrace();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -373,6 +388,38 @@ public class StaffRepositoryImpl implements StaffRepository{
 
 	@Override
 	public void viewAcademicSchedule() {
+		
+	}
+
+	@Override
+	public List<College> viewAllCollege() {
+		List<College> collegeList = new ArrayList<>();
+		String query = " SELECT * FROM college_tb ORDER BY id asc" ;
+		try (Connection conn = DBUtil.getConnection();
+				PreparedStatement pstmt = conn.prepareStatement(query)){
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				College college = College.builder()
+								.id(rs.getInt("id"))
+								.name(rs.getString("name"))
+								.build();
+								collegeList.add(college);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return collegeList;
+	}
+
+	@Override
+	public void deleteCollege(String name) {
+		String query = " DELETE FROM college_tb WHERE = ? ";
+		try {
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
 	}
 

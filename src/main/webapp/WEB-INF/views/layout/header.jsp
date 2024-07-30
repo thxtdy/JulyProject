@@ -93,7 +93,7 @@
 						<li class="header_menu_bar_li"><a
 							href="${pageContext.request.contextPath}/management/addStudent">학사관리</a>
 						<li class="header_menu_bar_li"><a
-							href="${pageContext.request.contextPath}/admin">등록</a>
+							href="${pageContext.request.contextPath}/admin/college">등록</a>
 						<li class="header_menu_bar_li"><a
 							href="${pageContext.request.contextPath}/notice">학사정보</a>
 					</ul>

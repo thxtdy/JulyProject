@@ -33,7 +33,6 @@ public interface StaffRepository {
 	// TODO 학사관리 - 수강 신청 기간 설청
 	
 	// 등록
-	void addCollege();
 	void addDepartment();
 	void addClassRoom();
 	void addClass();
@@ -43,5 +42,14 @@ public interface StaffRepository {
 	
 	List<Notice> viewNotice();
 	void viewAcademicSchedule();
+	
+	// 단과대학 보기
+	List<College> viewAllCollege();
+	
+	// 	등록 추가하기
+	void addCollege(String name);
+	
+	// 등록 삭제하기
+	void deleteCollege(String name);
 	
 }
