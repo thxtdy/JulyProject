@@ -5,11 +5,10 @@
 <body>
 	<main>
 		<div class="sub_menu">
-			<%@ include file="/WEB-INF/views/subMenu/subMenuMY.jsp"%>
+			<%@ include file="/WEB-INF/views/subMenu/professorMenuMy.jsp"%>
 		</div>
 		<h1>개인 정보 수정</h1>
-		<div class="splite--div"></div>
-		<form action="${pageContext.request.contextPath}/info/updateStudent" method="post" class="info--update--form">
+		<form action="${pageContext.request.contextPath}/info/updateProfessor" method="post" class="info--update--form">
 			<input type="hidden" name="userId" value="${principal.id}">
 			<input type="hidden" name="userRole" value = "${principal.userRole}">
 			<table class="update--table">
@@ -22,7 +21,7 @@
 
 					<tr>
 						<td><label for=tel>전화번호</label></td>
-						<td><input type="number" name="tel" id="phoneNum" class="input-box" maxlength="11"></td>
+						<td><input type="number" name="tel" id="tel" class="input-box" maxlength="11"></td>
 					</tr>
 
 					<tr>
@@ -32,7 +31,7 @@
 
 					<tr>
 						<td><label for=checkPassword>비밀번호 확인</label></td>
-						<td><input type="number" name="checkPassword" id="checkPassword" class="input-box" maxlength="4">
+						<td><input type="number" name="checkPassword" id="checkPassword" class="input-box" maxlength="4" required="required">
 							<button type="submit">수정하기</button></td>
 					</tr>
 				</tbody>

@@ -4,10 +4,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/studentInfo.css">
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/subjectList.css">
-<%
-request.getAttribute("principal");
-session.getAttribute("studentInfo");
-%>
+
 <div class="registration_box" style="min-width: 100em">
 
 	<div class="sub_menu">
@@ -73,7 +70,9 @@ session.getAttribute("studentInfo");
 					</tr>
 				</tbody>
 			</table>
-			<button onclick="location.href='studentMyInfoUpdate.jsp';" type="button">수정하기</button>
+		<form action="${pageContext.request.contextPath}/info/changeStudentInfo" method="GET">
+		<button type="submit">수정하기</button>
+		</form>
 		</div>
 	</main>
 </div>

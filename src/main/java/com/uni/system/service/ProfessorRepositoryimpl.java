@@ -21,6 +21,7 @@ public class ProfessorRepositoryimpl implements ProfessorRepository {
 	// 교수 정보 쿼리, 교수가 담당하고 있는 강의 쿼리, 교수의 수업을 신청한 학생 조회 쿼리
 	final String PROFESSOR_INFO = " SELECT p.*, c.name as college, d.name as department FROM college_tb AS c LEFT JOIN department_tb AS d ON c.id = d.college_id LEFT JOIN professor_tb as p on p.dept_id = d.id where p.id = ? ";
 	final String PROFESSOR_CLASS = " SELECT s.* FROM subject_tb AS s LEFT JOIN professor_tb AS p ON s.professor_id = p.id WHERE p.id = ? ";
+	final String CHANGE_MY_INFO = " UPDATE professor_tb SET address = ?, tel = ?, email = ? WHERE id = ? ";
 	
 	// 교수 수업을 신청한 학생들의 모든 정보를 뽑아오겠다. WHERE절은 subject_id를 가지고 옴(stu_sub_tb 사용)
 	final String GET_MY_STUDENT_BY_SUBJECT_ID = " SELECT stu.name AS student_name, sub.subject_id, dept.name AS department, sub.* , detail.* FROM stu_sub_tb AS sub LEFT JOIN student_tb AS stu ON sub.student_id = stu.id LEFT JOIN department_tb AS dept ON stu.dept_id = dept.id LEFT JOIN stu_sub_detail_tb AS detail ON sub.id = detail.id WHERE sub.subject_id = ? ";
@@ -59,6 +60,27 @@ public class ProfessorRepositoryimpl implements ProfessorRepository {
 		} catch (Exception e) {
 		}
 		return professor;
+	}
+	
+	@Override
+	public void changeInfomation(String address, int tel, String email, int userId) {
+		try (Connection conn = DBUtil.getConnection()){
+			conn.setAutoCommit(false);
+			try (PreparedStatement pstmt = conn.prepareStatement(CHANGE_MY_INFO)){
+				pstmt.setString(1, address);
+				pstmt.setInt(2, tel);
+				pstmt.setString(3, email);
+				pstmt.setInt(4, userId);
+				pstmt.executeUpdate();
+				conn.commit();
+			} catch (Exception e) {
+				System.out.println("rollback");
+				conn.rollback();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 	
 	@Override

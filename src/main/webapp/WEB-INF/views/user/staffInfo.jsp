@@ -73,7 +73,9 @@ session.getAttribute("staffInfo");
 				</tr>
 			</tbody>
 		</table>
-		<button type="button">수정하기</button>
+		<form action="${pageContext.request.contextPath}/info/changeStaffInfo" method="GET">
+		<button type="submit">수정하기</button>
+		</form>
 	</main>
 </div>
 </body>

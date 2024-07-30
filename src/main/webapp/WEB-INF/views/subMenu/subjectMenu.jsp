@@ -7,7 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-<<<<<<< HEAD
 		<div class="sub_menu">
 			<div class="sub_menu_top">
 				<h2>수업</h2>
@@ -17,7 +16,6 @@
 					<tbody>
 						<tr>
 							<td><a href="${pageContext.request.contextPath}/subject/subject" class="selected_menu">전체 강의 조회</a></td>
-									<td><a href="${pageContext.request.contextPath}/professor/myClass" class="selected_menu">내 강의 조회</a></td>
 									<td><a href="${pageContext.request.contextPath}/professor/myClassEvaluation" class="selected_menu">내 강의 평가</a></td>
 						</tr>
 					</tbody>

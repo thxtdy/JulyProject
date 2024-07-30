@@ -1,6 +1,7 @@
 package com.uni.system.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import com.uni.system.repository.interfaces.ProfessorRepository;
 import com.uni.system.repository.interfaces.StaffRepository;
@@ -60,16 +61,25 @@ public class InfoController extends HttpServlet {
 		case "/staffPassword":
 			System.out.println("staffPassowrd");
 			request.getRequestDispatcher("/WEB-INF/views/user/staffChangePassword.jsp").forward(request, response);
-
+			break;
 		case "/professor":
 			showProfessorInfo(request, response);
 			break;
 		case "/professorPassword":
 			System.out.println("professorPassword");
 			request.getRequestDispatcher("/WEB-INF/views/user/professorPassword.jsp").forward(request, response);
+			break;
 		case "/professorMy":
 			request.getRequestDispatcher("/WEB-INF/views/user/professorMyInfo.jsp").forward(request, response);
 			break;
+		case "/changeStudentInfo":
+			request.getRequestDispatcher("/WEB-INF/views/user/studentMyInfoUpdate.jsp").forward(request, response);
+			break;
+		case "/changeStaffInfo":
+			request.getRequestDispatcher("/WEB-INF/views/user/staffMyInfoUpdate.jsp").forward(request, response);
+			break;
+		case "/changeProfessorInfo":
+			request.getRequestDispatcher("/WEB-INF/views/user/professorMyInfoUpdate.jsp").forward(request, response);
 		default:
 			break;
 		}
@@ -138,9 +148,61 @@ public class InfoController extends HttpServlet {
 			break;
 		case "/professorPassword":
 			changePassword(request, response);
+			break;
+		case "/updateStudent":
+			changeInfomartion(request, response);
+			break;
+		case "/updateStaff":
+			changeInfomartion(request, response);
+			break;
+		case "/updateProfessor":
+			changeInfomartion(request, response);
 		default:
 			break;
 		}
+	}
+
+	private void changeInfomartion(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		HttpSession session = request.getSession();
+		UserDTO dto = (UserDTO) session.getAttribute("principal");
+		
+		String address = request.getParameter("address");
+		int tel = Integer.parseInt(request.getParameter("tel"));
+		String email = request.getParameter("email");
+		String checkPassword = request.getParameter("checkPassword");
+		int userId = Integer.parseInt(request.getParameter("userId"));
+		String userRole = request.getParameter("userRole");
+		
+		System.out.println("address : " + address);
+		System.out.println("tel : " + tel);
+		System.out.println("email : "  + email);
+		System.out.println("checkPassword : " + checkPassword);
+		System.out.println("Student ID : " + userId);
+		
+		if(userRole.equals("student") && checkPassword.equals(dto.getPassword())) {
+			studentRepository.changeInfomation(address, tel, email, userId);
+			response.sendRedirect(request.getContextPath() + "/info/student");
+		} else if (userRole.equals("staff") && checkPassword.equals(dto.getPassword())) {
+			staffRepository.changeInfomation(address, tel, email, userId);
+			response.sendRedirect(request.getContextPath() + "/info/staff");
+		} else if (userRole.equals("professor") && checkPassword.equals(dto.getPassword())) {
+			professorRepository.changeInfomation(address, tel, email, userId);
+			response.sendRedirect(request.getContextPath() + "/info/professor");
+		} else if (!checkPassword.equals(dto.getPassword())){
+				if(userRole.equals("student")) {
+					response.sendRedirect(request.getContextPath() + "/info/student");
+					alert(response);
+					return;
+				} else if (userRole.equals("staff")) {
+					response.sendRedirect(request.getContextPath() + "/info/staff");
+					alert(response);
+					return;
+				} else if (userRole.equals("professor")) {
+					response.sendRedirect(request.getContextPath() + "/info/professor");
+					alert(response);
+					return;
+				}
+		  }
 	}
 
 	private void changePassword(HttpServletRequest request, HttpServletResponse response)
@@ -166,6 +228,18 @@ public class InfoController extends HttpServlet {
 			response.sendRedirect(request.getContextPath() + "/info/staff?error");
 		} else if (dto.getUserRole().equals("professor") && currentPassword != dto.getPassword())
 			response.sendRedirect(request.getContextPath() + "/info/professor?error");
+	}
+	
+	public static void alert(HttpServletResponse response) {
+	    try {
+			response.setContentType("text/html; charset=utf-8");
+			PrintWriter writer = response.getWriter();
+			writer.write("<script>alert('"+"비밀번호가 잘못되었습니다."+"');</script>");
+			writer.flush();
+			writer.close();
+	    } catch(Exception e) {
+			e.printStackTrace();
+	    }
 	}
 
 }
