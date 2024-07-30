@@ -72,7 +72,7 @@
             <th>조회수</th>
         </tr>
         <tbody>
-        <c:forEach items="${schedulelist}" var="schedule">
+        <c:forEach items="${scheduleList}" var="schedule">
             <tr>
                 <td>${schedule.staffId}</td>
                 <td>${schedule.startDay}</td>
