@@ -15,6 +15,7 @@ public class StuSubDetail {
 	
 	private int id;				// primary key 입니다.
 	private int studentId;		// 학생 번호(ID) 입니다.
+	private String studentName; // 학생 이름 입니다.
 	private String department;  // 학생 소속 입니다.
 	private int subjectId;		// 과목 번호(ID) 입니다.
 	private int absent;			// 결석이라는 뜻입니다.

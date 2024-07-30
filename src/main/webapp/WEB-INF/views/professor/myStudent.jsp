@@ -7,9 +7,10 @@
 </head>
 <body>
 	<!-- 조회 버튼을 눌렀을때 나오는 페이지이다.  -->
-<c:if test="${empty requestScope.studentList}">
-			<a>TEST</a>
+		<c:if test="${empty requestScope.studentList}">
+			<a>해당 강의를 신청한 학생이 없습니다.</a>
 		</c:if>
+		
 		<c:if test="${not empty requestScope.studentList}">
 	<table border="1">
 		<thead>
@@ -26,25 +27,39 @@
 				<th>점수 기입</th>
 			</tr>
 		</thead>
-	<c:forEach var="student" items="${studentList}">
 		<tbody>
-		    <td>${student.studentId}</td>
-		    <td>${student.studentName}</td>
-		    <td>${student.department}</td>
-		    <td>${student.absent}</td>
-		    <td>${student.lateness}</td>
-		    <td>${student.homework}</td>
-		    <td>${student.midExam}</td>
-		    <td>${student.finalExam}</td>
-		    <td>${student.convertedMark}</td>
-		    <form action ="${pageContext.request.contextPath}/professor/evaluationStudent" method="get">
-		    	<td><button type="submit">기입</button></td>
-				<input type="hidden" name ="studentId" value ="${student.studentId}">		    	
-		    </form>
+		<c:forEach var = "student" items ="${studentList}">
+			<tr>
+			    <td>${student.studentId}</td>
+			    <td>${student.studentName}</td>
+			    <td>${student.department}</td>
+			    <td>${student.absent}</td>
+			    <td>${student.lateness}</td>
+			    <td>${student.homework}</td>
+			    <td>${student.midExam}</td>
+			    <td>${student.finalExam}</td>
+			    <td>${student.convertedMark}</td>
+			    <td class="evaluation_btn">
+
+						<c:if test="${student.finalExam != '' && student.finalExam ne null}">
+						    <form action="${pageContext.request.contextPath}/professor/editEvaluation" method="GET">
+						        <button>수정</button>
+						        <input type="hidden" name="studentId" value="${student.studentId}">
+						    </form>
+						</c:if>
+						
+						<c:if test="${student.finalExam == '' || student.finalExam == null}">
+						    <form action="${pageContext.request.contextPath}/professor/evaluationStudent" method="GET">
+						        <button>기입</button>
+						        <input type="hidden" name="studentId" value="${student.studentId}">
+						    </form>
+						</c:if>
+
+			    </td>
+		    </tr>
+	</c:forEach>
 		</tbody>
-</c:forEach>
 	</table>
 	</c:if>
-	
 </body>
 </html>
