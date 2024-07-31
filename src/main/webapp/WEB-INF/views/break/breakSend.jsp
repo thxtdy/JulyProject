@@ -5,7 +5,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/subjectList.css">
-
+<%
+request.getAttribute("principal");
+session.getAttribute("studentInfo");
+System.out.print(session.getAttribute("studentInfo"));
+%>
 
 <div class="registration_box" style="min-width: 100em">
 	<div class="sub_menu">
@@ -52,10 +56,21 @@
 					</tr>
 					<tr>
 						<th>휴학구분</th>
-						<td>  <input type="radio" id="normal" name="fav_language" value="normal">   <label for="일반 휴학">일반휴학</label><br>   <input type="radio" id="pregnant"
-							name="fav_language" value="pregnant">   <label for="임신·출산·육아 휴학">임신·출산·육아휴학</label><br>   <input type="radio" id="disease" name="fav_language" value="disease">
-							<label for="질병 휴학">질병휴학</label> <input type="radio" id="founded" name="fav_language" value="founded"> <label for="창업 휴학">창업휴학</label> <input type="radio" id="army"
-							name="fav_language" value="army"> <label for="군입대 휴학">군입대휴학</label>
+						<td>  
+						<input type="radio" id="normal" name="fav_language" value="normal">   
+						<label for="일반 휴학">일반휴학</label><br>   
+						
+						<input type="radio" id="pregnant" name="fav_language" value="pregnant">   
+						<label for="임신·출산·육아 휴학">임신·출산·육아휴학</label><br>   
+						
+						<input type="radio" id="disease" name="fav_language" value="disease">
+						<label for="질병 휴학">질병휴학</label> 
+						
+						<input type="radio" id="founded" name="fav_language" value="founded"> 
+						<label for="창업 휴학">창업휴학</label>
+						
+						<input type="radio" id="army" name="fav_language" value="army"> 
+						<label for="군입대 휴학">군입대휴학</label>
 
 						</td>
 					</tr>
@@ -71,7 +86,6 @@
 		</form>
 		</div>
 	</main>
->>>>>>> dev1
 </div>
 </body>
 </html>

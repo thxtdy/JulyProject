@@ -16,35 +16,35 @@
 				<a
 					href="${pageContext.request.contextPath}/admin/college?crud=insert">등록</a>
 				<a
-					href="${pageContext.request.contextPath}/admin/collegeDelete">삭제</a>
+					href="${pageContext.request.contextPath}/admin/college?crud=delete">삭제</a>
 				<br>
 			</div>
+			<h1>삭제할 단과 대학을 선택해주시오</h1>
 			<c:if test="${not empty crudType}">
 				<div>
 					<c:out value="${crudType}" escapeXml="false" />
 				</div>
 			</c:if>
-				<div>
-					<table border="1">
-						<thead>
+			<div>
+				<table border="1">
+					<thead>
+						<tr>
+							<th><a>ID</a></th>
+							<th><a>이름</a></th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach var="college" items="${collegeList}">
 							<tr>
-								<th><a>ID</a></th>
-								<th><a>이름</a></th>
+								<td>${college.id}</td>
+								 <td><a href="${pageContext.request.contextPath}/admin/collegeDeletion?collegeName=${college.name}">${college.name}</a></td>
 							</tr>
-						</thead>
-						<tbody>
 
-							<c:forEach var="college" items="${collegeList}">
-								<tr>
-									<td>${college.id}</td>
-									<td>${college.name}</td>
-								</tr>
+						</c:forEach>
 
-							</c:forEach>
-
-						</tbody>
-					</table>
-				</div>
+					</tbody>
+				</table>
+			</div>
 
 
 		</main>
