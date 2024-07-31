@@ -9,6 +9,8 @@
 	href="${pageContext.request.contextPath}/resources/css/subjectList.css">
 	
 	<h2>금학기 성적 조회</h2>
+	
+	<c:if test="${not empty requestScope.score}">
 	<table border="1">
 		<thead>
 			<tr>
@@ -37,6 +39,6 @@
 			</tr>
 		</tbody>
 	</table>
-	
+	</c:if>
 </body>
 </html>
