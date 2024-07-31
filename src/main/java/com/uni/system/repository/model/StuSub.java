@@ -15,17 +15,16 @@ public class StuSub {
 	
 	private int id;
 	private int studentId;
-	private String department;
 	private int subjectId;
-	private int absent;
-	private int lateness;
-	private int homework;
-	private int midExam;
-	private int finalExam;
-	private int convertedMark;
 	private String studentName;
-	private String studentGrade;
+	private String department;
+	private int absent;			// 결석이라는 뜻입니다.
+	private int	lateness;		// 지각이라는 뜻입니다.
+	private int homework;		// 과제점수입니다.
+	private int midExam;		// 중간 시험입니다.
+	private int finalExam;		// 기말 시험입니다.
+	private int convertedMark;	// 환산 점수입니다.
+
 	private String grade;
 	private int completeGrade;
-
 }

@@ -3,6 +3,7 @@
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/subMenu.css">
 </head>
 <body>
+<<<<<<< HEAD
 	<div class="alltable">
 	<div class="sub-bar">
 		<div class="sub-bar-top">
@@ -40,6 +41,13 @@
 		<div class="sub-bar">
 			<div class="sub-bar-top">
 				<table class="sub-bar-list" border="1">
+=======
+		<div class="sub_menu_top">
+			<h2>MY</h2>
+			</div>
+			<div class="sub_menu_mid">
+				<table class="sub_menu_table" border="1">
+>>>>>>> dev1
 					<tbody>
 						<tr>
 					<%-- 		<td><a href="${pageContext.request.contextPath}/info/student" class="seleted-menu">내 정보 조회</a></td>
@@ -64,7 +72,10 @@
 					</tbody>
 				</table>
 			</div>
+<<<<<<< HEAD
 		</div>
 	</div>
+=======
+>>>>>>> dev1
 </body>
 </html>

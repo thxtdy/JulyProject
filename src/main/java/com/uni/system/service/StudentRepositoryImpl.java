@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.uni.system.repository.interfaces.StudentRepository;
-import com.uni.system.repository.model.BreakApp;
 import com.uni.system.repository.model.Grade;
 import com.uni.system.repository.model.Notice;
 import com.uni.system.repository.model.Student;
@@ -15,11 +14,10 @@ import com.uni.system.repository.model.Subject;
 import com.uni.system.utils.DBUtil;
 
 public class StudentRepositoryImpl implements StudentRepository{
-	
 	Query query;
-	private String STUDENT_INFO = " SELECT s.*, c.name as college, d.name as department FROM college_tb as c LEFT JOIN department_tb AS d ON c.id = d.college_id LEFT JOIN student_tb as s on s.dept_id = d.id where s.id = ? " ;
-	private String CHANGE_PASSWORD = " UPDATE user_tb SET password = ? WHERE id = ? " ;
-	private String UPDATE_ADDRESS = " update student_tb set address = ? where id = ? " ;
+	final String STUDENT_INFO = "SELECT s.*, c.name as college, d.name as department FROM college_tb as c LEFT JOIN department_tb AS d ON c.id = d.college_id LEFT JOIN student_tb as s on s.dept_id = d.id where s.id = ? ";
+	final String CHANGE_PASSWORD = " UPDATE user_tb SET password = ? WHERE id = ? ";
+	final String CHANGE_MY_INFO = " UPDATE student_tb SET address = ?, tel = ?, email = ? WHERE id = ? ";
 	
 	@Override
 	public Student viewMyInfo(int userid) {
@@ -77,6 +75,28 @@ public class StudentRepositoryImpl implements StudentRepository{
 		
 	}
 	
+	@Override
+	public void changeInfomation(String address, int tel, String email, int studentId) {
+		try (Connection conn = DBUtil.getConnection()){
+			conn.setAutoCommit(false);
+			try (PreparedStatement pstmt = conn.prepareStatement(CHANGE_MY_INFO)){
+				pstmt.setString(1, address);
+				pstmt.setInt(2, tel);
+				pstmt.setString(3, email);
+				pstmt.setInt(4, studentId);
+				int result = pstmt.executeUpdate();
+				System.out.println("result : " + result);
+				System.out.println(address + studentId);
+				conn.commit();
+			} catch (Exception e) {
+				System.out.println("rollback");
+				conn.rollback();
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
 
 	@Override
 	public List<Subject> viewAllClass() {
@@ -155,28 +175,6 @@ public class StudentRepositoryImpl implements StudentRepository{
 	@Override
 	public void viewAcademicSchedule() {
 		
-	}
-	@Override
-	public Student changeAddress(int id) {
-		Student student = null;
-		try(Connection conn = DBUtil.getConnection()) {
-			conn.setAutoCommit(false);
-			
-			try (PreparedStatement pstmt = conn.prepareStatement(CHANGE_PASSWORD)){
-				pstmt.setString(1, student.getAddress());
-				pstmt.setInt(2, student.getId());
-				pstmt.executeUpdate();
-				conn.commit();
-			} catch (Exception e) {
-				conn.rollback();
-				e.printStackTrace();
-			}
-			
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
-		return student;
 	}
 	
 

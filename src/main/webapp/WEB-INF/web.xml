@@ -69,4 +69,14 @@
     <servlet-name>ScoreController</servlet-name>
     <url-pattern>/ScoreController</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>RegistrationController</display-name>
+    <servlet-name>RegistrationController</servlet-name>
+    <servlet-class>com.uni.system.controller.RegistrationController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RegistrationController</servlet-name>
+    <url-pattern>/RegistrationController</url-pattern>
+  </servlet-mapping>
 </web-app>
