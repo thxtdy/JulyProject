@@ -10,6 +10,7 @@
 	href="${pageContext.request.contextPath}/resources/css/header.css">
 </head>
 <body>
+	
 	<%
 	request.getAttribute("principal");
 	%>
