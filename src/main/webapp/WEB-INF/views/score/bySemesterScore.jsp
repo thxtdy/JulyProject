@@ -8,6 +8,6 @@
 </head>
 <body>
 <h2>학기별 성적 조회</h2>
-
+	
 </body>
 </html>

@@ -1,51 +1,126 @@
-@charset "UTF-8";
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    background-color: #f0f8f4; /* Light green background */
     margin: 0;
     padding: 0;
+    color: #333; /* Dark text for readability */
 }
 
-/* 헤더 스타일 */
+/* Header Styling */
 .background {
     text-align: center;
+    margin-bottom: 20px;
 }
 
-/* 공지사항 및 학사일정 스타일 */
-.notice_bar {
+.background img {
+    max-width: 100%;
+    height: auto;
+    border-bottom: 5px solid #a8d5ba; /* Soft green border for image */
+}
+
+/* Main Content Container */
+.main-content {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px; /* Space between columns */
+    padding: 0 20px;
     margin-top: 20px;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.board-table {
+/* Notice Bar and Schedule Section Styling */
+.notice_bar, .schedule_section {
+    flex: 1; /* Allow sections to grow equally */
+    background-color: #ffffff; /* White background */
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    min-width: 300px; /* Ensure a minimum width */
+    /* Ensure the sections have the same gap */
+    margin: 0; /* Reset margin to ensure consistent spacing controlled by gap */
+}
+
+/* Headings Styling */
+.notice_bar h1, .schedule_section h1 {
+    color: #6a994e; /* Soft green color for headings */
+    font-size: 24px;
+    margin: 0 0 10px;
+}
+
+/* Table Styling */
+.board-table, .schedule-table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
 }
 
-.board-table th, .board-table td {
-    border: 1px solid #ddd;
-    padding: 8px;
+.board-table th, .board-table td, .schedule-table th, .schedule-table td {
+    border: 1px solid #e0e0e0; /* Light gray borders for table */
+    padding: 12px;
     text-align: center;
 }
 
-
-.board-table th {
-    background-color: #f2f2f2;
+.board-table th, .schedule-table th {
+    background-color: #d0f0c0; /* Very light green for header */
     color: #333;
 }
 
-.board-table td {
-    background-color: #fff;
+.board-table td, .schedule-table td {
+    background-color: #f9f9f9; /* Light gray for rows */
 }
 
-.board-table tr:nth-child(even) {
-    background-color: #f9f9f9;
+.board-table tr:nth-child(even), .schedule-table tr:nth-child(even) {
+    background-color: #eaf4e9; /* Even rows with light green */
 }
 
-.board-table tr:hover {
-    background-color: #f1f1f1;
+.board-table tr:hover, .schedule-table tr:hover {
+    background-color: #c2e8c0; /* Hover effect for rows */
+}
+
+/* Additional Styling */
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.search-window {
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.search-wrap input[type="text"] {
+    width: calc(100% - 22px);
+    padding: 10px;
+    border: 1px solid #d0e0d1;
+    border-radius: 4px;
+}
+
+.search-wrap button {
+    padding: 10px 20px;
+    background-color: #6a994e; /* Soft green button */
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.search-wrap button:hover {
+    background-color: #4a773c; /* Darker green on hover */
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .main-content {
+        flex-direction: column; /* Stack sections vertically on small screens */
+    }
+
+    .notice_bar, .schedule_section {
+        min-width: 100%; /* Ensure sections take full width */
+    }
 }
