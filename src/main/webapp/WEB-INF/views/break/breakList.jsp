@@ -2,15 +2,20 @@
 <%@page import="com.uni.system.repository.model.BreakApp"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/views/layout/header.jsp"%>
-<%@ include file="/WEB-INF/views/subMenu/subMenuMY.jsp"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<h2>여기는 휴학 신청서를 보는 JSP입니다</h2>
+<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/subjectList.css">
+
+<div class="registration_box" style="min-width: 100em">
+	<div class="sub_menu">
+		<%@ include file="/WEB-INF/views/subMenu/subMenuMY.jsp"%>
+	</div>
+	
+	<main>
 <h1>휴학 내역 조회</h1>
-<div class="split--div"></div>
 <table border="1" class="list--table">
 	<tbody>
 		<c:if test="${empty requestScope.breakAppList}">
-			<div>님 휴학 신청을 안했어용</div>
+			<div>신청한 내역이 없습니다.</div>
 		</c:if>
 
 		<c:if test="${not empty requestScope.breakAppList}">
@@ -37,5 +42,7 @@
 		</c:if>
 	</tbody>
 </table>
+</main>
+</div>
 </body>
 </html>
