@@ -15,13 +15,12 @@ import com.uni.system.repository.model.Notice;
 import com.uni.system.repository.model.Professor;
 import com.uni.system.repository.model.Room;
 import com.uni.system.repository.model.Staff;
-import com.uni.system.repository.model.StuStat;
 import com.uni.system.repository.model.Student;
-import com.uni.system.repository.model.Tuition;
+import com.uni.system.repository.model.Subject;
 import com.uni.system.utils.DBUtil;
 
 public class StaffRepositoryImpl implements StaffRepository {
-
+	Query query;
 	// 교수 정보, 비밀번호 변경 쿼리
 	final String STAFF_INFO = " SELECT * FROM staff_tb where id = ? ";
 	final String CHANGE_PASSWORD = " UPDATE user_tb SET password = ? WHERE id = ? ";
@@ -560,5 +559,39 @@ public class StaffRepositoryImpl implements StaffRepository {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public List<Subject> viewAllClass() {
+		List<Subject> subjectList = new ArrayList<Subject>();
+		// SELECT 
+		try (Connection conn = DBUtil.getConnection()) {
+			PreparedStatement pstmt = conn.prepareStatement(query.VIEW_ALL_CLASS);
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Subject subject = Subject.builder()
+						.id(rs.getInt("id"))
+						.name(rs.getString("name"))
+						.professorId(rs.getInt("professorId"))
+						.roomId(rs.getString("roomId"))
+						.deptId(rs.getInt("deptId"))
+						.type(rs.getString("type"))
+						.subYear(rs.getInt("subYear"))
+						.semester(rs.getInt("semester"))
+						.subDay(rs.getString("subDay"))
+						.startTime(rs.getInt("startTime"))
+						.endTime(rs.getInt("endTime"))
+						.grades(rs.getInt("grade"))
+						.capacity(rs.getInt("capacity"))
+						.numOfStudent(rs.getInt("numOfStudent"))
+						.build();
+				subjectList.add(subject);
+				
+			}
+			
+		} catch (Exception e) {
+
+		}
+		return subjectList;
 	}
 }

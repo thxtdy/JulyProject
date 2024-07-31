@@ -24,7 +24,7 @@
 					<td><a href="${pageContext.request.contextPath}/admin/room">강의실</a></td>
 				</tr>
 				<tr>
-					<td><a href="${pageContext.request.contextPath}/registration/subjectList">강의</a></td>
+					<td><a href="${pageContext.request.contextPath}/admin/lecture">강의</a></td>
 				</tr>
 			</tbody>
 		</table>

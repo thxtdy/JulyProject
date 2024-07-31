@@ -28,7 +28,8 @@
 					</c:forEach>
 				</select>
 				<!-- 대상학과 콤보박스 -->
-				<label for="deptId">개설학과</label> <select name="deptId" id="deptId">
+				<label for="deptId">개설학과</label> 
+				<select name="deptId" id="deptId">
 					<option value="ALL">전체</option>
 					<c:forEach var="sugangDeptName" items="${sugangDeptName}">
 						<option value="${sugangDeptName.deptName}">${sugangDeptName.deptName}</option>

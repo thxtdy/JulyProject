@@ -12,6 +12,7 @@ import com.uni.system.repository.interfaces.StaffRepository;
 import com.uni.system.repository.model.College;
 import com.uni.system.repository.model.Department;
 import com.uni.system.repository.model.Room;
+import com.uni.system.repository.model.Subject;
 import com.uni.system.service.StaffRepositoryImpl;
 
 @WebServlet("/admin/*")
@@ -78,10 +79,20 @@ public class RegistrationController extends HttpServlet {
 			deleteRoom(request,response);
 			request.getRequestDispatcher("/WEB-INF/views/user/roomDelete.jsp").forward(request, response);
 			break;
+		case "/lecture":
+			viewAllSubject(request,response);
+			request.getRequestDispatcher("/WEB-INF/views/user/lecture.jsp").forward(request, response);
+			break;
 
 		default:
 			break;
 		}
+	}
+
+	private void viewAllSubject(HttpServletRequest request, HttpServletResponse response) {
+		List<Subject> subjectList= staffRepository.viewAllClass();
+		System.out.println(subjectList);
+		request.setAttribute("subjectList", subjectList);
 	}
 
 	private void deleteRoom(HttpServletRequest request, HttpServletResponse response) {

@@ -3,7 +3,15 @@ package com.uni.system.repository.interfaces;
 import java.sql.Date;
 import java.util.List;
 
-import com.uni.system.repository.model.*;
+import com.uni.system.repository.model.BreakApp;
+import com.uni.system.repository.model.College;
+import com.uni.system.repository.model.Department;
+import com.uni.system.repository.model.Notice;
+import com.uni.system.repository.model.Professor;
+import com.uni.system.repository.model.Room;
+import com.uni.system.repository.model.Staff;
+import com.uni.system.repository.model.Student;
+import com.uni.system.repository.model.Subject;
 
 public interface StaffRepository {
 
@@ -79,4 +87,6 @@ public interface StaffRepository {
 	List<Room> viwAllRoom();
 
 	void deleteRoom(String roomId);
+	
+	List<Subject> viewAllClass();
 }
