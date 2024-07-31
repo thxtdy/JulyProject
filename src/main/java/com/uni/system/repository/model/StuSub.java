@@ -16,6 +16,7 @@ public class StuSub {
 	private int id;
 	private int studentId;
 	private int subjectId;
+	private String subjectName;
 	private String studentName;
 	private String department;
 	private int absent;			// 결석이라는 뜻입니다.

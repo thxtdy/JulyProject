@@ -54,7 +54,7 @@
 						<li class="header_menu_bar_li"><a
 							href="${pageContext.request.contextPath}/sugang/subjectList">수강신청</a>
 						<li class="header_menu_bar_li"><a
-							href="${pageContext.request.contextPath}/thisSemester">성적</a>
+							href="${pageContext.request.contextPath}/score/thisSemester">성적</a>
 						<li class="header_menu_bar_li"><a
 							href="${pageContext.request.contextPath}/notice/notice">학사정보</a>
 					</ul>

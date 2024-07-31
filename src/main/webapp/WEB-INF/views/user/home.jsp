@@ -74,17 +74,12 @@
                             </thead>
                             <tbody>
                                 <c:forEach items="${noticeList}" var="notice">
-                                    <tr>
-<%--                                         <td>${notice.id}</td>
- --%>                                        <td>${notice.category}</td>
-                                        <td>${notice.title}</a></td>
-                                <c:forEach items="${noticelist}" var="notice">
-                                    <tr>
-                                        <td>${notice.id}</td>
-                                        <td>${notice.category}</td>
-                                        <td><a href="#!">${notice.title}</a></td>
-                                        <td>${notice.createdTime}</td>
-                                    </tr>
+                                    	<tr>
+<%--                                        <td>${notice.id}</td>
+ --%>                                       <td>${notice.category}</td>
+	                                        <td>${notice.title}</td>
+	                                        <td>${notice.createdTime}</td>
+                                        </tr>
                                 </c:forEach>
                             </tbody>
                         </table>
